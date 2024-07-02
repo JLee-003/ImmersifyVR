@@ -24,7 +24,12 @@ public class BreastStrokeEvaluator : MonoBehaviour
     List<float> measuredHeights = new List<float>();
     Vector3 initialHandPos, endHandPos;
 
-    Vector3 direction;
+    public float boostDuration = 1f;
+    float boostEndTime;
+    Vector3 boostDirection;
+
+    float totalBoost = 0f;
+
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -56,6 +61,11 @@ public class BreastStrokeEvaluator : MonoBehaviour
             Measure();
             measureTimer = 0f;
         }
+        if (Time.time < boostEndTime)
+        {
+            Vector3 move = boostDirection * totalBoost * Time.deltaTime;
+            characterController.Move(move);
+        }
     }
 
     void StartMeasuring()
@@ -85,13 +95,12 @@ public class BreastStrokeEvaluator : MonoBehaviour
     }
     void ApplyBoost()
     {
-        float totalBoost = StabilityBoost() + ArcLengthBoost() + SizeBoost() + HeightBoost() + SpeedBoost();
+        totalBoost = StabilityBoost() + ArcLengthBoost() + SizeBoost() + HeightBoost() + SpeedBoost();
         Debug.Log("Total Boost: " + totalBoost);
 
-        direction = initialHandPos - head.position;
-        direction.Normalize();
-        Vector3 move = direction * totalBoost;
-        characterController.Move(move);
+        boostDirection = initialHandPos - head.position;
+        boostDirection.Normalize();
+        boostEndTime = Time.time + boostDuration;
     }
     float StabilityBoost()
     {
