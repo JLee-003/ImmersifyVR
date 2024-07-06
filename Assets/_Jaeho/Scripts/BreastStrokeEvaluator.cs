@@ -24,11 +24,14 @@ public class BreastStrokeEvaluator : MonoBehaviour
     List<float> measuredHeights = new List<float>();
     Vector3 initialHandPos, endHandPos;
 
-    public float boostDuration = 1f;
-    float boostEndTime;
+    //public float boostDuration = 1f;
+    //float boostEndTime;
     Vector3 boostDirection;
 
+    public float speedCap = 12f;
+    public float decelerationFactor = 0.99f;
     float totalBoost = 0f;
+    public float currentSpeed = 0f;
 
     private void Start()
     {
@@ -61,11 +64,13 @@ public class BreastStrokeEvaluator : MonoBehaviour
             Measure();
             measureTimer = 0f;
         }
-        if (Time.time < boostEndTime)
-        {
-            Vector3 move = boostDirection * totalBoost * Time.deltaTime;
-            characterController.Move(move);
-        }
+        Vector3 move = boostDirection * currentSpeed * Time.deltaTime;
+        characterController.Move(move);
+    }
+    private void FixedUpdate()
+    {
+        currentSpeed *= decelerationFactor;
+        currentSpeed = Mathf.Clamp(currentSpeed, 0f, speedCap);
     }
 
     void StartMeasuring()
@@ -78,6 +83,7 @@ public class BreastStrokeEvaluator : MonoBehaviour
         initialRadius = Vector3.Distance(head.position, hand.position);
         initialHeight = hand.position.y;
         initialHandPos = hand.position;
+        Debug.Log("-----------Divider-----------");
         Debug.Log("Measuring start");
     }
     void Measure()
@@ -96,11 +102,19 @@ public class BreastStrokeEvaluator : MonoBehaviour
     void ApplyBoost()
     {
         totalBoost = StabilityBoost() + ArcLengthBoost() + SizeBoost() + HeightBoost() + SpeedBoost();
-        Debug.Log("Total Boost: " + totalBoost);
+        Debug.Log($"Total Boost: {totalBoost}");
 
         boostDirection = initialHandPos - head.position;
         boostDirection.Normalize();
-        boostEndTime = Time.time + boostDuration;
+
+        /*Vector3 newBoostDirection = hand.position - head.position;
+        newBoostDirection.Normalize();
+        // Smoothly transition to the new boost direction
+        float directionSmoothTime = 0.1f;
+        boostDirection = Vector3.Slerp(boostDirection, newBoostDirection, directionSmoothTime);*/
+
+        currentSpeed += totalBoost;
+        currentSpeed = Mathf.Clamp(currentSpeed, 0f, speedCap);
     }
     float StabilityBoost()
     {
@@ -112,17 +126,19 @@ public class BreastStrokeEvaluator : MonoBehaviour
         }
         float avg = sum / measuredRadii.Count;
         boost = avg < stabilityTolerance ? stabilityBoostAmount : 0;
-        Debug.Log($"Initial radius: {initialRadius}, Avg diff: {avg} - {stabilityTolerance} Tolerance");
+        Debug.Log($"Avg Radius diff: {avg}, StabilityBoost: {boost}");
         return boost;
     }
     float ArcLengthBoost()
     {
         float boost = 0f;
+        Vector3 leveledEndHandPos = new Vector3(endHandPos.x, initialHandPos.y, endHandPos.z);
         Vector3 initialVector = initialHandPos - head.position;
-        Vector3 endVector = endHandPos - head.position;
-        float angle = Vector3.Angle(initialVector, endVector);
-        boost = angle < arcLengthTolerance ? arcLengthBoostAmount : 0;
-        Debug.Log($"Arc Angle: {angle} - {arcLengthTolerance} Tolerance from 90 deg.");
+        Vector3 leveledEndVector = leveledEndHandPos - head.position;
+        float angle = Vector3.Angle(initialVector, leveledEndVector);
+        float diffFromRightAngle = Mathf.Abs(90 - angle);
+        boost = diffFromRightAngle < arcLengthTolerance ? arcLengthBoostAmount : 0;
+        Debug.Log($"Angle: {angle}, ArcLengthBoost: {boost}");
         return boost;
     }
     float SizeBoost()
@@ -149,7 +165,7 @@ public class BreastStrokeEvaluator : MonoBehaviour
         }
         float avg = sum / measuredHeights.Count;
         boost = avg < heightTolerance ? heightBoostAmount : 0;
-        Debug.Log($"Initial height: {initialHeight}, Avg diff: {avg} - {heightTolerance} Tolerance");
+        Debug.Log($"Avg Height diff: {avg}, HeightBoost: {boost}");
         return boost;
     }
     float SpeedBoost()
@@ -163,7 +179,12 @@ public class BreastStrokeEvaluator : MonoBehaviour
             radiiSum += radius;
         }
         avgRadius = radiiSum / (measuredRadii.Count + 1);
-        estimatedDistance = 0.5f * Mathf.PI * avgRadius;
+
+        Vector3 initialVector = initialHandPos - head.position;
+        Vector3 endVector = endHandPos - head.position;
+        float angle = Vector3.Angle(initialVector, endVector);
+
+        estimatedDistance = (angle/360) * (2 * Mathf.PI * avgRadius);
         float avgSpeed = (estimatedDistance / actionDuration);
         boost = avgSpeed * speedMultipler;
         Debug.Log($"Avg Speed: {avgSpeed}, SpeedBoost: {boost}");
