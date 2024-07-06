@@ -296,7 +296,7 @@ MonoBehaviour:
   stabilityTolerance: 0.2
   arcLengthTolerance: 30
   heightTolerance: 0.1
-  sizeMultiplier: 1.5
+  sizeMultiplier: 1
   speedMultipler: 2
   stabilityBoostAmount: 1
   arcLengthBoostAmount: 1
@@ -1181,6 +1181,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: XR Device Simulator
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
