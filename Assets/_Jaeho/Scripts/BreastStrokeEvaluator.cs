@@ -22,7 +22,7 @@ public class BreastStrokeEvaluator : MonoBehaviour
     List<float> measuredRadii = new List<float>();
     float initialHeight;
     List<float> measuredHeights = new List<float>();
-    Vector3 initialHandPos, endHandPos;
+    Vector3 initialHandPos, endHandPos, initialHeadPos;
 
     //public float boostDuration = 1f;
     //float boostEndTime;
@@ -37,8 +37,6 @@ public class BreastStrokeEvaluator : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         controller = hand.GetComponent<ActionBasedController>();
-        Debug.Log(controller);
-        Debug.Log(controller.transform.position);
     }
     private void Update()
     {
@@ -58,12 +56,13 @@ public class BreastStrokeEvaluator : MonoBehaviour
         {
             actionDuration += Time.deltaTime;
             measureTimer += Time.deltaTime;
+            if (measureTimer >= measureInterval)
+            {
+                Measure();
+                measureTimer = 0f;
+            }
         }
-        if (measureTimer >= measureInterval)
-        {
-            Measure();
-            measureTimer = 0f;
-        }
+        
         Vector3 move = boostDirection * currentSpeed * Time.deltaTime;
         characterController.Move(move);
     }
@@ -83,6 +82,7 @@ public class BreastStrokeEvaluator : MonoBehaviour
         initialRadius = Vector3.Distance(head.position, hand.position);
         initialHeight = hand.position.y;
         initialHandPos = hand.position;
+        initialHeadPos = head.position;
         Debug.Log("-----------Divider-----------");
         Debug.Log("Measuring start");
     }
@@ -104,16 +104,10 @@ public class BreastStrokeEvaluator : MonoBehaviour
         totalBoost = StabilityBoost() + ArcLengthBoost() + SizeBoost() + HeightBoost() + SpeedBoost();
         Debug.Log($"Total Boost: {totalBoost}");
 
-        boostDirection = initialHandPos - head.position;
+        boostDirection = initialHandPos - initialHeadPos;
         boostDirection.Normalize();
 
-        /*Vector3 newBoostDirection = hand.position - head.position;
-        newBoostDirection.Normalize();
-        // Smoothly transition to the new boost direction
-        float directionSmoothTime = 0.1f;
-        boostDirection = Vector3.Slerp(boostDirection, newBoostDirection, directionSmoothTime);*/
-
-        currentSpeed += totalBoost;
+        currentSpeed = totalBoost;
         currentSpeed = Mathf.Clamp(currentSpeed, 0f, speedCap);
     }
     float StabilityBoost()
