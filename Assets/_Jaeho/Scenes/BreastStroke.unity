@@ -249,17 +249,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   head: {fileID: 23250043}
   hand: {fileID: 1276596642}
-  measureInterval: 0.05
-  stabilityTolerance: 0.19
-  arcLengthTolerance: 30
-  heightTolerance: 0.1
-  sizeMultiplier: 1
-  speedMultipler: 2
-  stabilityBoostAmount: 0.75
-  arcLengthBoostAmount: 3
-  heightBoostAmount: 0.75
-  speedCap: 10
-  decelerationFactor: 0.98
   currentSpeed: 0
 --- !u!114 &2850254
 MonoBehaviour:
@@ -275,17 +264,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   head: {fileID: 23250043}
   hand: {fileID: 1518098367}
-  measureInterval: 0.05
-  stabilityTolerance: 0.19
-  arcLengthTolerance: 30
-  heightTolerance: 0.1
-  sizeMultiplier: 1
-  speedMultipler: 2
-  stabilityBoostAmount: 0.75
-  arcLengthBoostAmount: 3
-  heightBoostAmount: 0.75
-  speedCap: 10
-  decelerationFactor: 0.98
   currentSpeed: 0
 --- !u!114 &2850255
 MonoBehaviour:

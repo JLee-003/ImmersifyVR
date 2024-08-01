@@ -8,9 +8,9 @@ public class BreastStrokeEvaluator : MonoBehaviour
 {
     [SerializeField] Transform head;
     [SerializeField] Transform hand;
-    [SerializeField] float measureInterval;
-    [SerializeField] float stabilityTolerance, arcLengthTolerance, heightTolerance, sizeMultiplier, speedMultipler;
-    [SerializeField] float stabilityBoostAmount, arcLengthBoostAmount, heightBoostAmount;
+    float measureInterval = 0.05f;
+    float stabilityTolerance = 0.19f, arcLengthTolerance = 30f, heightTolerance = 0.1f, sizeMultiplier = 1f, speedMultipler = 2f;
+    float stabilityBoostAmount = 0.75f, arcLengthBoostAmount = 3f, heightBoostAmount = 0.75f;
 
     ActionBasedController controller;
     CharacterController characterController;
@@ -24,12 +24,10 @@ public class BreastStrokeEvaluator : MonoBehaviour
     List<float> measuredHeights = new List<float>();
     Vector3 initialHandPos, endHandPos, initialHeadPos;
 
-    //public float boostDuration = 1f;
-    //float boostEndTime;
     Vector3 boostDirection;
 
-    public float speedCap = 12f;
-    public float decelerationFactor = 0.99f;
+    float speedCap = 10f;
+    float decelerationFactor = 0.98f;
     float totalBoost = 0f;
     public float currentSpeed = 0f;
 
@@ -83,8 +81,8 @@ public class BreastStrokeEvaluator : MonoBehaviour
         initialHeight = hand.position.y;
         initialHandPos = hand.position;
         initialHeadPos = head.position;
-        Debug.Log("-----------Divider-----------");
-        Debug.Log("Measuring start");
+        //Debug.Log("-----------Divider-----------");
+        //Debug.Log("Measuring start");
     }
     void Measure()
     {
@@ -95,14 +93,14 @@ public class BreastStrokeEvaluator : MonoBehaviour
     }
     void StopMeasuring()
     {
-        Debug.Log("Measuring stop");
+        //Debug.Log("Measuring stop");
         measuring = false;
         endHandPos = hand.position;
     }
     void ApplyBoost()
     {
         totalBoost = StabilityBoost() + ArcLengthBoost() + SizeBoost() + HeightBoost() + SpeedBoost();
-        Debug.Log($"Total Boost: {totalBoost}");
+        //Debug.Log($"Total Boost: {totalBoost}");
 
         boostDirection = initialHandPos - initialHeadPos;
         boostDirection.Normalize();
@@ -120,7 +118,7 @@ public class BreastStrokeEvaluator : MonoBehaviour
         }
         float avg = sum / measuredRadii.Count;
         boost = avg < stabilityTolerance ? stabilityBoostAmount : 0;
-        Debug.Log($"Avg Radius diff: {avg}, StabilityBoost: {boost}");
+        //Debug.Log($"Avg Radius diff: {avg}, StabilityBoost: {boost}");
         return boost;
     }
     float ArcLengthBoost()
@@ -132,7 +130,7 @@ public class BreastStrokeEvaluator : MonoBehaviour
         float angle = Vector3.Angle(initialVector, leveledEndVector);
         float diffFromRightAngle = Mathf.Abs(90 - angle);
         boost = diffFromRightAngle < arcLengthTolerance ? arcLengthBoostAmount : 0;
-        Debug.Log($"Angle: {angle}, ArcLengthBoost: {boost}");
+        //Debug.Log($"Angle: {angle}, ArcLengthBoost: {boost}");
         return boost;
     }
     float SizeBoost()
@@ -146,7 +144,7 @@ public class BreastStrokeEvaluator : MonoBehaviour
         }
         avgRadius = radiiSum / (measuredRadii.Count + 1);
         boost = avgRadius * sizeMultiplier;
-        Debug.Log($"Avg Radius: {avgRadius}, SizeBoost: {boost}");
+        //Debug.Log($"Avg Radius: {avgRadius}, SizeBoost: {boost}");
         return boost;
     }
     float HeightBoost()
@@ -159,7 +157,7 @@ public class BreastStrokeEvaluator : MonoBehaviour
         }
         float avg = sum / measuredHeights.Count;
         boost = avg < heightTolerance ? heightBoostAmount : 0;
-        Debug.Log($"Avg Height diff: {avg}, HeightBoost: {boost}");
+        //Debug.Log($"Avg Height diff: {avg}, HeightBoost: {boost}");
         return boost;
     }
     float SpeedBoost()
@@ -181,7 +179,7 @@ public class BreastStrokeEvaluator : MonoBehaviour
         estimatedDistance = (angle/360) * (2 * Mathf.PI * avgRadius);
         float avgSpeed = (estimatedDistance / actionDuration);
         boost = avgSpeed * speedMultipler;
-        Debug.Log($"Avg Speed: {avgSpeed}, SpeedBoost: {boost}");
+        //Debug.Log($"Avg Speed: {avgSpeed}, SpeedBoost: {boost}");
         return boost;
     }
 }
