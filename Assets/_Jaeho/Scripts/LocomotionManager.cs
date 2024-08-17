@@ -7,6 +7,8 @@ public class LocomotionManager : MonoBehaviour
 {
     ActionBasedContinuousMoveProvider continuousMoveProvider;
     BreastStrokeEvaluator[] breastStrokeEvaultors;
+    float waterWalkSpeed = 1.5f;
+    float normalWalkSpeed = 3f;
     private void Start()
     {
         continuousMoveProvider = GetComponentInChildren<ActionBasedContinuousMoveProvider>();
@@ -16,7 +18,7 @@ public class LocomotionManager : MonoBehaviour
     {
         if (other.CompareTag("Water Volume"))
         {
-            continuousMoveProvider.enabled = false;
+            continuousMoveProvider.moveSpeed = waterWalkSpeed;
             breastStrokeEvaultors[0].enabled = true;
             breastStrokeEvaultors[1].enabled = true;
         }
@@ -24,8 +26,8 @@ public class LocomotionManager : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Water Volume"))
-        { 
-            continuousMoveProvider.enabled = true;
+        {
+            continuousMoveProvider.moveSpeed = normalWalkSpeed;
             breastStrokeEvaultors[0].enabled = false;
             breastStrokeEvaultors[1].enabled = false;
         }
