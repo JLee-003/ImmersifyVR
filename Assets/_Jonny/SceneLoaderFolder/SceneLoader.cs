@@ -3,8 +3,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : Singleton<SceneLoader>
+// public class SceneLoader : Singleton<SceneLoader>
+public class SceneLoader : MonoBehaviour
 {
+    public static SceneLoader Instance { get; private set; }
     public UnityEvent OnLoadBegin = new UnityEvent();
     public UnityEvent OnLoadEnd = new UnityEvent();
     public ScreenFader screenFader = null;
@@ -13,6 +15,16 @@ public class SceneLoader : Singleton<SceneLoader>
 
     private void Awake()
     {
+        // If there is an instance, and it's not me, delete myself.
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(this); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        } 
+
         SceneManager.sceneLoaded += SetActiveScene;
     }
 
@@ -27,6 +39,7 @@ public class SceneLoader : Singleton<SceneLoader>
             StartCoroutine(LoadScene(sceneName));
         }
     }
+    
 
     private IEnumerator LoadScene(string sceneName)
     {

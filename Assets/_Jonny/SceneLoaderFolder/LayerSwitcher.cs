@@ -14,7 +14,8 @@ public class LayerSwitcher : MonoBehaviour
     {
         SceneLoader.Instance.OnLoadBegin.AddListener(SwitchToLoadLayer);
         SceneLoader.Instance.OnLoadEnd.AddListener(ResetLayer);
-    }
+    } 
+
 
     private void OnDisable()
     {
