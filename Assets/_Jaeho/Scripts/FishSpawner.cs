@@ -21,21 +21,40 @@ public class FishSpawner : MonoBehaviour
 {
     public List<FishInfo> fishInfoList;
 
+    [SerializeField] float minimumPlayerDist;
+
     [SerializeField] GameObject fishPrefab;
+
+    GameObject playerView;
 
     private void Start()
     {
-        // Loop through each fish in the list
+
+        playerView = GameObject.FindGameObjectWithTag("MainCamera");
+
+
         foreach (FishInfo fishInfo in fishInfoList)
         {
             for (int i = 0; i < fishInfo.numberOfFish; i++)
             {
-                Vector3 randomPosition = new Vector3(Random.Range(fishInfo.minX, fishInfo.maxX),
+                bool spawned = false;
+                while (!spawned)
+                {
+                    Vector3 randomPosition = new Vector3(Random.Range(fishInfo.minX, fishInfo.maxX),
                     Random.Range(fishInfo.minY, fishInfo.maxY),
                     Random.Range(fishInfo.minZ, fishInfo.maxZ));
 
-                GameObject fish = Instantiate(fishPrefab, randomPosition, Quaternion.identity);
-                fish.GetComponent<Fish>().type = fishInfo.type;
+                    Vector3 difference = randomPosition - playerView.transform.position;
+
+                    if (difference.magnitude >= minimumPlayerDist)
+                    {
+                        GameObject fish = Instantiate(fishPrefab, randomPosition, Quaternion.identity);
+                        fish.GetComponent<Fish>().type = fishInfo.type;
+
+                        spawned = true;
+                    }
+                }
+                
             }
         }
     }
