@@ -15,6 +15,11 @@ public class FishInfo
     public int type;
 
     public int numberOfFish;
+
+    public float cooldown = 5f;
+    [HideInInspector] public float respawnTimer = 0f;
+
+    public List<GameObject> fishList = new List<GameObject>();
 }
 
 public class FishSpawner : MonoBehaviour
@@ -37,26 +42,55 @@ public class FishSpawner : MonoBehaviour
         {
             for (int i = 0; i < fishInfo.numberOfFish; i++)
             {
-                bool spawned = false;
-                while (!spawned)
+                SpawnFish(fishInfo);
+            }
+        }
+    }
+    private void Update()
+    {
+        foreach (FishInfo fishInfo in fishInfoList)
+        {
+            foreach(GameObject fish in fishInfo.fishList)
+            {
+                if (fish == null)
                 {
-                    Vector3 randomPosition = new Vector3(Random.Range(fishInfo.minX, fishInfo.maxX),
-                    Random.Range(fishInfo.minY, fishInfo.maxY),
-                    Random.Range(fishInfo.minZ, fishInfo.maxZ));
-
-                    Vector3 difference = randomPosition - playerView.transform.position;
-
-                    if (difference.magnitude >= minimumPlayerDist)
-                    {
-                        GameObject fish = Instantiate(fishPrefab, randomPosition, Quaternion.identity);
-                        fish.GetComponent<Fish>().type = fishInfo.type;
-
-                        spawned = true;
-                    }
+                    fishInfo.fishList.Remove(fish);
                 }
-                
+            }
+            if (fishInfo.fishList.Count < fishInfo.numberOfFish)
+            {
+                if (fishInfo.respawnTimer >= fishInfo.cooldown)
+                {
+                    SpawnFish(fishInfo);
+                    fishInfo.respawnTimer = 0f;
+                }
+                else
+                {
+                    fishInfo.respawnTimer += Time.deltaTime;
+                }
             }
         }
     }
 
+    private void SpawnFish(FishInfo fishInfo)
+    {
+        bool spawned = false;
+        while (!spawned)
+        {
+            Vector3 randomPosition = new Vector3(Random.Range(fishInfo.minX, fishInfo.maxX),
+            Random.Range(fishInfo.minY, fishInfo.maxY),
+            Random.Range(fishInfo.minZ, fishInfo.maxZ));
+
+            Vector3 difference = randomPosition - playerView.transform.position;
+
+            if (difference.magnitude >= minimumPlayerDist)
+            {
+                GameObject fish = Instantiate(fishPrefab, randomPosition, Quaternion.identity);
+                fish.GetComponent<Fish>().type = fishInfo.type;
+                fishInfo.fishList.Add(fish);
+
+                spawned = true;
+            }
+        }
+    }
 }
