@@ -1066,32 +1066,32 @@ PrefabInstance:
     - target: {fileID: 6058693853080453115, guid: 17c56660cef6fcc4088e1f30292e8e4a,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.95
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6058693853080453115, guid: 17c56660cef6fcc4088e1f30292e8e4a,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.95
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6058693853080453115, guid: 17c56660cef6fcc4088e1f30292e8e4a,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.95
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6058693853080453115, guid: 17c56660cef6fcc4088e1f30292e8e4a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.8
+      value: 36.3
       objectReference: {fileID: 0}
     - target: {fileID: 6058693853080453115, guid: 17c56660cef6fcc4088e1f30292e8e4a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.28
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 6058693853080453115, guid: 17c56660cef6fcc4088e1f30292e8e4a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 22.2
+      value: 33.7
       objectReference: {fileID: 0}
     - target: {fileID: 6058693853080453115, guid: 17c56660cef6fcc4088e1f30292e8e4a,
         type: 3}
@@ -2347,6 +2347,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 367182872562581504, guid: 5fa5027615d8b9c4f83f4114d6f05435,
+        type: 3}
+      propertyPath: m_text
+      value: "To Swim:\nPush the grip buttons on the two controllers to start the
+        action\n\nWhile pushing the two grip buttons move your arms in the breathstroke
+        action(like a semi circle) \n\nLet go of the button to finish the action\n"
+      objectReference: {fileID: 0}
     - target: {fileID: 367182872562581504, guid: 5fa5027615d8b9c4f83f4114d6f05435,
         type: 3}
       propertyPath: m_fontSize
