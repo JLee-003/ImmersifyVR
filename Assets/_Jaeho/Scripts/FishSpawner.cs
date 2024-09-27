@@ -77,9 +77,10 @@ public class FishSpawner : MonoBehaviour
         bool spawned = false;
         while (!spawned)
         {
-            Vector3 randomPosition = new Vector3(Random.Range(fishInfo.minX, fishInfo.maxX),
-            Random.Range(fishInfo.minY, fishInfo.maxY),
-            Random.Range(fishInfo.minZ, fishInfo.maxZ));
+            float randomX = Random.Range(fishInfo.minX, fishInfo.maxX);
+            float randomY = Random.Range(fishInfo.minY, fishInfo.maxY);
+            float randomZ = Random.Range(fishInfo.minZ, fishInfo.maxZ);
+            Vector3 randomPosition = new Vector3(randomX, randomY, randomZ);
 
             Vector3 difference = randomPosition - playerView.transform.position;
 

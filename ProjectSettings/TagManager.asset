@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Water Volume
   - InteractableObject
+  - Fish
   layers:
   - Default
   - TransparentFX
