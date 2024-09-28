@@ -9,7 +9,7 @@ public class RandomizedMovement : MonoBehaviour
     private Vector3 randomDirection;
     private float timer;
     public Rigidbody fish;
-    private float bound;
+    private float bound = 15.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,12 +25,13 @@ public class RandomizedMovement : MonoBehaviour
 
         if (timer >= changeDirectionTimer)
         {
-            if (fish.position.y >= bound)
+            randomDirection = GetRandomDirection();
+
+            if (fish.position.y >= bound && randomDirection.y > 0)
             {
                 randomDirection.y = -randomDirection.y;
             }
 
-            randomDirection = GetRandomDirection();
             fish.AddForce(randomDirection * speed, ForceMode.Impulse);
             timer = 0;
         }
