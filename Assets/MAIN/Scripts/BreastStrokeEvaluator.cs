@@ -38,7 +38,7 @@ public class BreastStrokeEvaluator : MonoBehaviour
     }
     private void Update()
     {
-        if (controller.activateAction.action.ReadValue<float>() > 0.1f)
+        if (controller.selectAction.action.ReadValue<float>() > 0.1f)
         {
             if (!measuring)
             {
