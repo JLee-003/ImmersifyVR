@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScreenFader : MonoBehaviour
@@ -11,7 +10,14 @@ public class ScreenFader : MonoBehaviour
 
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        _fadeMaterial.SetFloat("_Intensity", _intensity);
+        if (_fadeMaterial == null)
+        {
+            Debug.LogError("Fade material is not assigned.");
+            Graphics.Blit(source, destination);
+            return;
+        }
+
+        _fadeMaterial.SetFloat("_Intensity", Mathf.Clamp01(_intensity));
         _fadeMaterial.SetColor("_FadeColor", _color);
         Graphics.Blit(source, destination, _fadeMaterial);
     }
@@ -24,9 +30,10 @@ public class ScreenFader : MonoBehaviour
 
     private IEnumerator FadeIn()
     {
-        while (_intensity <= 1.0f)
+        while (_intensity < 1.0f)
         {
             _intensity += _speed * Time.deltaTime;
+            _intensity = Mathf.Clamp01(_intensity);
             yield return null;
         }
     }
@@ -39,9 +46,10 @@ public class ScreenFader : MonoBehaviour
 
     private IEnumerator FadeOut()
     {
-        while (_intensity >= 0.0f)
+        while (_intensity > 0.0f)
         {
             _intensity -= _speed * Time.deltaTime;
+            _intensity = Mathf.Clamp01(_intensity);
             yield return null;
         }
     }

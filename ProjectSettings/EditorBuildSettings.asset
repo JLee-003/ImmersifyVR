@@ -20,6 +20,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Jonny/SceneLoaderFolder/ThirdScene.unity
     guid: 116180e7f212b4136a850bbc0cbb6be5
+  - enabled: 1
+    path: Assets/_Flynn/Lobby.unity
+    guid: 1e4803086ba061247b5542d5d21d1a5f
+  - enabled: 1
+    path: Assets/_Flynn/Scene Loader.unity
+    guid: 8d1c09d8bf851a746a682000b3bf9a4d
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f86be8e2fa28caa4eaf9e781d4509e9d,
       type: 2}
