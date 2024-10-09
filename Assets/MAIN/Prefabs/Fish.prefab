@@ -199,4 +199,4 @@ MonoBehaviour:
   speed: 5
   changeDirectionTimer: 3
   fish: {fileID: 137308521831777591}
-  bound: 2.5
+  bound: 16
