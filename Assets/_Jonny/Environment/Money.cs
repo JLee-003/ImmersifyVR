@@ -26,9 +26,5 @@ public class Money : MonoBehaviour
     public void AddMoney(int amount) {
         money += amount;
     }
-    // Update is called once per frame
-    void Update()
-    {
-        moneyText.text = "Your Money: " + money.ToString();
-    }
+
 }
