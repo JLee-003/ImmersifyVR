@@ -13,6 +13,10 @@ public class LocomotionManager : MonoBehaviour
     {
         continuousMoveProvider = GetComponentInChildren<ActionBasedContinuousMoveProvider>();
         breastStrokeEvaultors = GetComponents<BreastStrokeEvaluator>();
+
+        continuousMoveProvider.moveSpeed = normalWalkSpeed;
+        breastStrokeEvaultors[0].enabled = false;
+        breastStrokeEvaultors[1].enabled = false;
     }
     private void OnTriggerStay(Collider other)
     {
