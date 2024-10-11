@@ -191,7 +191,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7053705457185874877}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eefd071bc6be40941b24e7dd888ec3bd, type: 3}
   m_Name: 
@@ -199,4 +199,4 @@ MonoBehaviour:
   speed: 5
   changeDirectionTimer: 3
   fish: {fileID: 137308521831777591}
-  bound: 16
+  bound: 10
