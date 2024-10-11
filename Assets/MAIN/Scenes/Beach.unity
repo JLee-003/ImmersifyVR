@@ -2123,6 +2123,7 @@ GameObject:
   - component: {fileID: 952351132}
   - component: {fileID: 952351131}
   - component: {fileID: 952351130}
+  - component: {fileID: 952351133}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -2194,8 +2195,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9651013}
-        m_TargetAssemblyTypeName: Teleport, Assembly-CSharp
+      - m_Target: {fileID: 952351133}
+        m_TargetAssemblyTypeName: TeleportCaller, Assembly-CSharp
         m_MethodName: tpToSpecificPos
         m_Mode: 1
         m_Arguments:
@@ -2244,6 +2245,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952351128}
   m_CullTransparentMesh: 1
+--- !u!114 &952351133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952351128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1072ec2361d9842b3b96a1b0132fc85e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &954555783
 GameObject:
   m_ObjectHideFlags: 0

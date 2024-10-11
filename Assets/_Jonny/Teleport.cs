@@ -23,12 +23,5 @@ public class Teleport : MonoBehaviour
         transform.position = new Vector3(x, y, z);
         await Fader.Instance.FadeOut();
     }
-
-    public void tpToSpecificPos() { // MOVE TO SEPARATE SCRIPT
-        tp(100,20,100);
-    }
-
-    void Update() {
-    }
 }
  
