@@ -18,11 +18,13 @@ public class Teleport : MonoBehaviour
         }
     }
     
-    public void tp(int x, int y, int z) {
+    public async void tp(int x, int y, int z) {
+        await Fader.Instance.FadeIn();
         transform.position = new Vector3(x, y, z);
+        await Fader.Instance.FadeOut();
     }
 
-    public void tpToSpecificPos() {
+    public void tpToSpecificPos() { // MOVE TO SEPARATE SCRIPT
         tp(100,20,100);
     }
 
