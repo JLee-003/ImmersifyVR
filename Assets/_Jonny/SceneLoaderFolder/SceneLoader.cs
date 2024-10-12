@@ -2,16 +2,17 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class SceneLoader : MonoBehaviour
 {
     public static SceneLoader Instance { get; private set; }
     public UnityEvent OnLoadBegin = new UnityEvent();
     public UnityEvent OnLoadEnd = new UnityEvent();
-    [SerializeField] public Animator animator;
-    public ScreenFader screenFader = null;
 
     private bool isLoading = false;
+
+    [SerializeField] string startingScene;
 
     private void Awake()
     {
@@ -19,10 +20,12 @@ public class SceneLoader : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             Destroy(this.gameObject);
+            return;
         }
         else
         {
             Instance = this;
+            LoadNewScene(startingScene, false);
         }
 
         SceneManager.sceneLoaded += SetActiveScene;
@@ -33,37 +36,33 @@ public class SceneLoader : MonoBehaviour
         SceneManager.sceneLoaded -= SetActiveScene;
     }
 
-    public void LoadNewScene(string sceneName)
+    public async void LoadNewScene(string sceneName, bool unload = true)
     {
         if (!isLoading)
         {
-            StartCoroutine(LoadScene(sceneName));
+            await Fader.Instance.FadeIn(reset: false);
+            StartCoroutine(LoadScene(sceneName, unload));
         }
     }
 
-    private IEnumerator LoadScene(string sceneName)
+    private IEnumerator LoadScene(string sceneName, bool unload)
     {
         isLoading = true;
 
         OnLoadBegin?.Invoke();
 
-        yield return StartCoroutine(UnloadCurrent());
-
+        if (unload)
+        {
+            yield return StartCoroutine(UnloadCurrent());
+        }
         // Optional delay for testing
         // yield return new WaitForSeconds(3.0f);
 
-        // Start a different animation for loading the scene
-        if (animator != null)
-        {
-            animator.GetComponent<Animator>().Play("Fade_In");
-
-        }
-
         yield return StartCoroutine(LoadNew(sceneName));
-        if (screenFader != null)
-        {
-            yield return screenFader.StartFadeOut();
-        }
+
+        Task t = Fader.Instance.FadeOut();
+        yield return new WaitUntil(() => t.IsCompleted);
+
         OnLoadEnd?.Invoke();
 
         isLoading = false;
@@ -72,12 +71,6 @@ public class SceneLoader : MonoBehaviour
 
     private IEnumerator UnloadCurrent()
     {
-        // Trigger the animation for unloading the scene
-        if (animator != null)
-        {
-            animator.GetComponent<Animator>().SetTrigger("FadeOut");
-
-        }
         yield return new WaitForSeconds(1);
         AsyncOperation unloadOperation = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         while (!unloadOperation.isDone)

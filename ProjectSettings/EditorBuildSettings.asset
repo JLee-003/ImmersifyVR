@@ -6,26 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/MAIN/Scenes/Main.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/_Jaeho/Scenes/RandomizedFish.unity
-    guid: 5a4fb980f569ba941be48cacf5145cb0
+    path: Assets/MAIN/Scenes/Scene Loader.unity
+    guid: a1115214d5cbf7844844ac89ff1d1d53
   - enabled: 1
-    path: Assets/_Jonny/SceneLoaderFolder/Scene Loader.unity
-    guid: 2b7f68377c6a74120b236d8a884ee455
-  - enabled: 1
-    path: Assets/_Jonny/SceneLoaderFolder/SecondScene.unity
-    guid: e29bd1e6387e74dd2bcae809cd4eaef1
-  - enabled: 1
-    path: Assets/_Jonny/SceneLoaderFolder/ThirdScene.unity
-    guid: 116180e7f212b4136a850bbc0cbb6be5
-  - enabled: 1
-    path: Assets/_Flynn/Lobby.unity
-    guid: 1e4803086ba061247b5542d5d21d1a5f
-  - enabled: 1
-    path: Assets/_Flynn/Scene Loader.unity
-    guid: 8d1c09d8bf851a746a682000b3bf9a4d
+    path: Assets/MAIN/Scenes/Beach.unity
+    guid: 0c6ab0981a4fd7146be898a62407d9fe
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f86be8e2fa28caa4eaf9e781d4509e9d,
       type: 2}
