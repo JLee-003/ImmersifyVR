@@ -39,8 +39,8 @@ public class NewBreastStrokeEvaluator : MonoBehaviour
     }
     private void Update()
     {   
-        // if (controller.selectAction.action.ReadValue<float>() > 0.1f) // need to change here
-        if (Math.Abs(Math.Abs(controller.transform.rotation.eulerAngles.z) - 90 ) <= 20)
+        // Do I need to use mod to take care of the case where the controller is rotated over 360 degrees? Like, 450 degrees? Because I don't think people can rotate their hands that much.
+        if (Math.Abs(Math.Abs(controller.transform.rotation.eulerAngles.z) - 90 ) <= 20) 
         {
             if (!measuring)
             {
