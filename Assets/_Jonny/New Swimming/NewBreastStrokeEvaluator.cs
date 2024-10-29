@@ -39,7 +39,6 @@ public class NewBreastStrokeEvaluator : MonoBehaviour
     }
     private void Update()
     {   
-        // Do I need to use mod to take care of the case where the controller is rotated over 360 degrees? Like, 450 degrees? Because I don't think people can rotate their hands that much.
         if (Math.Abs(Math.Abs(controller.transform.rotation.eulerAngles.z) - 90 ) <= 20) 
         {
             if (!measuring)
