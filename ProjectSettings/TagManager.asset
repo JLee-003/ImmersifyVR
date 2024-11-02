@@ -8,6 +8,7 @@ TagManager:
   - InteractableObject
   - Fish
   - Controller
+  - XRcontroller
   layers:
   - Default
   - TransparentFX
