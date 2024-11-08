@@ -30,13 +30,21 @@ public class TutorialCheckpoints : MonoBehaviour
     {
         foreach (Transform checkpoint in checkpointColliders)
         {
-            if (checkpoint != null && checkpoint.gameObject.activeInHierarchy == true && Vector3.Distance(checkpoint.position, player.transform.position) < checkpointRadius)
+            if (checkpoint != null && checkpoint.gameObject.activeInHierarchy == true)
             {
-                checkpointsReached += 1;
-                Debug.Log($"Checkpoint reached! {checkpointsReached}/{totalCheckpoints}");
-                checkpoint.gameObject.SetActive(false);
-                //Note for future: Add sound effect to indicate that a checkpoint has been completed
-                break;
+                bool colliding = Vector3.Distance(checkpoint.position, player.transform.position) < checkpointRadius;
+                Vector3 playerForward = player.transform.forward;
+                Vector3 playerToCheckpt = checkpoint.position - player.transform.position;
+                float angle = Vector3.Angle(playerForward, playerToCheckpt);
+                Debug.Log($"Player: {playerForward}, To {checkpoint.name}: {playerToCheckpt}, Angle: {angle}");
+                if (colliding)
+                {
+                    checkpointsReached += 1;
+                    Debug.Log($"Checkpoint reached! {checkpointsReached}/{totalCheckpoints}");
+                    checkpoint.gameObject.SetActive(false);
+                    //Note for future: Add sound effect to indicate that a checkpoint has been completed
+                    break;
+                }
             }
         }
 
