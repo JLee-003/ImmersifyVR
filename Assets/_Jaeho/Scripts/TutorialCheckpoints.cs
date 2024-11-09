@@ -8,6 +8,7 @@ public class TutorialCheckpoints : MonoBehaviour
     [SerializeField] Transform[] checkpointColliders;
     [SerializeField] Transform door;
     GameObject player;
+    Camera playerView;
 
     float checkpointRadius = 2.2f;
 
@@ -15,6 +16,8 @@ public class TutorialCheckpoints : MonoBehaviour
     int checkpointsReached = 0;
 
     float doorSpeed = 0.75f;
+
+    float angleThreshold = 40f;
 
     [SerializeField] TextMeshProUGUI checkpointsText;
 
@@ -24,6 +27,7 @@ public class TutorialCheckpoints : MonoBehaviour
 
         //Get player transform
         player = GameObject.FindGameObjectWithTag("Player");
+        playerView = player.GetComponentInChildren<Camera>();
     }
 
     private void Update()
@@ -33,11 +37,13 @@ public class TutorialCheckpoints : MonoBehaviour
             if (checkpoint != null && checkpoint.gameObject.activeInHierarchy == true)
             {
                 bool colliding = Vector3.Distance(checkpoint.position, player.transform.position) < checkpointRadius;
-                Vector3 playerForward = player.transform.forward;
+                Vector3 playerForward = playerView.transform.forward;
+                playerForward.y = 0;
                 Vector3 playerToCheckpt = checkpoint.position - player.transform.position;
+                playerToCheckpt.y = 0;
                 float angle = Vector3.Angle(playerForward, playerToCheckpt);
-                Debug.Log($"Player: {playerForward}, To {checkpoint.name}: {playerToCheckpt}, Angle: {angle}");
-                if (colliding)
+                Debug.Log($"Angle to {checkpoint.name} = {angle}");
+                if (colliding && angle < angleThreshold)
                 {
                     checkpointsReached += 1;
                     Debug.Log($"Checkpoint reached! {checkpointsReached}/{totalCheckpoints}");
