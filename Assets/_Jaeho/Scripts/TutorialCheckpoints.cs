@@ -10,14 +10,14 @@ public class TutorialCheckpoints : MonoBehaviour
     GameObject player;
     Camera playerView;
 
-    float checkpointRadius = 2.2f;
+    float checkpointRadius = 0.8f;
 
     int totalCheckpoints;
     int checkpointsReached = 0;
 
     float doorSpeed = 0.75f;
 
-    float angleThreshold = 40f;
+    float angleThreshold = 30f;
 
     [SerializeField] TextMeshProUGUI checkpointsText;
 
@@ -36,17 +36,31 @@ public class TutorialCheckpoints : MonoBehaviour
         {
             if (checkpoint != null && checkpoint.gameObject.activeInHierarchy == true)
             {
-                bool colliding = Vector3.Distance(checkpoint.position, player.transform.position) < checkpointRadius;
+                //Colliding Check
+                Vector3 checkpointPosXZ = checkpoint.position;
+                checkpointPosXZ.y = 0;
+                Vector3 playerPosXZ = player.transform.position;
+                playerPosXZ.y = 0;
+
+                float distance = Vector3.Distance(checkpointPosXZ, playerPosXZ);
+                bool colliding = distance < checkpointRadius;
+
+                //Angle Check
+                Transform corner = checkpoint.GetChild(0);
                 Vector3 playerForward = playerView.transform.forward;
                 playerForward.y = 0;
-                Vector3 playerToCheckpt = checkpoint.position - player.transform.position;
+                playerForward.Normalize();
+                
+                Vector3 playerToCheckpt = corner.position - playerView.transform.position;
                 playerToCheckpt.y = 0;
+                playerToCheckpt.Normalize();
+
                 float angle = Vector3.Angle(playerForward, playerToCheckpt);
-                Debug.Log($"Angle to {checkpoint.name} = {angle}");
+                //Debug.Log($"Angle to {checkpoint.name} = {angle}, cornerPos:{corner.position}, forward: {playerForward}, playerToCheckpt:{playerToCheckpt}");
                 if (colliding && angle < angleThreshold)
                 {
                     checkpointsReached += 1;
-                    Debug.Log($"Checkpoint reached! {checkpointsReached}/{totalCheckpoints}");
+                    Debug.Log($"Checkpoint reached! {checkpointsReached}/{totalCheckpoints}");  
                     checkpoint.gameObject.SetActive(false);
                     //Note for future: Add sound effect to indicate that a checkpoint has been completed
                     break;
