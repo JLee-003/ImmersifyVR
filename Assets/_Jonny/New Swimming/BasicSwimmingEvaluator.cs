@@ -7,7 +7,7 @@ using System;
 
 
 // USING DELTA VELOCITY OR VELOCITY???
-public class SwimmingEvaluator : MonoBehaviour
+public class BasicSwimmingEvaluator : MonoBehaviour
 {
     ActionBasedController controller;
     CharacterController characterController;
@@ -15,9 +15,9 @@ public class SwimmingEvaluator : MonoBehaviour
 
     bool measuring = false;
 
-    Vector3 dv; // delta velocity/acceleration
     Vector3 curr_v; // current velocity
     Vector3 prev_v; // preivous velocity
+    Vector3 total_v; // total velocity
 
     Vector3 curr_pos;
     Vector3 prev_pos;
@@ -27,7 +27,8 @@ public class SwimmingEvaluator : MonoBehaviour
     float decelerationFactor = 0.98f;
 
     float speedFactor;
-
+    
+    bool flag;
 
     // Start is called before the first frame update
     void Start()
@@ -44,40 +45,45 @@ public class SwimmingEvaluator : MonoBehaviour
         boost_vel = CalculateSpeedBoost();
 
         // Conditional: if controller is moving above X speed, apply boost using acceleration
-        if (true) {
-            ApplyBoost();
+        if (boost_vel.x + boost_vel.y + boost_vel.z > 3) {
+            AddToTotalVelocity();
+            flag = true;
         }
-    }
+        else if (flag == true){
+            flag = false;
+            CalculateSpeedBoost();
+            speedFactor = 1; // moved here!
+            total_v = new Vector3(0,0,0);
+        }
 
-    void FixedUpdate()
-    {
         speedFactor *= decelerationFactor;
-        // currentSpeed = Mathf.Clamp(currentSpeed, 0f, speedCap);
+        ApplyBoost();
+
     }
 
-
-    Vector3 CalculateSpeedBoost() {
-        // Calculate current controller velocity
+    void AddToTotalVelocity() {
         prev_pos = curr_pos;
         curr_pos = transform.localPosition; // here
 
         prev_v = curr_v;
         curr_v = new Vector3((curr_pos.x-prev_pos.x)/Time.deltaTime, (curr_pos.y-prev_pos.y)/Time.deltaTime, (curr_pos.z-prev_pos.z)/Time.deltaTime);
 
-        dv = new Vector3((curr_v.x - prev_v.x)/Time.deltaTime, (curr_v.y - prev_v.y)/Time.deltaTime, (curr_v.z - prev_v.z)/Time.deltaTime);
+        total_v += curr_v;
+    }
 
-        Debug.Log(dv);
+    Vector3 CalculateSpeedBoost() {
+        // Calculate average velocity
+        Vector3 avg_v = total_v/Time.deltaTime;
 
         // Flip current controller velocity to opposite direction
-        return new Vector3(-1*dv.x, -1*dv.y, -1*dv.z);
+        return new Vector3(-1*avg_v.x, -1*avg_v.y, -1*avg_v.z);
 
     }
 
     void ApplyBoost()
     {
         // Apply boost to character controller using acceleration
-        speedFactor = 1;
-        Vector3 move = boost_vel * Time.deltaTime * speedFactor;
+        Vector3 move = boost_vel * speedFactor; // * Time.deltaTime
         characterController.Move(move);
     }
 }
