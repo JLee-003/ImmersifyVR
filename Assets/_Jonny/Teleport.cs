@@ -18,7 +18,7 @@ public class Teleport : MonoBehaviour
         }
     }
     
-    public async void tp(int x, int y, int z) {
+    public async void tp(float x, float y, float z) {
         await Fader.Instance.FadeIn();
         transform.position = new Vector3(x, y, z);
         await Fader.Instance.FadeOut();

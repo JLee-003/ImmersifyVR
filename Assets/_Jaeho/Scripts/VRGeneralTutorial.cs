@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
-public class TutorialCheckpoints : MonoBehaviour
+public class VRGeneralTutorial : MonoBehaviour
 {
     [SerializeField] Transform[] checkpointColliders;
     [SerializeField] Transform door;
@@ -17,10 +18,15 @@ public class TutorialCheckpoints : MonoBehaviour
 
     float doorSpeed = 0.75f;
 
-    float angleThreshold = 30f;
+    float angleThreshold = 40f;
 
     [SerializeField] TextMeshProUGUI checkpointsText;
+    [SerializeField] Button pokeButton;
 
+    private void Awake()
+    {
+        Teleport.Instance.tp(-0.5f, 0.2f, 0f);
+    }
     private void Start()
     {
         totalCheckpoints = checkpointColliders.Length;
@@ -28,10 +34,13 @@ public class TutorialCheckpoints : MonoBehaviour
         //Get player transform
         player = GameObject.FindGameObjectWithTag("Player");
         playerView = player.GetComponentInChildren<Camera>();
+
+        pokeButton.onClick.AddListener(TransitionOut);
     }
 
     private void Update()
     {
+        //Checkpoints logic
         foreach (Transform checkpoint in checkpointColliders)
         {
             if (checkpoint != null && checkpoint.gameObject.activeInHierarchy == true)
@@ -82,5 +91,11 @@ public class TutorialCheckpoints : MonoBehaviour
     void OpenDoor()
     {
         door.position = Vector3.MoveTowards(door.position, new Vector3(18f, 2f, -3.7f), doorSpeed * Time.deltaTime);
+    }
+
+    void TransitionOut()
+    {
+        Debug.Log("Transitioning out...");
+        SceneLoader.Instance.LoadNewScene("Lobby");
     }
 }
