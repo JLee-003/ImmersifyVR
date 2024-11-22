@@ -6,25 +6,25 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class LocomotionManager : MonoBehaviour
 {
     ActionBasedContinuousMoveProvider continuousMoveProvider;
-    BreastStrokeEvaluator[] breastStrokeEvaultors;
+    BasicSwimmingEvaluator[] BasicSwimmingEvaultors;
     float waterWalkSpeed = 1.5f;
     float normalWalkSpeed = 3f;
     private void Start()
     {
         continuousMoveProvider = GetComponentInChildren<ActionBasedContinuousMoveProvider>();
-        breastStrokeEvaultors = GetComponents<BreastStrokeEvaluator>();
+        BasicSwimmingEvaultors = GetComponentsInChildren<BasicSwimmingEvaluator>();
 
         continuousMoveProvider.moveSpeed = normalWalkSpeed;
-        breastStrokeEvaultors[0].enabled = false;
-        breastStrokeEvaultors[1].enabled = false;
+        BasicSwimmingEvaultors[0].enabled = false;
+        BasicSwimmingEvaultors[1].enabled = false;
     }
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Water Volume"))
         {
             continuousMoveProvider.moveSpeed = waterWalkSpeed;
-            breastStrokeEvaultors[0].enabled = true;
-            breastStrokeEvaultors[1].enabled = true;
+            BasicSwimmingEvaultors[0].enabled = true;
+            BasicSwimmingEvaultors[1].enabled = true;
         }
     }
     private void OnTriggerExit(Collider other)
@@ -32,8 +32,8 @@ public class LocomotionManager : MonoBehaviour
         if (other.CompareTag("Water Volume"))
         {
             continuousMoveProvider.moveSpeed = normalWalkSpeed;
-            breastStrokeEvaultors[0].enabled = false;
-            breastStrokeEvaultors[1].enabled = false;
+            BasicSwimmingEvaultors[0].enabled = false;
+            BasicSwimmingEvaultors[1].enabled = false;
         }
     }
 }

@@ -6,17 +6,14 @@ using UnityEngine.XR.Interaction.Toolkit;
 using System;
 
 
-// USING DELTA VELOCITY OR VELOCITY???
 public class BasicSwimmingEvaluator : MonoBehaviour
 {
     ActionBasedController controller;
     CharacterController characterController;
     [SerializeField] Transform head;
-
-    bool measuring = false;
+    [SerializeField] float velocityScale;
 
     Vector3 curr_v; // current velocity
-    Vector3 prev_v; // preivous velocity
     Vector3 total_v; // total velocity
 
     Vector3 curr_pos;
@@ -28,7 +25,9 @@ public class BasicSwimmingEvaluator : MonoBehaviour
 
     float speedFactor;
     
-    bool flag;
+    bool flag = false;
+
+    float startTime;
 
     // Start is called before the first frame update
     void Start()
@@ -38,20 +37,34 @@ public class BasicSwimmingEvaluator : MonoBehaviour
         speedFactor = 0;
     }
 
+    void OnEnable()
+    {
+        prev_pos = transform.localPosition;
+        curr_pos = transform.localPosition;
+    }
+
     // Update is called once per frame
     void Update()
     {
         // Calculate delta velocity
-        boost_vel = CalculateSpeedBoost();
+
+        prev_pos = curr_pos;
+        curr_pos = transform.localPosition;
+
+        curr_v = (curr_pos-prev_pos)/Time.deltaTime;
+        Debug.Log(curr_v);
 
         // Conditional: if controller is moving above X speed, apply boost using acceleration
-        if (boost_vel.x + boost_vel.y + boost_vel.z > 3) {
+        if (curr_v.magnitude > 0.5) {
             AddToTotalVelocity();
+            if (flag == false) {
+                startTime = Time.time;
+            }
             flag = true;
         }
         else if (flag == true){
             flag = false;
-            CalculateSpeedBoost();
+            boost_vel = CalculateSpeedBoost();
             speedFactor = 1; // moved here!
             total_v = new Vector3(0,0,0);
         }
@@ -62,18 +75,13 @@ public class BasicSwimmingEvaluator : MonoBehaviour
     }
 
     void AddToTotalVelocity() {
-        prev_pos = curr_pos;
-        curr_pos = transform.localPosition; // here
-
-        prev_v = curr_v;
-        curr_v = new Vector3((curr_pos.x-prev_pos.x)/Time.deltaTime, (curr_pos.y-prev_pos.y)/Time.deltaTime, (curr_pos.z-prev_pos.z)/Time.deltaTime);
-
         total_v += curr_v;
     }
 
     Vector3 CalculateSpeedBoost() {
         // Calculate average velocity
-        Vector3 avg_v = total_v/Time.deltaTime;
+        Vector3 avg_v = total_v/(Time.time-startTime) * velocityScale; // add scaling here
+        // Debug.Log(avg_v.magnitude);
 
         // Flip current controller velocity to opposite direction
         return new Vector3(-1*avg_v.x, -1*avg_v.y, -1*avg_v.z);
@@ -83,7 +91,7 @@ public class BasicSwimmingEvaluator : MonoBehaviour
     void ApplyBoost()
     {
         // Apply boost to character controller using acceleration
-        Vector3 move = boost_vel * speedFactor; // * Time.deltaTime
+        Vector3 move = boost_vel * speedFactor * Time.deltaTime; //  
         characterController.Move(move);
     }
 }
