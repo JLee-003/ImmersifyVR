@@ -6,6 +6,6 @@ public class PokeButtonTest : MonoBehaviour
 {
     public void PokeButton()
     {
-        Debug.Log("BUTTON PRESSED");
+        HapticFeedbackManager.Instance.InitiateHapticFeedback(true, true, 1, 1);
     }
 }
