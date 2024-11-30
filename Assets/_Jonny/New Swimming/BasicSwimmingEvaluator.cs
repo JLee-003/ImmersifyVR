@@ -29,6 +29,7 @@ public class BasicSwimmingEvaluator : MonoBehaviour
 
     float startTime;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +53,6 @@ public class BasicSwimmingEvaluator : MonoBehaviour
         curr_pos = transform.localPosition;
 
         curr_v = (curr_pos-prev_pos)/Time.deltaTime;
-        Debug.Log(curr_v);
 
         // Conditional: if controller is moving above X speed, apply boost using acceleration
         if (curr_v.magnitude > 0.5) {
@@ -91,7 +91,21 @@ public class BasicSwimmingEvaluator : MonoBehaviour
     void ApplyBoost()
     {
         // Apply boost to character controller using acceleration
-        Vector3 move = boost_vel * speedFactor * Time.deltaTime; //  
+        Vector3 move = boost_vel * speedFactor * Time.deltaTime * CalculateVectorProjection();
         characterController.Move(move);
+    }
+
+    float CalculateVectorProjection() {
+        Vector3 v1 = total_v/(Time.time-startTime) * velocityScale; // avg_v
+        Vector3 v2 = transform.forward;
+        v1.Normalize();
+        v2.Normalize();
+
+        Debug.Log(Vector3.Dot(v1,v2));
+        
+        if ( Vector3.Dot(v1, v2) > 0) return Vector3.Dot(v1, v2);
+        else return 0.1f;
+
+        return 0;
     }
 }
