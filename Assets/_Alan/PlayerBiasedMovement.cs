@@ -18,13 +18,19 @@ public class PlayerBiasedMovement : MonoBehaviour
     public GameObject target;
     private float timer;
     public float changeDirectionTimer = 4.0f;
+    public Vector3 rotationOffset = new Vector3(0, 90, 0);
     Vector3 target_pos;
 
     void Start()
     {
+        
         fish = GetComponent<Rigidbody>();
         fish.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         fish.interpolation = RigidbodyInterpolation.Interpolate;
+        fish.useGravity = false;
+        fish.drag = 0.75f;        
+        fish.angularDrag = 0.5f; 
+        fish.mass = 1.0f; 
     }
 
     public void Update()
@@ -54,21 +60,27 @@ public class PlayerBiasedMovement : MonoBehaviour
             timer = 0;
         }
     }
+void FixedUpdate()
+{
+    Vector3 totalForce = attraction_force + avoidance_force + GetRandomDirection(-0.25f, 0.25f);
+    
+    totalForce.y = Mathf.Clamp(totalForce.y, -0.1f, 0.1f);
 
-    public void FixedUpdate() {
-        fish.AddForce(Velocity, ForceMode.Force);
-        if (Velocity != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(Velocity.normalized, Vector3.up);
-            fish.rotation = Quaternion.Lerp(fish.rotation, targetRotation, Time.fixedDeltaTime * 5.0f);
-        }
+    fish.AddForce(totalForce, ForceMode.Force);
 
-        if (fish.position.y >= MaxY && Velocity.y > 0)
-        {
-            Velocity.y = -Mathf.Abs(Velocity.y);
-        }
+    Vector3 currentVelocity = fish.velocity;
+    currentVelocity.y = Mathf.Clamp(currentVelocity.y, -0.5f, 0.5f);
+    fish.velocity = currentVelocity;        
+
+    if (fish.velocity != Vector3.zero)
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(fish.velocity.normalized, Vector3.up);
+        Quaternion correctedRotation = targetRotation * Quaternion.Euler(rotationOffset);
+        fish.rotation = Quaternion.Lerp(fish.rotation, correctedRotation, Time.fixedDeltaTime * 5.0f);
     }
 
+    ClampPositionAndVelocity();
+}
 
     Vector3 GetRandomDirection(float min, float max)
     {
@@ -128,11 +140,11 @@ public class PlayerBiasedMovement : MonoBehaviour
 
         if (fish.position.y >= MaxY && Velocity.y > 0)
         {
-            Velocity.y = 0; 
+            Velocity.y = Mathf.Clamp(Velocity.y, float.MinValue, 0);
         }
         else if (fish.position.y <= 0.0f && Velocity.y < 0)
         {
-            Velocity.y = 0; 
+            Velocity.y = Mathf.Clamp(Velocity.y, 0, float.MaxValue); 
         }
     }
 
