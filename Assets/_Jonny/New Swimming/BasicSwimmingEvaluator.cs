@@ -21,13 +21,13 @@ public class BasicSwimmingEvaluator : MonoBehaviour
 
     Vector3 boost_vel;
 
-    float decelerationFactor = 0.98f;
-
-    float speedFactor;
+    float decelerationFactor = 0.98f; // IS DECELERATION TOO LOW?
     
     bool flag = false;
 
     float startTime;
+
+    float dot = 1f;
 
 
     // Start is called before the first frame update
@@ -35,7 +35,6 @@ public class BasicSwimmingEvaluator : MonoBehaviour
     {
         characterController = head.GetComponent<CharacterController>();
         controller = GetComponent<ActionBasedController>();
-        speedFactor = 0;
     }
 
     void OnEnable()
@@ -64,12 +63,13 @@ public class BasicSwimmingEvaluator : MonoBehaviour
         }
         else if (flag == true){
             flag = false;
-            boost_vel = CalculateSpeedBoost();
-            speedFactor = 1; // moved here!
+            boost_vel += CalculateSpeedBoost();
+            dot = CalculateVectorProjection(); // should this be +=?
             total_v = new Vector3(0,0,0);
         }
 
-        speedFactor *= decelerationFactor;
+        boost_vel *= decelerationFactor;
+        Debug.Log(boost_vel);
         ApplyBoost();
 
     }
@@ -91,7 +91,8 @@ public class BasicSwimmingEvaluator : MonoBehaviour
     void ApplyBoost()
     {
         // Apply boost to character controller using acceleration
-        Vector3 move = boost_vel * speedFactor * Time.deltaTime * CalculateVectorProjection();
+        // make movement force-based, not velocity-based.
+        Vector3 move = boost_vel * Time.deltaTime * dot; // problem: dot is rn one variable so if you move forward then back, dot will = 0 and then you will suddenly stop.
         characterController.Move(move);
     }
 
@@ -100,11 +101,9 @@ public class BasicSwimmingEvaluator : MonoBehaviour
         Vector3 v2 = transform.forward;
         v1.Normalize();
         v2.Normalize();
-
-        Debug.Log(Vector3.Dot(v1,v2));
         
         if ( Vector3.Dot(v1, v2) > 0) return Vector3.Dot(v1, v2);
-        else return 0.1f;
+        else return 0f;
 
         return 0;
     }
