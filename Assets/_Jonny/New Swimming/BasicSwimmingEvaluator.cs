@@ -63,7 +63,7 @@ public class BasicSwimmingEvaluator : MonoBehaviour
         }
         else if (flag == true){
             flag = false;
-            boost_vel += CalculateSpeedBoost();
+            boost_vel += CalculateSpeedBoost() * CalculateVectorProjection();
             dot = CalculateVectorProjection(); // should this be +=?
             total_v = new Vector3(0,0,0);
         }
@@ -92,7 +92,7 @@ public class BasicSwimmingEvaluator : MonoBehaviour
     {
         // Apply boost to character controller using acceleration
         // make movement force-based, not velocity-based.
-        Vector3 move = boost_vel * Time.deltaTime * dot; // problem: dot is rn one variable so if you move forward then back, dot will = 0 and then you will suddenly stop.
+        Vector3 move = boost_vel * Time.deltaTime; // problem: dot is rn one variable so if you move forward then back, dot will = 0 and then you will suddenly stop.
         characterController.Move(move);
     }
 
