@@ -21,7 +21,7 @@ public class BasicSwimmingEvaluator : MonoBehaviour
 
     Vector3 boost_vel;
 
-    float decelerationFactor = 0.98f; // IS DECELERATION TOO LOW?
+    float decelerationFactor = 0.90f;
     
     bool flag = false;
 
@@ -98,7 +98,8 @@ public class BasicSwimmingEvaluator : MonoBehaviour
 
     float CalculateVectorProjection() {
         Vector3 v1 = total_v/(Time.time-startTime) * velocityScale; // avg_v
-        Vector3 v2 = transform.forward;
+        Vector3 v2 = transform.right * -1; // maybe?
+        // add child object so one of its axes is palm direction?
         v1.Normalize();
         v2.Normalize();
         
