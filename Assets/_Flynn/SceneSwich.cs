@@ -5,7 +5,7 @@ public class SocketInteractorScript : MonoBehaviour
 {
     public string targetSceneName;
 
-    public void OnSelectEnter(XRBaseInteractor interactor)
+    public void OnSelectEnter()
     {
     
             SceneManager.LoadScene(targetSceneName);

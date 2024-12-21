@@ -9,6 +9,8 @@ TagManager:
   - Fish
   - Controller
   - XRcontroller
+  - Button Bottom
+  - index finger
   layers:
   - Default
   - TransparentFX
