@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MAIN/Scenes/Lobby.unity
     guid: 9fc3ebad12c3f6c459072f52538be7d3
+  - enabled: 1
+    path: Assets/_Jonny/New Swimming/NewBeach.unity
+    guid: 07e12d2a63a3e4eaeb913c02b027b1f4
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f86be8e2fa28caa4eaf9e781d4509e9d,
       type: 2}
