@@ -5,14 +5,13 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class Swimmer : MonoBehaviour
 {
-    [Header("Values")] // do i need ;?
+    [Header("Values")]
     [SerializeField] float swimForce = 2f;
     [SerializeField] float dragForce = 1f;
     [SerializeField] float minForce;
     [SerializeField] float minTimeBetweenStrokes;
     
-    [Header("References")] // do i need ;?
-
+    [Header("References")]
     [SerializeField] InputActionReference leftControllerSwimReference;
     [SerializeField] InputActionReference leftControllerVelocity;
     [SerializeField] InputActionReference rightControllerSwimReference;
@@ -28,13 +27,14 @@ public class Swimmer : MonoBehaviour
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
-    void fixedUpdate() {
+    void FixedUpdate() {
         _cooldownTimer += Time.fixedDeltaTime;
+
         if (_cooldownTimer > minTimeBetweenStrokes
-            && leftControllerSwimReference.action.IsPressed()
-            && rightControllerSwimReference.action.IsPressed()) // may need to change this to be more accessible for people with one hand
+            && (leftControllerSwimReference.action.IsPressed() || rightControllerSwimReference.action.IsPressed())) // this or was an and; changed to be more accessible
         { 
 
+            Debug.Log("SWIMMING!!!");
             var leftHandVelocity = leftControllerVelocity.action.ReadValue<Vector3>();
             var rightHandVelocity = rightControllerVelocity.action.ReadValue<Vector3>();
             Vector3 localVelocity = leftHandVelocity + rightHandVelocity;
