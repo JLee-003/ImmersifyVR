@@ -93,9 +93,9 @@ public class VRGeneralTutorial : MonoBehaviour
         door.position = Vector3.MoveTowards(door.position, new Vector3(18f, 2f, -3.7f), doorSpeed * Time.deltaTime);
     }
 
-    void TransitionOut()
+    public void TransitionOut()
     {
         Debug.Log("Transitioning out...");
-        SceneLoader.Instance.LoadNewScene("Lobby");
+        SceneLoader.Instance.LoadNewScene("NewBeach");
     }
 }

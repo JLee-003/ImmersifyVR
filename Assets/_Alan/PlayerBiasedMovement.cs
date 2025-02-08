@@ -23,7 +23,7 @@ public class PlayerBiasedMovement : MonoBehaviour
 
     void Start()
     {
-        
+        target = GameObject.FindGameObjectWithTag("Player");
         fish = GetComponent<Rigidbody>();
         fish.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         fish.interpolation = RigidbodyInterpolation.Interpolate;
