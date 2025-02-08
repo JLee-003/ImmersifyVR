@@ -25,7 +25,9 @@ public class Swimmer : MonoBehaviour
 
     void Awake() {
         _characterController = GetComponent<CharacterController>();
+    }
 
+    void OnEnable() {
         // Initialize previous positions for velocity calculation
         _previousLeftControllerPosition = leftControllerTransform.localPosition;
         _previousRightControllerPosition = rightControllerTransform.localPosition;

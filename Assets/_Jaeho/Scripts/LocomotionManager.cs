@@ -6,25 +6,23 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class LocomotionManager : MonoBehaviour
 {
     ActionBasedContinuousMoveProvider continuousMoveProvider;
-    BasicSwimmingEvaluator[] BasicSwimmingEvaultors;
+    Swimmer SwimmingEvaluator;
     float waterWalkSpeed = 1.5f;
     float normalWalkSpeed = 3f;
     private void Start()
     {
         continuousMoveProvider = GetComponentInChildren<ActionBasedContinuousMoveProvider>();
-        BasicSwimmingEvaultors = GetComponentsInChildren<BasicSwimmingEvaluator>();
+        SwimmingEvaluator = GetComponent<Swimmer>();
 
         continuousMoveProvider.moveSpeed = normalWalkSpeed;
-        BasicSwimmingEvaultors[0].enabled = false;
-        BasicSwimmingEvaultors[1].enabled = false;
+        SwimmingEvaluator.enabled = false;
     }
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Water Volume"))
         {
             continuousMoveProvider.moveSpeed = waterWalkSpeed;
-            BasicSwimmingEvaultors[0].enabled = true;
-            BasicSwimmingEvaultors[1].enabled = true;
+            SwimmingEvaluator.enabled = true;
         }
     }
     private void OnTriggerExit(Collider other)
@@ -32,8 +30,7 @@ public class LocomotionManager : MonoBehaviour
         if (other.CompareTag("Water Volume"))
         {
             continuousMoveProvider.moveSpeed = normalWalkSpeed;
-            BasicSwimmingEvaultors[0].enabled = false;
-            BasicSwimmingEvaultors[1].enabled = false;
+            SwimmingEvaluator.enabled = false;
         }
     }
 }
