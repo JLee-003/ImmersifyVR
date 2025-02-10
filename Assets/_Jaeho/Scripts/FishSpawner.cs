@@ -30,12 +30,12 @@ public class FishSpawner : MonoBehaviour
 
     [SerializeField] GameObject fishPrefab;
 
-    GameObject playerView;
+    GameObject player;
 
     private void Start()
     {
 
-        playerView = GameObject.FindGameObjectWithTag("MainCamera");
+        player = GameObject.FindGameObjectWithTag("Player");
 
 
         foreach (FishInfo fishInfo in fishInfoList)
@@ -82,7 +82,7 @@ public class FishSpawner : MonoBehaviour
             float randomZ = Random.Range(fishInfo.minZ, fishInfo.maxZ);
             Vector3 randomPosition = new Vector3(randomX, randomY, randomZ);
 
-            Vector3 difference = randomPosition - playerView.transform.position;
+            Vector3 difference = randomPosition - player.transform.position;
 
             if (difference.magnitude >= minimumPlayerDist)
             {

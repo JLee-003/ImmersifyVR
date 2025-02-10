@@ -221,7 +221,7 @@ MonoBehaviour:
   AvoidanceStrength: 1.5
   RandomDirectionStrength: 2
   AvoidRadius: 5
-  MaxY: 15
+  MaxY: 27
   avoidance_force: {x: 0, y: 0, z: 0}
   attraction_force: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
