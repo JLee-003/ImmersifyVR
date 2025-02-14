@@ -198,8 +198,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxYLevel: 26
-  minForce: 20
-  maxForce: 30
+  minForce: 18
+  maxForce: 29
   maxTime: 3.5
   smoothTime: 8.5
   followDistance: 10
