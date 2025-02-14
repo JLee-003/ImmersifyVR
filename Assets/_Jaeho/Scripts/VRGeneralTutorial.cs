@@ -35,7 +35,7 @@ public class VRGeneralTutorial : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerView = player.GetComponentInChildren<Camera>();
 
-        pokeButton.onClick.AddListener(TransitionOut);
+        //pokeButton.onClick.AddListener(TransitionOut);
     }
 
     private void Update()
@@ -96,6 +96,6 @@ public class VRGeneralTutorial : MonoBehaviour
     public void TransitionOut()
     {
         Debug.Log("Transitioning out...");
-        SceneLoader.Instance.LoadNewScene("NewBeach");
+        SceneLoader.Instance.LoadNewScene("MAIN Visuals");
     }
 }

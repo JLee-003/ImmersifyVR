@@ -15,6 +15,7 @@ public class Sound
     public bool loop = false;
     public bool playOnAwake = false;
     public AudioSource source;
+    
 
     public Sound()
     {
@@ -33,7 +34,12 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        if (instance == null) {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        } else {
+            Destroy(gameObject);
+        }
 
         foreach (Sound s in sounds)
         {

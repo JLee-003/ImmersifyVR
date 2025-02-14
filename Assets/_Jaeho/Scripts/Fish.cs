@@ -8,6 +8,8 @@ public class Fish : MonoBehaviour
     //Renderer objRenderer;
     public Mesh mesh1, mesh2;
     public int value1, value2;
+    [SerializeField] AudioClip removeAudio;
+
     //public Material mat1, mat2;
 
     public int type;
@@ -19,6 +21,7 @@ public class Fish : MonoBehaviour
         meshFilter = GetComponentInChildren<MeshFilter>();
         //objRenderer = GetComponent<Renderer>();
         SetModel();
+        
     }
 
     void SetModel()
@@ -29,12 +32,26 @@ public class Fish : MonoBehaviour
             case 2: meshFilter.mesh = mesh2; value = value2; break;
         }
     }
-    private void OnTriggerEnter(Collider other)
+
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Controller"))
+        if (collision.gameObject.CompareTag("Controller"))
         {
             Money.Instance.AddMoney(value);
+            AudioSource.PlayClipAtPoint(removeAudio, transform.position, 1f);
             Destroy(gameObject);
+
         }
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Controller"))
+    //    {
+    //        Money.Instance.AddMoney(value);
+    //        AudioSource.PlayClipAtPoint(removeAudio, transform.position, 1f);
+    //        Destroy(gameObject);
+
+    //    }
+    //}
 }

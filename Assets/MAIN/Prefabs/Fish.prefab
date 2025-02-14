@@ -95,8 +95,7 @@ GameObject:
   - component: {fileID: 5355613978992192469}
   - component: {fileID: -4577419827761118401}
   - component: {fileID: 137308521831777591}
-  - component: {fileID: 5286783586516160072}
-  - component: {fileID: 6455577221681180703}
+  - component: {fileID: 6953249695196389261}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Fish
@@ -157,6 +156,7 @@ MonoBehaviour:
   mesh2: {fileID: -2068639166428788250, guid: ea93ead513f04c9478f78e3f40ba5b11, type: 3}
   value1: 100
   value2: 500
+  removeAudio: {fileID: 8300000, guid: c6d6b012d8330964e814d210bb4e3e8d, type: 3}
   type: 0
 --- !u!54 &137308521831777591
 Rigidbody:
@@ -166,7 +166,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7053705457185874877}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0.5
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -183,25 +183,9 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &5286783586516160072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7053705457185874877}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eefd071bc6be40941b24e7dd888ec3bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  changeDirectionTimer: 3
-  fish: {fileID: 137308521831777591}
-  bound: 10
---- !u!114 &6455577221681180703
+--- !u!114 &6953249695196389261
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,20 +194,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7053705457185874877}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4311048874c5c0c489a490d9ad47c9b1, type: 3}
+  m_Script: {fileID: 11500000, guid: ae9fb10a2657b13448436e584223d9c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 0, y: 0, z: 0}
-  Velocity: {x: 0, y: 0, z: 0}
-  fish: {fileID: 0}
-  MaxSpeed: 4
-  AttractionStrength: 1.3
-  AvoidanceStrength: 1.5
-  RandomDirectionStrength: 2
-  AvoidRadius: 5
-  MaxY: 15
-  avoidance_force: {x: 0, y: 0, z: 0}
-  attraction_force: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
-  changeDirectionTimer: 4
-  rotationOffset: {x: 0, y: 90, z: 0}
+  maxYLevel: 26
+  minForce: 18
+  maxForce: 29
+  maxTime: 3.5
+  smoothTime: 8.5
+  followDistance: 10

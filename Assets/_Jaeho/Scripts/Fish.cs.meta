@@ -3,7 +3,10 @@ guid: e683ff0504d4ce74eb1148568567e18d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - mesh1: {instanceID: 0}
+  - mesh2: {instanceID: 0}
+  - removeAudio: {fileID: 8300000, guid: c6d6b012d8330964e814d210bb4e3e8d, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
