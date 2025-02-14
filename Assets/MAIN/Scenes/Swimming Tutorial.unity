@@ -400,9 +400,9 @@ MonoBehaviour:
   greenPoint: {fileID: 1995334839}
   objectToShow: {fileID: 528247074}
   triggerButton: 5
-  leftControllerSwimReference: {fileID: 5667446173830999989, guid: 0be0028c24f2a4c14a96b6aa39055933,
+  leftControllerSwimReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  rightControllerSwimReference: {fileID: 5667446173830999989, guid: 0be0028c24f2a4c14a96b6aa39055933,
+  rightControllerSwimReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!114 &30236045 stripped
 MonoBehaviour:
