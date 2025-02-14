@@ -32,9 +32,10 @@ public class Fish : MonoBehaviour
             case 2: meshFilter.mesh = mesh2; value = value2; break;
         }
     }
-    private void OnTriggerEnter(Collider other)
+
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Controller"))
+        if (collision.gameObject.CompareTag("Controller"))
         {
             Money.Instance.AddMoney(value);
             AudioSource.PlayClipAtPoint(removeAudio, transform.position, 1f);
@@ -42,4 +43,15 @@ public class Fish : MonoBehaviour
 
         }
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Controller"))
+    //    {
+    //        Money.Instance.AddMoney(value);
+    //        AudioSource.PlayClipAtPoint(removeAudio, transform.position, 1f);
+    //        Destroy(gameObject);
+
+    //    }
+    //}
 }
