@@ -62,7 +62,7 @@ public class SwimmingTutorial : MonoBehaviour
         
         if (SceneLoader.Instance != null)
         {
-            player.transform.position = new Vector3(72f,32f,56f);
+            Teleport.Instance.tp(72f,32f,56f);
             Debug.Log("SceneLoader instance found. Loading scene 'NewBeach'...");
             SceneLoader.Instance.LoadNewScene("Main VISUALS");
         }

@@ -65,7 +65,7 @@ public class VRGeneralTutorial : MonoBehaviour
                 playerToCheckpt.Normalize();
 
                 float angle = Vector3.Angle(playerForward, playerToCheckpt);
-                //Debug.Log($"Angle to {checkpoint.name} = {angle}, cornerPos:{corner.position}, forward: {playerForward}, playerToCheckpt:{playerToCheckpt}");
+                Debug.Log($"Angle to {checkpoint.name} = {angle}, cornerPos:{corner.position}, forward: {playerForward}, playerToCheckpt:{playerToCheckpt}");
                 if (colliding && angle < angleThreshold)
                 {
                     checkpointsReached += 1;
@@ -96,6 +96,8 @@ public class VRGeneralTutorial : MonoBehaviour
     public void TransitionOut()
     {
         Debug.Log("Transitioning out...");
-        SceneLoader.Instance.LoadNewScene("MAIN Visuals");
+        SceneLoader.Instance.LoadNewScene("Swimming Tutorial");
+        Teleport.Instance.tp(100f, 55f, 40f);
+        player.transform.rotation = Quaternion.Euler(0, 45, 0);
     }
 }
