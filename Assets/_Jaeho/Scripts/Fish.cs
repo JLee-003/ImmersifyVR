@@ -51,7 +51,7 @@ public class Fish : MonoBehaviour
             Money.Instance.AddMoney(value);
             AudioSource.PlayClipAtPoint(removeAudio, transform.position, 1f);
             Destroy(gameObject);
-
+            FishGame.Instance.CaughtFishUIDisplay();
         }
     }
 }
