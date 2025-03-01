@@ -7,6 +7,6 @@ public class XRPushButton : MonoBehaviour
 
     public void LoadTargetScene()
     {
-        SceneManager.LoadScene(targetSceneName);
+        SceneLoader.Instance.LoadNewScene(targetSceneName);
     }
 }
