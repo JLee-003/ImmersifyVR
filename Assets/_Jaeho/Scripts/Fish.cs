@@ -50,6 +50,7 @@ public class Fish : MonoBehaviour
         {
             Money.Instance.AddMoney(value);
             AudioSource.PlayClipAtPoint(removeAudio, transform.position, 1f);
+            HapticFeedbackManager.Instance.InitiateHapticFeedback(true, true, 1f, 1f);
             Destroy(gameObject);
             FishGame.Instance.CaughtFishUIDisplay();
         }

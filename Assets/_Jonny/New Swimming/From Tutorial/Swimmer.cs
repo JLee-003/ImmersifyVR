@@ -57,6 +57,9 @@ public class Swimmer : MonoBehaviour
                 Vector3 worldVelocity = trackingReference.TransformDirection(localVelocity);
                 _velocity += worldVelocity * swimForce * Time.fixedDeltaTime;
                 _cooldownTimer = 0f;
+
+                //Swimming haptics
+                HapticFeedbackManager.Instance.InitiateHapticFeedback(true, true, 0.2f, 0.2f);
             }
         }
 
