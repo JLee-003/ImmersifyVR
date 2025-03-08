@@ -10,17 +10,22 @@ public class SwimmingTutorial : MonoBehaviour
 {
     public TextMeshProUGUI tutorialText; // Change Text to TextMeshProUGUI
     public GameObject greenPoint;
-    public GameObject objectToShow;
+    public GameObject firstFish;
+    public GameObject secondFish;
+    //public GameObject objectToShow;
     public UnityEngine.XR.Interaction.Toolkit.InputHelpers.Button triggerButton = UnityEngine.XR.Interaction.Toolkit.InputHelpers.Button.Trigger;
     [SerializeField] InputActionReference leftControllerSwimReference;
     [SerializeField] InputActionReference rightControllerSwimReference;
     private GameObject player;
 
     private bool hasReachedGreenPoint = false;
+    private bool hasCaughtFirstFish = false;
 
     void Start()
     {
         greenPoint.SetActive(false);
+        firstFish.SetActive(false);
+        secondFish.SetActive(false);
         player = GameObject.FindWithTag("Player");
         if (player == null)
         {
@@ -33,27 +38,32 @@ public class SwimmingTutorial : MonoBehaviour
         if (leftControllerSwimReference.action.IsPressed() || rightControllerSwimReference.action.IsPressed())
         {
             Debug.Log("Grip button pressed"); // Debug log
-            tutorialText.text = "Now swim to the green point";
+            tutorialText.text = "Now, swim to the green sphere.";
             greenPoint.SetActive(true);
         }
-
+        // Green Point
         if (player != null && !hasReachedGreenPoint && Vector3.Distance(player.transform.position, greenPoint.transform.position) < 5.0f)
         {
             hasReachedGreenPoint = true;
-            objectToShow.SetActive(true);
             greenPoint.SetActive(false);
-            StartCoroutine(WaitAndLoadScene()); // Ensure WaitAndLoadScene is called here
-        }
-    }
+            firstFish.SetActive(true);
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+            tutorialText.text = "Well done! Now, try to catch the fish in front of you by touching it with your hand.";
+        }
+        // First Stationary Fish
+        if (player != null && hasReachedGreenPoint && !hasCaughtFirstFish && firstFish == null)
         {
-            hasReachedGreenPoint = true;
-            objectToShow.SetActive(true);
-            greenPoint.SetActive(false);
-            StartCoroutine(WaitAndLoadScene());
+            hasCaughtFirstFish = true;
+            secondFish.SetActive(true);
+
+            tutorialText.text = "Finally, catch this moving fish!";
+        }
+        // Second Moving Fish
+        if (player != null && hasReachedGreenPoint && hasCaughtFirstFish && secondFish == null)
+        {
+            tutorialText.text = "Great Job! You're now ready for the open ocean.";
+
+            StartCoroutine(WaitAndLoadScene()); // Ensure WaitAndLoadScene is called here
         }
     }
 
