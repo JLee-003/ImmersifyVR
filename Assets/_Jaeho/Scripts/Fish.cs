@@ -52,7 +52,10 @@ public class Fish : MonoBehaviour
             AudioSource.PlayClipAtPoint(removeAudio, transform.position, 1f);
             HapticFeedbackManager.Instance.InitiateHapticFeedback(true, true, 1f, 1f);
             Destroy(gameObject);
-            FishGame.Instance.CaughtFishUIDisplay();
+            if (FishGame.Instance != null)
+            {
+                FishGame.Instance.CaughtFishUIDisplay();
+            }
         }
     }
 }
