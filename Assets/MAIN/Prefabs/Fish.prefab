@@ -154,8 +154,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mesh1: {fileID: -5414332994079535143, guid: 38f74cd884cda8242b4fdc167c4962f8, type: 3}
   mesh2: {fileID: -2068639166428788250, guid: ea93ead513f04c9478f78e3f40ba5b11, type: 3}
+  mesh3: {fileID: 7834934524071737294, guid: ae51ad94fa7d3764d957aa512d506d00, type: 3}
   value1: 100
   value2: 500
+  value3: 300
   removeAudio: {fileID: 8300000, guid: c6d6b012d8330964e814d210bb4e3e8d, type: 3}
   type: 0
 --- !u!54 &137308521831777591
@@ -203,3 +205,4 @@ MonoBehaviour:
   maxTime: 3.5
   smoothTime: 8.5
   followDistance: 10
+  stationaryTutorial: 0

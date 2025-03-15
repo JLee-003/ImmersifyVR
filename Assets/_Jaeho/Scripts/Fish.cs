@@ -6,8 +6,8 @@ public class Fish : MonoBehaviour
 {
     MeshFilter meshFilter;
     //Renderer objRenderer;
-    public Mesh mesh1, mesh2;
-    public int value1, value2;
+    public Mesh mesh1, mesh2, mesh3;
+    public int value1, value2, value3;
     [SerializeField] AudioClip removeAudio;
 
     //public Material mat1, mat2;
@@ -30,6 +30,7 @@ public class Fish : MonoBehaviour
         {
             case 1: meshFilter.mesh = mesh1; value = value1; break;
             case 2: meshFilter.mesh = mesh2; value = value2; break;
+            case 3: meshFilter.mesh = mesh3; value = value3; break;
         }
     }
 
