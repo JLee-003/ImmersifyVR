@@ -12460,7 +12460,7 @@ MonoBehaviour:
     maxY: 20
     maxZ: 256
     type: 1
-    numberOfFish: 40
+    numberOfFish: 20
     cooldown: 30
     respawnTimer: 0
     fishList: []
@@ -12493,7 +12493,7 @@ MonoBehaviour:
     maxY: 20
     maxZ: 188
     type: 1
-    numberOfFish: 20
+    numberOfFish: 10
     cooldown: 90
     respawnTimer: 0
     fishList: []
@@ -12504,7 +12504,7 @@ MonoBehaviour:
     maxY: 20
     maxZ: 150
     type: 2
-    numberOfFish: 30
+    numberOfFish: 15
     cooldown: 90
     respawnTimer: 0
     fishList: []

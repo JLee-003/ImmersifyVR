@@ -6,15 +6,14 @@ public class Fish : MonoBehaviour
 {
     MeshFilter meshFilter;
     //Renderer objRenderer;
-    public Mesh mesh1, mesh2, mesh3;
-    public int value1, value2, value3;
+    public Mesh[] meshes;
     [SerializeField] AudioClip removeAudio;
 
     //public Material mat1, mat2;
 
     public int type;
 
-    int value;
+    int value = 100;
 
     private void Start()
     {
@@ -26,25 +25,8 @@ public class Fish : MonoBehaviour
 
     void SetModel()
     {
-        switch (type)
-        {
-            case 1: meshFilter.mesh = mesh1; value = value1; break;
-            case 2: meshFilter.mesh = mesh2; value = value2; break;
-            case 3: meshFilter.mesh = mesh3; value = value3; break;
-        }
+        meshFilter.mesh = meshes[type-1];
     }
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Controller"))
-    //    {
-    //        Money.Instance.AddMoney(value);
-    //        AudioSource.PlayClipAtPoint(removeAudio, transform.position, 1f);
-    //        Destroy(gameObject);
-
-    //    }
-    //}
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Controller"))
