@@ -13,8 +13,6 @@ public class FishMovement : MonoBehaviour
 
     [SerializeField] private float followDistance;
 
-    [SerializeField] private bool stationaryTutorial = false;
-
     private Transform player;
     private Rigidbody rb;
     private float timer;
@@ -49,23 +47,20 @@ public class FishMovement : MonoBehaviour
 
     private void Move()
     {
-        if (!stationaryTutorial)
+        float randForce = Random.Range(minForce, maxForce);
+        var playerDir = player.position - transform.position;
+        if (playerDir.sqrMagnitude <= followDistance * followDistance)
         {
-            float randForce = Random.Range(minForce, maxForce);
-            var playerDir = player.position - transform.position;
-            if (playerDir.sqrMagnitude <= followDistance * followDistance)
-            {
-                Vector3 randomOffset = new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f));
-                var offsetDir = playerDir.normalized + randomOffset;
-                rb.AddForce(offsetDir.normalized * randForce, ForceMode.Impulse);
-            }
-            else
-            {
-                var dir = Random.insideUnitSphere;
-                rb.AddForce(dir * randForce, ForceMode.Impulse);
-            }
-            timer = maxTime;
+            Vector3 randomOffset = new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f));
+            var offsetDir = playerDir.normalized + randomOffset;
+            rb.AddForce(offsetDir.normalized * randForce, ForceMode.Impulse);
         }
+        else
+        {
+            var dir = Random.insideUnitSphere;
+            rb.AddForce(dir * randForce, ForceMode.Impulse);
+        }
+        timer = maxTime;
     }
 
 }

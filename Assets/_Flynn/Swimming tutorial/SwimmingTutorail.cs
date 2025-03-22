@@ -19,6 +19,8 @@ public class SwimmingTutorial : MonoBehaviour
     [SerializeField] InputActionReference rightControllerSwimReference;
     private GameObject player;
 
+    ActionBasedContinuousMoveProvider moveProvider;
+
     private bool gripButtonPressed = false;
     private bool hasReachedGreenPoint = false;
     private bool hasCaughtFirstFish = false;
@@ -36,6 +38,11 @@ public class SwimmingTutorial : MonoBehaviour
         if (player == null)
         {
             Debug.LogError("Player not found in the scene.");
+        }
+        else
+        {
+            moveProvider = player.GetComponentInChildren<ActionBasedContinuousMoveProvider>();
+            moveProvider.enabled = false;
         }
     }
 

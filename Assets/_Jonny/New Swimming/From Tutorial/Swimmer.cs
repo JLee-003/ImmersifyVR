@@ -48,7 +48,7 @@ public class Swimmer : MonoBehaviour
             && (leftControllerSwimReference.action.IsPressed() || rightControllerSwimReference.action.IsPressed())) // this or was an and; changed to be more accessible
         { 
             Vector3 localVelocity = leftHandVelocity + rightHandVelocity;
-            Debug.Log(localVelocity);
+            //Debug.Log(localVelocity);
             localVelocity *= -1;
 
             if (localVelocity.sqrMagnitude > minForce * minForce)
