@@ -466,8 +466,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The thumbstick on your right hand will make you turn. Gently push the right
-    thumbstick in the left and right directions to turn.
+  m_text: 'Right hand controller joystick will change your direction and POV depending
+    on whether you push right or left respectively.
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -664,8 +666,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.7, y: 1.5}
-  m_SizeDelta: {x: 200, y: 100}
+  m_AnchoredPosition: {x: 7.5, y: 1.5}
+  m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &202243385
 GameObject:
@@ -3470,8 +3472,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The thumbstick on your left hand will make you walk. Gently push the left
-    thumb stick forward to walk forward.
+  m_text: "Left hand controller joystick will make you walk when  you push the joystick
+    forward. \r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5230,9 +5232,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "On the top part of your controllers, you\u2019ll find a small stick or
-    circle, called a \u201Cthumbstick.\u201D It should be right where your thumb
-    naturally rests when you\u2019re holding it."
+  m_text: "Right where your thumb sits on the controller should be where the \u201Cjoystick\u201D,
+    a stick, should sit.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
