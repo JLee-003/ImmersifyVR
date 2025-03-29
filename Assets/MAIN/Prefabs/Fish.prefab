@@ -159,6 +159,8 @@ MonoBehaviour:
   - {fileID: -2068639166428788250, guid: ea93ead513f04c9478f78e3f40ba5b11, type: 3}
   removeAudio: {fileID: 8300000, guid: c6d6b012d8330964e814d210bb4e3e8d, type: 3}
   type: 0
+  catchEffect: {fileID: 3061336691144616840, guid: 55cfdd29497ea4688be1a5ede3460e09,
+    type: 3}
 --- !u!54 &137308521831777591
 Rigidbody:
   m_ObjectHideFlags: 0

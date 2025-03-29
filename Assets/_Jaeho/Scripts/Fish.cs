@@ -15,6 +15,8 @@ public class Fish : MonoBehaviour
 
     int value = 100;
 
+    public GameObject catchEffect;
+
     private void Start()
     {
         meshFilter = GetComponentInChildren<MeshFilter>();
@@ -34,6 +36,15 @@ public class Fish : MonoBehaviour
             Money.Instance.AddMoney(value);
             AudioSource.PlayClipAtPoint(removeAudio, transform.position, 1f);
             HapticFeedbackManager.Instance.InitiateHapticFeedback(true, true, 1f, 1f);
+
+            // Instantiate the particle effect
+            if (catchEffect != null)
+            {
+                GameObject effect = Instantiate(catchEffect, transform.position, Quaternion.identity);
+                Debug.Log("CAUGHT!");
+            }
+
+
             Destroy(gameObject);
             if (FishGame.Instance != null)
             {
