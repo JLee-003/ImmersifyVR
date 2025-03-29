@@ -23,6 +23,8 @@ public class TutorialFish : MonoBehaviour
     private float timer;
     private int currentCheckpointIndex = 0;
 
+    public GameObject catchEffect;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -83,6 +85,13 @@ public class TutorialFish : MonoBehaviour
             AudioSource.PlayClipAtPoint(removeAudio, transform.position, 1f);
             HapticFeedbackManager.Instance.InitiateHapticFeedback(true, true, 1f, 1f);
             Destroy(gameObject);
+
+            // Instantiate the particle effect
+            if (catchEffect != null)
+            {
+                GameObject effect = Instantiate(catchEffect, transform.position, Quaternion.identity);
+                Debug.Log("CAUGHT!");
+            }
         }
     }
 }

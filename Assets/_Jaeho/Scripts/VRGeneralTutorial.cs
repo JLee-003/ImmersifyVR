@@ -25,7 +25,7 @@ public class VRGeneralTutorial : MonoBehaviour
 
     private void Awake()
     {
-        Teleport.Instance.tp(-0.5f, 0.2f, 0f);
+        //Teleport.Instance.tp(-0.5f, 0.2f, 0f);
     }
     private void Start()
     {
@@ -65,11 +65,11 @@ public class VRGeneralTutorial : MonoBehaviour
                 playerToCheckpt.Normalize();
 
                 float angle = Vector3.Angle(playerForward, playerToCheckpt);
-                Debug.Log($"Angle to {checkpoint.name} = {angle}, cornerPos:{corner.position}, forward: {playerForward}, playerToCheckpt:{playerToCheckpt}");
+                //Debug.Log($"Angle to {checkpoint.name} = {angle}, cornerPos:{corner.position}, forward: {playerForward}, playerToCheckpt:{playerToCheckpt}");
                 if (colliding && angle < angleThreshold)
                 {
                     checkpointsReached += 1;
-                    Debug.Log($"Checkpoint reached! {checkpointsReached}/{totalCheckpoints}");  
+                    //Debug.Log($"Checkpoint reached! {checkpointsReached}/{totalCheckpoints}");  
                     checkpoint.gameObject.SetActive(false);
                     //Note for future: Add sound effect to indicate that a checkpoint has been completed
                     break;
@@ -91,13 +91,5 @@ public class VRGeneralTutorial : MonoBehaviour
     void OpenDoor()
     {
         door.position = Vector3.MoveTowards(door.position, new Vector3(18f, 2f, -3.7f), doorSpeed * Time.deltaTime);
-    }
-
-    public void TransitionOut()
-    {
-        Debug.Log("Transitioning out...");
-        SceneLoader.Instance.LoadNewScene("Swimming Tutorial");
-        Teleport.Instance.tp(100f, 55f, 40f);
-        player.transform.rotation = Quaternion.Euler(0, 45, 0);
     }
 }

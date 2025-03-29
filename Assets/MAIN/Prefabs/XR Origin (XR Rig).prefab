@@ -1145,6 +1145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be341e8c6e5004c7aae66b29b9ea1012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xrOrigin: {fileID: 8334321818440728165}
 --- !u!114 &-5157658466774883635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1672,7 +1673,7 @@ MonoBehaviour:
   m_TurnAmount: 45
   m_DebounceTime: 0.5
   m_EnableTurnLeftRight: 1
-  m_EnableTurnAround: 1
+  m_EnableTurnAround: 0
   m_DelayTime: 0
   m_LeftHandSnapTurnAction:
     m_UseReference: 0

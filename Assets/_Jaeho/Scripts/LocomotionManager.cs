@@ -17,7 +17,7 @@ public class LocomotionManager : MonoBehaviour
         continuousMoveProvider.moveSpeed = normalWalkSpeed;
         SwimmingEvaluator.enabled = false;
     }
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Water Volume"))
         {

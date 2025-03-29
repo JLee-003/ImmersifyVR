@@ -26,6 +26,7 @@ public class SwimmingTutorial : MonoBehaviour
     private bool hasCaughtFirstFish = false;
     private bool hasCaughtSecondFish = false;
     private bool hasCaughtThirdFish = false;
+    private bool loadedScene = false;
 
     void Start()
     {
@@ -42,7 +43,7 @@ public class SwimmingTutorial : MonoBehaviour
         else
         {
             moveProvider = player.GetComponentInChildren<ActionBasedContinuousMoveProvider>();
-            moveProvider.enabled = false;
+            moveProvider.moveSpeed = 0;
         }
     }
 
@@ -50,7 +51,7 @@ public class SwimmingTutorial : MonoBehaviour
     {
         if (!hasReachedGreenPoint && leftControllerSwimReference.action.IsPressed() || rightControllerSwimReference.action.IsPressed())
         {
-            Debug.Log("Grip button pressed"); // Debug log
+            //Debug.Log("Grip button pressed"); // Debug log
             gripButtonPressed = true;
             greenPoint.SetActive(true);
         }
@@ -76,25 +77,25 @@ public class SwimmingTutorial : MonoBehaviour
             hasCaughtThirdFish = true;
             finalFish.SetActive(true);
         }
-        if (player != null && hasCaughtThirdFish && finalFish == null)
+        if (player != null && hasCaughtThirdFish && !loadedScene && finalFish == null)
         {
             StartCoroutine(WaitAndLoadScene()); // Ensure WaitAndLoadScene is called here
+            loadedScene = true;
         }
     }
 
     private IEnumerator WaitAndLoadScene()
     {
-        
+        yield return new WaitForSeconds(3);
         if (SceneLoader.Instance != null)
         {
-            Teleport.Instance.tp(72f,32f,56f);
             Debug.Log("SceneLoader instance found. Loading scene 'NewBeach'...");
+            moveProvider.moveSpeed = 3f;
             SceneLoader.Instance.LoadNewScene("Main VISUALS");
         }
         else
         {
             Debug.LogError("SceneLoader instance is null. Cannot load scene.");
         }
-        yield return new WaitForSeconds(3);
     }
 }
