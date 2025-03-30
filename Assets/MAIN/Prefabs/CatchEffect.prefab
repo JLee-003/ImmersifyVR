@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4492919743708386793}
   - component: {fileID: 1930305252921716124}
   - component: {fileID: 1313251424142604293}
+  - component: {fileID: 7142489008291372985}
   m_Layer: 0
   m_Name: CatchEffect
   m_TagString: Untagged
@@ -4888,3 +4889,15 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &7142489008291372985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3061336691144616840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f089349fa13af4503901a28db00504d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
