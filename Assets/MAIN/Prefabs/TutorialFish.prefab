@@ -187,3 +187,5 @@ MonoBehaviour:
   checkpoints: []
   checkpointThreshold: 1.5
   stationary: 0
+  catchEffect: {fileID: 3061336691144616840, guid: 55cfdd29497ea4688be1a5ede3460e09,
+    type: 3}

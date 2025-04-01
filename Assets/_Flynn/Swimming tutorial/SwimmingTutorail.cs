@@ -27,6 +27,7 @@ public class SwimmingTutorial : MonoBehaviour
     private bool hasCaughtSecondFish = false;
     private bool hasCaughtThirdFish = false;
     private bool loadedScene = false;
+    Swimmer swimmer;
 
     void Start()
     {
@@ -42,6 +43,7 @@ public class SwimmingTutorial : MonoBehaviour
         }
         else
         {
+            swimmer = player.GetComponent<Swimmer>();
             moveProvider = player.GetComponentInChildren<ActionBasedContinuousMoveProvider>();
             moveProvider.moveSpeed = 0;
         }
@@ -49,6 +51,8 @@ public class SwimmingTutorial : MonoBehaviour
 
     void Update()
     {
+        moveProvider.moveSpeed = 0;
+
         if (!hasReachedGreenPoint && leftControllerSwimReference.action.IsPressed() || rightControllerSwimReference.action.IsPressed())
         {
             //Debug.Log("Grip button pressed"); // Debug log
@@ -91,6 +95,7 @@ public class SwimmingTutorial : MonoBehaviour
         {
             Debug.Log("SceneLoader instance found. Loading scene 'NewBeach'...");
             moveProvider.moveSpeed = 3f;
+            swimmer.enabled = false;
             SceneLoader.Instance.LoadNewScene("Main VISUALS");
         }
         else
