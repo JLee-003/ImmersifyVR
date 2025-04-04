@@ -1003,6 +1003,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialFish (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7053705457185874877, guid: 10cb733e428458345905cfd80bc40acc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

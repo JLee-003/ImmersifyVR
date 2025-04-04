@@ -12,7 +12,7 @@ public class SwimmingTutorial : MonoBehaviour
     public GameObject firstFish;
     public GameObject secondFish;
     public GameObject thirdFish;
-    public GameObject finalFish;
+    //public GameObject finalFish;
     //public GameObject objectToShow;
     public UnityEngine.XR.Interaction.Toolkit.InputHelpers.Button triggerButton = UnityEngine.XR.Interaction.Toolkit.InputHelpers.Button.Trigger;
     [SerializeField] InputActionReference leftControllerSwimReference;
@@ -35,7 +35,7 @@ public class SwimmingTutorial : MonoBehaviour
         firstFish.SetActive(false);
         secondFish.SetActive(false);
         thirdFish.SetActive(false);
-        finalFish.SetActive(false);
+        //finalFish.SetActive(false);
         player = GameObject.FindWithTag("Player");
         if (player == null)
         {
@@ -81,9 +81,15 @@ public class SwimmingTutorial : MonoBehaviour
         if (player != null && hasCaughtSecondFish && !hasCaughtThirdFish && thirdFish == null)
         {
             hasCaughtThirdFish = true;
-            finalFish.SetActive(true);
+            StartCoroutine(WaitAndLoadScene()); // Ensure WaitAndLoadScene is called here
+            loadedScene = true;
+            //Manually run water-exit code
+            moveProvider.moveSpeed = 3f;
+            swimmer.enabled = false;
+            Physics.gravity = new Vector3(0f, -9.8f, 0f);
+            //finalFish.SetActive(true);
         }
-        if (player != null && hasCaughtThirdFish && !loadedScene && finalFish == null)
+        /*if (player != null && hasCaughtThirdFish && !loadedScene && finalFish == null)
         {
             StartCoroutine(WaitAndLoadScene()); // Ensure WaitAndLoadScene is called here
             loadedScene = true;
@@ -91,7 +97,7 @@ public class SwimmingTutorial : MonoBehaviour
             moveProvider.moveSpeed = 3f;
             swimmer.enabled = false;
             Physics.gravity = new Vector3(0f, -9.8f, 0f);
-        }
+        }*/
     }
 
     private IEnumerator WaitAndLoadScene()
