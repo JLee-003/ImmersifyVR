@@ -12401,7 +12401,7 @@ MonoBehaviour:
     maxY: 10
     maxZ: 256
     type: 1
-    numberOfFish: 30
+    numberOfFish: 40
     cooldown: 30
     respawnTimer: 0
     fishList: []
@@ -12412,7 +12412,7 @@ MonoBehaviour:
     maxY: 15
     maxZ: 256
     type: 2
-    numberOfFish: 30
+    numberOfFish: 40
     cooldown: 30
     respawnTimer: 0
     fishList: []
@@ -12423,7 +12423,7 @@ MonoBehaviour:
     maxY: 10
     maxZ: 256
     type: 3
-    numberOfFish: 30
+    numberOfFish: 45
     cooldown: 30
     respawnTimer: 0
     fishList: []
@@ -12434,7 +12434,7 @@ MonoBehaviour:
     maxY: 20
     maxZ: 188
     type: 1
-    numberOfFish: 20
+    numberOfFish: 30
     cooldown: 90
     respawnTimer: 0
     fishList: []
@@ -12445,7 +12445,7 @@ MonoBehaviour:
     maxY: 20
     maxZ: 150
     type: 2
-    numberOfFish: 20
+    numberOfFish: 30
     cooldown: 90
     respawnTimer: 0
     fishList: []
@@ -12456,7 +12456,7 @@ MonoBehaviour:
     maxY: 20
     maxZ: 130
     type: 3
-    numberOfFish: 25
+    numberOfFish: 30
     cooldown: 90
     respawnTimer: 0
     fishList: []
