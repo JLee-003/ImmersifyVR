@@ -51,8 +51,10 @@ public class SwimmingTutorial : MonoBehaviour
 
     void Update()
     {
-        moveProvider.moveSpeed = 0;
-
+        if (!loadedScene)
+        {
+            moveProvider.moveSpeed = 0;
+        }
         if (!hasReachedGreenPoint && leftControllerSwimReference.action.IsPressed() || rightControllerSwimReference.action.IsPressed())
         {
             //Debug.Log("Grip button pressed"); // Debug log
@@ -85,6 +87,10 @@ public class SwimmingTutorial : MonoBehaviour
         {
             StartCoroutine(WaitAndLoadScene()); // Ensure WaitAndLoadScene is called here
             loadedScene = true;
+            //Manually run water-exit code
+            moveProvider.moveSpeed = 3f;
+            swimmer.enabled = false;
+            Physics.gravity = new Vector3(0f, -9.8f, 0f);
         }
     }
 
@@ -93,9 +99,11 @@ public class SwimmingTutorial : MonoBehaviour
         yield return new WaitForSeconds(3);
         if (SceneLoader.Instance != null)
         {
-            Debug.Log("SceneLoader instance found. Loading scene 'NewBeach'...");
+            Debug.Log("SceneLoader instance found. Loading scene 'Main VISUALS'...");
+            //Manually run water-exit code; again, just in case
             moveProvider.moveSpeed = 3f;
             swimmer.enabled = false;
+            Physics.gravity = new Vector3(0f, -9.8f, 0f);
             SceneLoader.Instance.LoadNewScene("Main VISUALS");
         }
         else

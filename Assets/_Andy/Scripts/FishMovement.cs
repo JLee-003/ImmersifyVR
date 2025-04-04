@@ -42,7 +42,14 @@ public class FishMovement : MonoBehaviour
             rb.velocity = curVel;
         }
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rb.velocity), Time.deltaTime * smoothTime);
+        if (rb.velocity.sqrMagnitude > 0.0001f)
+        {
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                Quaternion.LookRotation(rb.velocity),
+                Time.deltaTime * smoothTime
+            );
+        }
     }
 
     private void Move()
