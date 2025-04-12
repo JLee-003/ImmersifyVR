@@ -23,7 +23,7 @@ public class LocomotionManager : MonoBehaviour
         {
             continuousMoveProvider.moveSpeed = waterWalkSpeed;
             SwimmingEvaluator.enabled = true;
-            Physics.gravity = Vector3.zero;
+            Physics.gravity = new Vector3(0f, -0.01f, 0f);
         }
     }
     private void OnTriggerExit(Collider other)
