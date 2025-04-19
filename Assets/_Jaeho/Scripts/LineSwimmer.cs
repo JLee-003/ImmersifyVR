@@ -48,6 +48,8 @@ public class LineSwimmer : MonoBehaviour
         LeftControllerSwim();
         RightControllerSwim();
 
+        UpdateStrokeLine();
+
         // Apply drag force
         if (velocity.sqrMagnitude > 0.01f)
         {
@@ -130,6 +132,34 @@ public class LineSwimmer : MonoBehaviour
             //Swimming haptics
             HapticFeedbackManager.Instance.InitiateHapticFeedback(true, false, 0.25f, 0.4f);
             rightSwimStarted = false;
+        }
+    }
+    void UpdateStrokeLine()
+    {
+        // Left stroke active = left controller line
+        if (leftSwimStarted)
+        {
+            lineRenderer.enabled = true;
+            lineRenderer.positionCount = 2;
+
+            lineRenderer.SetPosition(0, leftControllerTransform.parent.TransformPoint(startPosLeft));
+            lineRenderer.SetPosition(1, leftControllerTransform.position);
+        }
+
+        // Right stroke active = Right controller line
+        else if (rightSwimStarted)
+        {
+            lineRenderer.enabled = true;
+            lineRenderer.positionCount = 2;
+
+            lineRenderer.SetPosition(0, rightControllerTransform.parent.TransformPoint(startPosRight));
+            lineRenderer.SetPosition(1, rightControllerTransform.position);
+        }
+
+        // No stroke active = No line
+        else
+        {
+            lineRenderer.enabled = false;
         }
     }
 }

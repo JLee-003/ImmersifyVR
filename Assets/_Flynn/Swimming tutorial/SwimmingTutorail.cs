@@ -45,19 +45,13 @@ public class SwimmingTutorial : MonoBehaviour
         {
             swimmer = player.GetComponent<Swimmer>();
             moveProvider = player.GetComponentInChildren<ActionBasedContinuousMoveProvider>();
-            moveProvider.moveSpeed = 0;
         }
     }
 
     void Update()
     {
-        if (!loadedScene)
-        {
-            moveProvider.moveSpeed = 0;
-        }
         if (!hasReachedGreenPoint && leftControllerSwimReference.action.IsPressed() || rightControllerSwimReference.action.IsPressed())
         {
-            //Debug.Log("Grip button pressed"); // Debug log
             gripButtonPressed = true;
             greenPoint.SetActive(true);
         }
@@ -67,6 +61,7 @@ public class SwimmingTutorial : MonoBehaviour
             hasReachedGreenPoint = true;
             greenPoint.SetActive(false);
             firstFish.SetActive(true);
+            moveProvider.moveSpeed = 0;
         }
         if (player != null && hasReachedGreenPoint && !hasCaughtFirstFish && firstFish == null)
         {
@@ -87,17 +82,7 @@ public class SwimmingTutorial : MonoBehaviour
             moveProvider.moveSpeed = 3f;
             swimmer.enabled = false;
             Physics.gravity = new Vector3(0f, -9.8f, 0f);
-            //finalFish.SetActive(true);
         }
-        /*if (player != null && hasCaughtThirdFish && !loadedScene && finalFish == null)
-        {
-            StartCoroutine(WaitAndLoadScene()); // Ensure WaitAndLoadScene is called here
-            loadedScene = true;
-            //Manually run water-exit code
-            moveProvider.moveSpeed = 3f;
-            swimmer.enabled = false;
-            Physics.gravity = new Vector3(0f, -9.8f, 0f);
-        }*/
     }
 
     private IEnumerator WaitAndLoadScene()
