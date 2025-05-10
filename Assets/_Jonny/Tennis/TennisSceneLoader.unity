@@ -667,7 +667,7 @@ MonoBehaviour:
   OnLoadEnd:
     m_PersistentCalls:
       m_Calls: []
-  startingScene: TennisGame
+  startingScene: TennisGameTest
 --- !u!1 &1931752495
 GameObject:
   m_ObjectHideFlags: 0

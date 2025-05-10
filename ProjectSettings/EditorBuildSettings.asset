@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MAIN/Scenes/MAIN Visuals.unity
     guid: 0ac0f9dbcae9b4ad0836012cb7366b01
+  - enabled: 1
+    path: Assets/_Jaeho/Scenes/TennisGameTest.unity
+    guid: f55e8caeacfaa3b42b47c9776445c6b7
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f86be8e2fa28caa4eaf9e781d4509e9d,
       type: 2}
