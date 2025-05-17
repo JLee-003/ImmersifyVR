@@ -206,4 +206,3 @@ MonoBehaviour:
   maxTime: 3.5
   smoothTime: 8.5
   followDistance: 10
-  stationaryTutorial: 0
