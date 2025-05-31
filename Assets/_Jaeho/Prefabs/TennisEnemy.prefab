@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d1462fdad56c781419afa331c40d10f9, type: 2}
+  - {fileID: 2100000, guid: 7b53c7324ff3a1e458ae970c9b993dca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122,5 +122,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 8461101134120035008, guid: ca771e468866e02439abe027a5b83b2e,
     type: 3}
-  fireCooldown: 3
+  fireCooldown: 5
   shootForce: 3
