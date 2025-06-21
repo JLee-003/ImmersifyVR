@@ -9,7 +9,7 @@ public class ZeroGravProjectile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
-    public void ChangeVeloity(Vector3 newVelocity)
+    public void ChangeVelocity(Vector3 newVelocity)
     {
         rb.velocity = newVelocity;
     }

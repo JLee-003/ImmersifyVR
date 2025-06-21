@@ -4,44 +4,57 @@ using UnityEngine;
 
 public class TennisEnemy : MonoBehaviour
 {
-    [Header("Ball Spawning/Shooting")]
-    [SerializeField] Transform ballPrefab;
+    [SerializeField] float hitForce = 1f;
+    [SerializeField] float moveSpeed = 7.5f;
+
+    [SerializeField] Vector2 minBoundaries;
+    [SerializeField] Vector2 maxBoundaries;
+
     Transform player;
 
-    [Header("Firing")]
-    [SerializeField] float fireCooldown = 1f;
-    [SerializeField] float shootForce = 15f;   // tweak to taste
-    float fireTimer = 0f;
+    GameObject ball;
 
     private void Start()
     {
         player = PlayerReferences.instance.playerObject.transform;
+
+        ball = GameObject.FindGameObjectWithTag("Ball");
     }
 
     private void Update()
     {
-        fireTimer += Time.deltaTime;
-
-        if (fireTimer >= fireCooldown)
+        if (ball != null)
         {
-            fireTimer -= fireCooldown;
-            ShootBall();
+            Vector3 moveDir = ball.transform.position - transform.position;
+            moveDir.y = 0f;
+            moveDir.Normalize();
+
+            Vector3 newPos = transform.position + moveDir * moveSpeed * Time.deltaTime;
+
+            if (newPos.x > minBoundaries.x && newPos.x < maxBoundaries.x)
+            {
+                transform.position = new Vector3(newPos.x, transform.position.y, transform.position.z);
+            }
+
+            if (newPos.z > minBoundaries.y && newPos.z < maxBoundaries.y)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y, newPos.z);
+            }
         }
     }
 
-    void ShootBall()
+    void HitBall()
     {
-        Transform ball = Instantiate(ballPrefab, transform.position + Vector3.up * 1f, Quaternion.identity);
-        Rigidbody rb = ball.GetComponent<Rigidbody>();
+        Vector3 dir = player.position - transform.position;
+        dir.Normalize();
 
-        Vector3 dir = (player.position - transform.position).normalized;
-        rb.velocity = dir * shootForce;
+        ball.GetComponent<ZeroGravProjectile>().ChangeVelocity(dir * hitForce);
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Ball"))
+        if (other.gameObject == ball)
         {
-            Destroy(gameObject);
+            HitBall();
         }
     }
 }
