@@ -77,6 +77,7 @@ public class BallHitting : MonoBehaviour
     
     void ReturnBall(GameObject ball)
     {
+        
         // Raw from your hand�s velocity
         Vector3 rawDir = currentVelocity.normalized;
         float rawSpeed = currentVelocity.magnitude * powerMultiplier;
@@ -108,7 +109,10 @@ public class BallHitting : MonoBehaviour
         }
 
         hitEvaluationScore = EvaluateShot(horizAngle);
+        
     }
+
+
     float EvaluateShot(float angle)
     {
         float score = 0f;

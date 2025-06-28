@@ -553,6 +553,11 @@ MonoBehaviour:
   swingThreshold: 1
   pushbackForce: 5
   xrOrigin: {fileID: 239395435}
+  minHitSpeed: 2
+  maxHitSpeed: 15
+  maxHorizontalAngle: 30
+  maxVerticalAngle: 0
+  enemy: {fileID: 0}
 --- !u!65 &1352744749
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -852,7 +857,7 @@ MonoBehaviour:
   OnLoadEnd:
     m_PersistentCalls:
       m_Calls: []
-  startingScene: TennisZeroG
+  startingScene: TennisGameTest
 --- !u!1 &1931752495
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,6 +1008,11 @@ MonoBehaviour:
   swingThreshold: 1
   pushbackForce: 5
   xrOrigin: {fileID: 239395435}
+  minHitSpeed: 2
+  maxHitSpeed: 15
+  maxHorizontalAngle: 30
+  maxVerticalAngle: 0
+  enemy: {fileID: 0}
 --- !u!1001 &2446915245381026552
 PrefabInstance:
   m_ObjectHideFlags: 0
