@@ -5,6 +5,12 @@ public class BallHitting : MonoBehaviour
     [Tooltip("Multiplier to scale the power of the hit.")]
     public float powerMultiplier = 1.5f;
 
+
+    public float swingThreshold = 2.0f;
+    public float pushbackForce = 2.0f;
+
+    public Transform xrOrigin;
+
     private Vector3 previousPosition;
     private Vector3 currentVelocity;
 
@@ -13,7 +19,7 @@ public class BallHitting : MonoBehaviour
     public float minHitSpeed = 2f;
     public float maxHitSpeed = 15f;
 
-    [Tooltip("Max angle from the hand’s forward for horizontal deflection")]
+    [Tooltip("Max angle from the handï¿½s forward for horizontal deflection")]
     public float maxHorizontalAngle = 30f;
 
     [Tooltip("Max angle above the horizontal plane")]
@@ -35,17 +41,43 @@ public class BallHitting : MonoBehaviour
         // Calculate velocity of the hand based on position delta
         currentVelocity = (transform.position - previousPosition) / Time.deltaTime;
         previousPosition = transform.position;
+
+        // Check if swing exceeds threshold and apply pushback to player
+        float swingSpeed = currentVelocity.magnitude;
+        if (swingSpeed > swingThreshold && xrOrigin != null)
+        {
+            //ApplyZeroGEffect(currentVelocity.normalized, swingSpeed);
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Ball")) return;
+        if (other.CompareTag("Ball"))
+        {
+            Rigidbody ballRb = other.GetComponent<Rigidbody>();
+            if (ballRb != null)
+            {
+                // Apply velocity from racket to the ball
+                ballRb.velocity = currentVelocity * powerMultiplier;
+                Debug.Log("Ball is HIT!");
+            }
+            if (CompareTag("LeftHand"))
+            {
+                Debug.Log("This racket is from the left hand.");
+            }
+            else if (CompareTag("RightHand"))
+            {
+                Debug.Log("This racket is from the right hand.");
+            }
 
-        ReturnBall(other.GetComponent<GameObject>());
+            ReturnBall(other.GetComponent<GameObject>());
+        }
     }
+
+    
     void ReturnBall(GameObject ball)
     {
-        // Raw from your hand’s velocity
+        // Raw from your handï¿½s velocity
         Vector3 rawDir = currentVelocity.normalized;
         float rawSpeed = currentVelocity.magnitude * powerMultiplier;
 

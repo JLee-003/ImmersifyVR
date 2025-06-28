@@ -12,6 +12,9 @@ TagManager:
   - Button Bottom
   - index finger
   - Ball
+  - Block
+  - LeftHand
+  - RightHand
   layers:
   - Default
   - TransparentFX

@@ -10,12 +10,15 @@ public class BallManager : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        transform.position = new Vector3(0, 0.5f, 1); // or your custom start point
+        transform.position = new Vector3(0, -4.0f, -4); // or your custom start point
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.CompareTag("Block"))
+        {
+            Destroy(collision.gameObject, 0.1f);
+        }
     }
+
 }
