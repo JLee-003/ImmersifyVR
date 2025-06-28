@@ -22,6 +22,8 @@ public class BallHitting : MonoBehaviour
     [SerializeField]
     Transform enemy; //Change this
 
+    float hitEvaluationScore;
+
 
     void Start()
     {
@@ -39,6 +41,10 @@ public class BallHitting : MonoBehaviour
     {
         if (!other.CompareTag("Ball")) return;
 
+        ReturnBall(other.GetComponent<GameObject>());
+    }
+    void ReturnBall(GameObject ball)
+    {
         // Raw from your hand’s velocity
         Vector3 rawDir = currentVelocity.normalized;
         float rawSpeed = currentVelocity.magnitude * powerMultiplier;
@@ -63,10 +69,44 @@ public class BallHitting : MonoBehaviour
             rawDir = Vector3.RotateTowards(flatDir, rawDir, maxVerticalAngle * Mathf.Deg2Rad, 0f);
         }
 
-        ZeroGravProjectile projectile = other.GetComponent<ZeroGravProjectile>();
+        ZeroGravProjectile projectile = ball.GetComponent<ZeroGravProjectile>();
         if (projectile != null)
         {
             projectile.ChangeVelocity(rawDir * speed);
         }
+
+        hitEvaluationScore = EvaluateShot(horizAngle);
+    }
+    float EvaluateShot(float angle)
+    {
+        float score = 0f;
+
+        if (angle <= 15f)
+        {
+            score = 5f;
+        }
+
+        else if (angle < 30f)
+        {
+            score = 4f;
+        }
+
+        else if (angle < 45f)
+        {
+            score = 3f;
+        }
+
+
+        else if (angle < 90f)
+        {
+            score = 2f;
+        }
+
+        else
+        {
+            score = 1f;
+        }
+
+        return score;
     }
 }
