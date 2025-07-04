@@ -13,4 +13,35 @@ public class ZeroGravProjectile : MonoBehaviour
     {
         rb.velocity = newVelocity;
     }
+
+
+    void OnCollisionEnter(Collision collision)
+    {
+        GameObject other = collision.collider.gameObject;
+        Debug.Log("COLLIDED!");
+        if (other.CompareTag("EnemyPointZone"))
+        {
+            ScoreManager.Instance.playerPoint();
+            StartCoroutine(FlashGreen(other.gameObject));
+        }
+        if (other.CompareTag("PlayerPointZone"))
+        {
+            ScoreManager.Instance.enemyPoint();
+            StartCoroutine(FlashGreen(other.gameObject));
+        }
+    }
+
+        IEnumerator FlashGreen(GameObject obj) {
+        Renderer renderer = obj.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            Color originalColor = renderer.material.color;
+            renderer.material.color = Color.green;
+
+            yield return new WaitForSeconds(1f);
+
+            renderer.material.color = originalColor;
+        }
+    }
+
 }

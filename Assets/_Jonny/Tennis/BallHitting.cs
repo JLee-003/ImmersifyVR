@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BallHitting : MonoBehaviour
@@ -70,14 +71,16 @@ public class BallHitting : MonoBehaviour
                 Debug.Log("This racket is from the right hand.");
             }
 
-            ReturnBall(other.GetComponent<GameObject>());
+            ReturnBall(other.gameObject);
         }
     }
 
-    
+
+
+
     void ReturnBall(GameObject ball)
     {
-        
+
         // Raw from your hand�s velocity
         Vector3 rawDir = currentVelocity.normalized;
         float rawSpeed = currentVelocity.magnitude * powerMultiplier;
@@ -109,7 +112,7 @@ public class BallHitting : MonoBehaviour
         }
 
         hitEvaluationScore = EvaluateShot(horizAngle);
-        
+
     }
 
 
@@ -145,4 +148,7 @@ public class BallHitting : MonoBehaviour
 
         return score;
     }
+
+    
+
 }
