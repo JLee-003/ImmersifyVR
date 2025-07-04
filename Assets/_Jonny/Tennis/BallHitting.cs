@@ -26,8 +26,8 @@ public class BallHitting : MonoBehaviour
     [Tooltip("Max angle above the horizontal plane")]
     public float maxVerticalAngle = 0f;
 
-    [SerializeField]
-    Transform enemy; //Change this
+    GameObject enemyObj;
+    TennisEnemy tennisEnemy;
 
     float hitEvaluationScore;
 
@@ -35,6 +35,9 @@ public class BallHitting : MonoBehaviour
     void Start()
     {
         previousPosition = transform.position;
+
+        enemyObj = GameObject.FindGameObjectWithTag("Enemy");
+        tennisEnemy = enemyObj.GetComponent<TennisEnemy>();
     }
 
     void Update()
@@ -88,7 +91,7 @@ public class BallHitting : MonoBehaviour
         float speed = Mathf.Clamp(rawSpeed, minHitSpeed, maxHitSpeed);
 
         // Clamp horizontal angle relative to enemyDir
-        Vector3 enemyDir = enemy.position - transform.position;
+        Vector3 enemyDir = enemyObj.transform.position - transform.position;
         enemyDir.Normalize();
 
         float horizAngle = Vector3.Angle(enemyDir, rawDir);
@@ -123,27 +126,32 @@ public class BallHitting : MonoBehaviour
         if (angle <= 15f)
         {
             score = 5f;
+            tennisEnemy.moveSpeedMultiplier = 0.2f;
         }
 
         else if (angle < 30f)
         {
             score = 4f;
+            tennisEnemy.moveSpeedMultiplier = 0.4f;
         }
 
         else if (angle < 45f)
         {
             score = 3f;
+            tennisEnemy.moveSpeedMultiplier = 0.6f;
         }
 
 
         else if (angle < 90f)
         {
             score = 2f;
+            tennisEnemy.moveSpeedMultiplier = 0.8f;
         }
 
         else
         {
             score = 1f;
+            tennisEnemy.moveSpeedMultiplier = 1f;
         }
 
         return score;

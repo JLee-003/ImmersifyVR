@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class TennisEnemy : MonoBehaviour
 {
-    [SerializeField] float hitForce = 1f;
-    [SerializeField] float moveSpeed = 7.5f;
+    [SerializeField] float hitForce = 31f;
+    [SerializeField] float moveSpeed = 2f;
+
+    public float moveSpeedMultiplier = 1f;
     
 
     [SerializeField] Vector2 minBoundaries;
