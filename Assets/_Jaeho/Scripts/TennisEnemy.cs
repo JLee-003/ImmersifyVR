@@ -66,9 +66,9 @@ public class TennisEnemy : MonoBehaviour
         // is there someting weird that can happen when the ball is rotated so the z isn't actually z?
 
         // key physics formula: df = v*t + di since acceleration is 0. time is constant across because its the same object moving
-        float timeToZ = (ball.transform.position.z - transform.position.z) / ballVelocity.z;
+        float timeToZ = Mathf.Abs(ball.transform.position.z - transform.position.z) / ballVelocity.z;
         float predictedX = timeToZ * ballVelocity.x + ball.transform.position.x;
-        float predictedY = timeToZ * ballVelocity.y + ball.transform.position.y; ;
+        float predictedY = timeToZ * ballVelocity.y + ball.transform.position.y;
 
         Vector3 moveDir = new Vector3(predictedX, predictedY, transform.position.z) - transform.position; // do we want them to be able to fly up to hit the ball?
         moveDir.Normalize();
