@@ -29,7 +29,7 @@ public class BallHitting : MonoBehaviour
     GameObject enemyObj;
     TennisEnemy tennisEnemy;
 
-    float hitEvaluationScore;
+    float targetSpeed = 2f;
 
 
     void Start()
@@ -58,13 +58,6 @@ public class BallHitting : MonoBehaviour
     {
         if (other.CompareTag("Ball"))
         {
-            Rigidbody ballRb = other.GetComponent<Rigidbody>();
-            if (ballRb != null)
-            {
-                // Apply velocity from racket to the ball
-                ballRb.velocity = currentVelocity * powerMultiplier;
-                Debug.Log("Ball is HIT!");
-            }
             if (CompareTag("LeftHand"))
             {
                 Debug.Log("This racket is from the left hand.");
@@ -78,13 +71,9 @@ public class BallHitting : MonoBehaviour
         }
     }
 
-
-
-
     void ReturnBall(GameObject ball)
     {
-
-        // Raw from your hand�s velocity
+        // Raw from your hand's velocity
         Vector3 rawDir = currentVelocity.normalized;
         float rawSpeed = currentVelocity.magnitude * powerMultiplier;
 
@@ -114,47 +103,19 @@ public class BallHitting : MonoBehaviour
             projectile.ChangeVelocity(rawDir * speed);
         }
 
-        hitEvaluationScore = EvaluateShot(horizAngle);
+        EvaluateShot(currentVelocity.magnitude);
 
     }
 
-
-    float EvaluateShot(float angle)
+    void EvaluateShot(float hitSpeed)
     {
-        float score = 0f;
+        float multiplier = targetSpeed / hitSpeed;
 
-        if (angle <= 15f)
-        {
-            score = 5f;
-            tennisEnemy.moveSpeedMultiplier = 0.2f;
-        }
+        multiplier = Mathf.Clamp(multiplier, 0.1f, 2f);
 
-        else if (angle < 30f)
-        {
-            score = 4f;
-            tennisEnemy.moveSpeedMultiplier = 0.4f;
-        }
+        Debug.Log(hitSpeed + ", " + multiplier);
 
-        else if (angle < 45f)
-        {
-            score = 3f;
-            tennisEnemy.moveSpeedMultiplier = 0.6f;
-        }
-
-
-        else if (angle < 90f)
-        {
-            score = 2f;
-            tennisEnemy.moveSpeedMultiplier = 0.8f;
-        }
-
-        else
-        {
-            score = 1f;
-            tennisEnemy.moveSpeedMultiplier = 1f;
-        }
-
-        return score;
+        tennisEnemy.moveSpeedMultiplier = multiplier;
     }
 
     

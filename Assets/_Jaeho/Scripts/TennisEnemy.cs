@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TennisEnemy : MonoBehaviour
 {
-    [SerializeField] float hitForce = 31f;
+    [SerializeField] float hitForce = 3f;
     [SerializeField] float moveSpeed = 2f;
 
     public float moveSpeedMultiplier = 1f;
@@ -19,7 +19,7 @@ public class TennisEnemy : MonoBehaviour
 
     private void Start()
     {
-        player = PlayerReferences.instance.playerObject.transform;
+        player = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
 
         ball = GameObject.FindGameObjectWithTag("Ball");
     }
@@ -75,7 +75,7 @@ public class TennisEnemy : MonoBehaviour
         Vector3 moveDir = new Vector3(predictedX, predictedY, transform.position.z) - transform.position; // do we want them to be able to fly up to hit the ball?
         moveDir.Normalize();
         
-        Vector3 newPos = transform.position + moveDir * moveSpeed * Time.deltaTime;
+        Vector3 newPos = transform.position + moveDir * moveSpeed * moveSpeedMultiplier * Time.deltaTime;
 
         if (newPos.x > minBoundaries.x && newPos.x < maxBoundaries.x && newPos.y > minBoundaries.y && newPos.y < maxBoundaries.y)
         {
