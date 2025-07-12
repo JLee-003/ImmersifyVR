@@ -6,6 +6,8 @@ public class TennisEnemy : MonoBehaviour
 {
     [SerializeField] float hitForce = 3f;
     [SerializeField] float moveSpeed = 2f;
+    [SerializeField] float missChance = 0.15f;
+    private int totalHits = 0;
 
     public float moveSpeedMultiplier = 1f;
     
@@ -51,10 +53,19 @@ public class TennisEnemy : MonoBehaviour
 
     void HitBall()
     {
-        Vector3 dir = player.position - transform.position;
-        dir.Normalize();
+        if (totalHits>10) {
+            totalHits = 0;
+        }
+        if (Random.value < missChance) {
+            Debug.Log("missed due to random chance!");
+        }
+        else {
+            Vector3 dir = player.position - transform.position;
+            dir.Normalize();
 
-        ball.GetComponent<ZeroGravProjectile>().ChangeVelocity(dir * hitForce);
+            ball.GetComponent<ZeroGravProjectile>().ChangeVelocity(dir * hitForce);
+            totalHits++;
+        }
     }
 
     void MoveToBall(GameObject ball)
@@ -77,10 +88,12 @@ public class TennisEnemy : MonoBehaviour
         
         Vector3 newPos = transform.position + moveDir * moveSpeed * moveSpeedMultiplier * Time.deltaTime;
 
-        if (newPos.x > minBoundaries.x && newPos.x < maxBoundaries.x && newPos.y > minBoundaries.y && newPos.y < maxBoundaries.y)
-        {
-            transform.position = new Vector3(newPos.x, newPos.y, transform.position.z);
-        }
+        float clampedX = Mathf.Clamp(newPos.x, minBoundaries.x, maxBoundaries.x);
+        float clampedY = Mathf.Clamp(newPos.y, minBoundaries.y, maxBoundaries.y);
+
+        // Update the enemy position using the clamped values
+        transform.position = new Vector3(clampedX, clampedY, transform.position.z);
+
 
 
 
