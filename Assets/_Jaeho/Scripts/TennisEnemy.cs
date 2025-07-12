@@ -56,7 +56,7 @@ public class TennisEnemy : MonoBehaviour
         if (totalHits>10) {
             totalHits = 0;
         }
-        if (Random.value < missChance) {
+        else if (Random.value < missChance) {
             Debug.Log("missed due to random chance!");
         }
         else {
