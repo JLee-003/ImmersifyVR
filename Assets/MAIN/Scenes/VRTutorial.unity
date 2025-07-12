@@ -5244,7 +5244,7 @@ GameObject:
   - component: {fileID: 1573944407}
   - component: {fileID: 1573944406}
   m_Layer: 5
-  m_Name: FishActivity Text
+  m_Name: Swimming Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7532,7 +7532,7 @@ PrefabInstance:
     - target: {fileID: 2993717993143443751, guid: 415f5587264e11d4ab933a60fc00933b,
         type: 3}
       propertyPath: m_Name
-      value: FishActivityPortal
+      value: SwimmingPortal
       objectReference: {fileID: 0}
     - target: {fileID: 5394152517781283558, guid: 415f5587264e11d4ab933a60fc00933b,
         type: 3}
