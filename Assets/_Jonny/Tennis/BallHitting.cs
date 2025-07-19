@@ -97,13 +97,18 @@ public class BallHitting : MonoBehaviour
             rawDir = Vector3.RotateTowards(flatDir, rawDir, maxVerticalAngle * Mathf.Deg2Rad, 0f);
         }
 
+        if (rawDir == Vector3.zero)
+        {
+            rawDir = enemyDir;
+        }
+
         ZeroGravProjectile projectile = ball.GetComponent<ZeroGravProjectile>();
         if (projectile != null)
         {
             projectile.ChangeVelocity(rawDir * speed);
         }
 
-        EvaluateShot(currentVelocity.magnitude);
+        EvaluateShot(speed);
 
     }
 
