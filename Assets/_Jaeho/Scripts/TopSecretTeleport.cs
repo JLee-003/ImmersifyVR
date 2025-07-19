@@ -64,7 +64,7 @@ public class TopSecretTeleport : MonoBehaviour
         {
             sceneName = "FishActivityTutorial";
         }
-        else if(currentScene == "MAIN Visuals")
+        else if(currentScene == "Swimming Game")
         {
             sceneName = "TennisGameTest";
         }
