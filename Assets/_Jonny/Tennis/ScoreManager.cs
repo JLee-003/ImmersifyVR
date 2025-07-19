@@ -18,6 +18,14 @@ public class ScoreManager : MonoBehaviour
     int playerSetScore = 0;
     int winCondition = 5;
 
+    GameObject enemyObj;
+    GameObject ballObj;
+
+    Vector3 ballServePos = new Vector3(0, 1, -9);
+    Vector3 playerNeutralPos = new Vector3(0, 0.5f, -11);
+    Vector3 enemyNeutralPos = new Vector3(0, 0.75f, 11);
+
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -35,6 +43,9 @@ public class ScoreManager : MonoBehaviour
     {
         GameObject scoreTextObject = GameObject.Find("GameScoreText");
         scoreText = scoreTextObject.GetComponent<TMPro.TextMeshProUGUI>();
+
+        enemyObj = GameObject.FindGameObjectWithTag("Enemy");
+        ballObj = GameObject.FindGameObjectWithTag("Ball");
     }
 
     // Update is called once per frame
@@ -60,14 +71,14 @@ public class ScoreManager : MonoBehaviour
 
 
         // check if any player wins
-        if (playerScore > winCondition && playerScore - enemyScore >= 2)
+        if (playerScore >= winCondition && playerScore - enemyScore >= 2)
         {
             // player wins
             playerSetScore++;
             resetMatch();
 
         }
-        else if (enemyScore > winCondition && enemyScore - playerScore >= 2)
+        else if (enemyScore >= winCondition && enemyScore - playerScore >= 2)
         {
             // enemy wins
             enemySetScore++;
@@ -89,6 +100,15 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = $"{playerTxt} : {enemyTxt}";
 
 
-        // implement resetting game to neutral state here.
+        setCourtToNeutral();
+    }
+
+    public void setCourtToNeutral()
+    {
+        Debug.Log("Resetting court to neutral serving state.");
+        Teleport.Instance.tp(playerNeutralPos.x, playerNeutralPos.y, playerNeutralPos.z);
+        enemyObj.transform.position = enemyNeutralPos;
+        ballObj.transform.position = ballServePos;
+        ballObj.GetComponent<ZeroGravProjectile>().ChangeVelocity(Vector3.zero);
     }
 }
