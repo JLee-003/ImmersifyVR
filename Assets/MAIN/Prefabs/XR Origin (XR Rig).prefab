@@ -1174,6 +1174,8 @@ MonoBehaviour:
   trackingReference: {fileID: 6541681293610120885}
   leftControllerTransform: {fileID: 7732801129828780928}
   rightControllerTransform: {fileID: 4301946589613925507}
+  leftLineRenderer: {fileID: 0}
+  rightLineRenderer: {fileID: 0}
 --- !u!114 &-5157658466774883635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1351,30 +1353,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4fe21e42f2edbc48a9acb23f4022a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aButtonAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: A Button
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 4e8cd7f7-b130-4a37-9426-16438e711143
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
-  bButtonAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: B Button
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: b1c2b7b2-9396-472a-b2f4-452878d245bd
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
+  rightAButtonAction: {fileID: -3599823989380923159, guid: 0be0028c24f2a4c14a96b6aa39055933,
+    type: 3}
+  rightBButtonAction: {fileID: -8069514856583376848, guid: 0be0028c24f2a4c14a96b6aa39055933,
+    type: 3}
 --- !u!1 &1848559090598254508
 GameObject:
   m_ObjectHideFlags: 0

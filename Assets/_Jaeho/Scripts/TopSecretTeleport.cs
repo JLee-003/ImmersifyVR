@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 using UnityEngine.XR;
 
 public class TopSecretTeleport : MonoBehaviour
 {
-    private InputDevice rightController;
+    [SerializeField] InputActionReference rightAButtonAction;
+    [SerializeField] InputActionReference rightBButtonAction;
 
     float teleportTimer = 0f;
 
-    void Start()
+    /*void Start()
     {
         var rightHandedControllers = new List<InputDevice>();
         InputDevices.GetDevicesAtXRNode(XRNode.RightHand, rightHandedControllers);
@@ -18,40 +20,39 @@ public class TopSecretTeleport : MonoBehaviour
         {
             rightController = rightHandedControllers[0];
         }
-    }
+    }*/
 
     void Update()
     {
-        if (rightController.isValid)
+        bool aButtonPressed = false;
+        if (rightAButtonAction.action.IsPressed())
         {
-            bool aButtonPressed = false;
-            if (rightController.TryGetFeatureValue(CommonUsages.primaryButton, out aButtonPressed) && aButtonPressed)
-            {
-                Debug.Log("A button pressed");
-            }
+            Debug.Log("A button pressed");
+            aButtonPressed = true;
+        }
 
-            bool bButtonPressed = false;
-            if (rightController.TryGetFeatureValue(CommonUsages.secondaryButton, out bButtonPressed) && bButtonPressed)
-            {
-                Debug.Log("B button pressed");
-            }
+        bool bButtonPressed = false;
+        if (rightBButtonAction.action.IsPressed())
+        {
+            Debug.Log("B button pressed");
+            bButtonPressed = true;
+        }
 
-            if (aButtonPressed && bButtonPressed)
-            {
-                teleportTimer += Time.deltaTime;
-            }
+        if (aButtonPressed && bButtonPressed)
+        {
+            teleportTimer += Time.deltaTime;
+        }
 
-            else
-            {
-                teleportTimer = 0f;
-            }
+        else
+        {
+            teleportTimer = 0f;
+        }
 
-            if (teleportTimer >= 5f)
-            {
-                teleportTimer = 0f;
+        if (teleportTimer >= 5f)
+        {
+            teleportTimer = 0f;
 
-                TeleportToOtherScene();
-            }
+            TeleportToOtherScene();
         }
     }
 
