@@ -31,6 +31,8 @@ public class BallHitting : MonoBehaviour
 
     float targetSpeed = 2f;
 
+    [SerializeField] AudioClip hitAudio;
+
 
     void Start()
     {
@@ -106,6 +108,7 @@ public class BallHitting : MonoBehaviour
         if (projectile != null)
         {
             projectile.ChangeVelocity(rawDir * speed);
+            AudioSource.PlayClipAtPoint(hitAudio, transform.position, 1f);
         }
 
         EvaluateShot(speed);

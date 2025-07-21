@@ -1992,6 +1992,7 @@ MonoBehaviour:
   maxHitSpeed: 15
   maxHorizontalAngle: 30
   maxVerticalAngle: 10
+  hitAudio: {fileID: 8300000, guid: 698fc5bb80f620b44889a6669322f0f6, type: 3}
 --- !u!135 &1559214574
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2756,6 +2757,7 @@ MonoBehaviour:
   maxHitSpeed: 15
   maxHorizontalAngle: 30
   maxVerticalAngle: 10
+  hitAudio: {fileID: 8300000, guid: 698fc5bb80f620b44889a6669322f0f6, type: 3}
 --- !u!1 &1954592822
 GameObject:
   m_ObjectHideFlags: 0
@@ -3226,6 +3228,7 @@ MonoBehaviour:
   moveSpeedMultiplier: 1
   minBoundaries: {x: -7.2, y: 0.5}
   maxBoundaries: {x: 7.2, y: 12}
+  hitAudio: {fileID: 8300000, guid: 698fc5bb80f620b44889a6669322f0f6, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

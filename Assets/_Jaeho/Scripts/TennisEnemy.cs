@@ -19,6 +19,8 @@ public class TennisEnemy : MonoBehaviour
 
     GameObject ball;
 
+    [SerializeField] AudioClip hitAudio;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
@@ -65,6 +67,8 @@ public class TennisEnemy : MonoBehaviour
 
             ball.GetComponent<ZeroGravProjectile>().ChangeVelocity(dir * hitForce);
             totalHits++;
+
+            AudioSource.PlayClipAtPoint(hitAudio, transform.position, 0.5f);
         }
     }
 
