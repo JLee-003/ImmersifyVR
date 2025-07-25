@@ -6,7 +6,7 @@ public class TennisEnemy : MonoBehaviour
 {
     [SerializeField] float hitForce = 3f;
     [SerializeField] float moveSpeed = 2f;
-    [SerializeField] float missChance = 0.15f;
+    [SerializeField] float missChance = 0.025f;
     private int totalHits = 0;
 
     public float moveSpeedMultiplier = 1f;
@@ -55,18 +55,23 @@ public class TennisEnemy : MonoBehaviour
 
     void HitBall()
     {
-        if (totalHits>10) {
+        if (totalHits > 10)
+        {
             totalHits = 0;
+            missChance = 0.025f;
         }
-        else if (Random.value < missChance) {
+        else if (Random.value < missChance)
+        {
             Debug.Log("missed due to random chance!");
         }
-        else {
+        else
+        {
             Vector3 dir = player.position - transform.position;
             dir.Normalize();
 
             ball.GetComponent<ZeroGravProjectile>().ChangeVelocity(dir * hitForce);
             totalHits++;
+            missChance += 0.025f;
 
             AudioSource.PlayClipAtPoint(hitAudio, transform.position, 0.5f);
         }
