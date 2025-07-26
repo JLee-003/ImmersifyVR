@@ -29,14 +29,24 @@ public class ZeroGravProjectile : MonoBehaviour
         Debug.Log("COLLIDED!");
         if (other.CompareTag("EnemyPointZone"))
         {
+            ScoreManager.Instance.missedHits++;
             ScoreManager.Instance.playerPoint();
             StartCoroutine(FlashGreen(other.gameObject));
         }
         if (other.CompareTag("PlayerPointZone"))
         {
+            ScoreManager.Instance.missedHits++;
             ScoreManager.Instance.enemyPoint();
             StartCoroutine(FlashGreen(other.gameObject));
         }
+
+        // reset gamec if 4 missed in a row
+        if (ScoreManager.Instance.missedHits >= 4)
+        {
+            ScoreManager.Instance.missedHits = 0;
+            ScoreManager.Instance.setCourtToNeutral();
+        }
+
     }
 
         IEnumerator FlashGreen(GameObject obj) {

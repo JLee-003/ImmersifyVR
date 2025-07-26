@@ -64,9 +64,13 @@ public class TennisEnemy : MonoBehaviour
         else if (Random.value < missChance)
         {
             Debug.Log("missed due to random chance!");
+            totalHits = 0;
+            missChance = 0.025f;
         }
         else
         {
+            // enemy hits the ball -> reset "missed hits in a row"
+            ScoreManager.Instance.missedHits = 0;
             Vector3 dir = player.position - transform.position;
             dir.Normalize();
 

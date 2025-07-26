@@ -87,6 +87,9 @@ public class BallHitting : MonoBehaviour
 
     void ReturnBall(GameObject ball)
     {
+        // hit the ball -> reset "missed hits in a row"
+        ScoreManager.Instance.missedHits = 0;
+
         // Raw from your hand's velocity
         Vector3 rawDir = currentVelocity.normalized;
         float rawSpeed = currentVelocity.magnitude * powerMultiplier;

@@ -26,6 +26,8 @@ public class ScoreManager : MonoBehaviour
     Vector3 enemyNeutralPos = new Vector3(0, 0.75f, 11);
 
 
+    public int missedHits = 0;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -90,14 +92,9 @@ public class ScoreManager : MonoBehaviour
     {
         playerScore = 0;
         enemyScore = 0;
+        scoreText.text = "00 : 00";
 
-        string playerTxt = $"{playerScore}";
-        string enemyTxt = $"{enemyScore}";
-        if (playerScore < 10) playerTxt = $"0{playerScore}";
-        if (enemyScore < 10) enemyTxt = $"0{enemyScore}";
-
-
-        scoreText.text = $"{playerTxt} : {enemyTxt}";
+        setText.text = $"{playerSetScore} : {enemySetScore}";
 
 
         setCourtToNeutral();
