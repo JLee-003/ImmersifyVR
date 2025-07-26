@@ -90,12 +90,12 @@ public class SwimmingTutorial : MonoBehaviour
         yield return new WaitForSeconds(3);
         if (SceneLoader.Instance != null)
         {
-            Debug.Log("SceneLoader instance found. Loading scene 'Main VISUALS'...");
+            Debug.Log("SceneLoader instance found. Loading scene 'Swimming Game'...");
             //Manually run water-exit code; again, just in case
             moveProvider.moveSpeed = 3f;
             swimmer.enabled = false;
             Physics.gravity = new Vector3(0f, -9.8f, 0f);
-            SceneLoader.Instance.LoadNewScene("Main VISUALS");
+            SceneLoader.Instance.LoadNewScene("Swimming Game");
         }
         else
         {

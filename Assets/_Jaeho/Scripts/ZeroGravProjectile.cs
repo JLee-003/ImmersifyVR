@@ -5,13 +5,21 @@ using UnityEngine;
 public class ZeroGravProjectile : MonoBehaviour
 {
     Rigidbody rb;
+    [SerializeField] float targetSpeed = 2f;
+    [SerializeField] TennisEnemy enemy;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
-    public void ChangeVelocity(Vector3 newVelocity)
+    public void ChangeVelocity(Vector3 newVelocity, bool isPlayer = false)
     {
         rb.velocity = newVelocity;
+        if (isPlayer){
+            float multiplier = targetSpeed / newVelocity.magnitude;
+            multiplier = Mathf.Clamp(multiplier, 0.1f, 2f);
+            enemy.moveSpeedMultiplier = multiplier;
+        }
     }
 
 

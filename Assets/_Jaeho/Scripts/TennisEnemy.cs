@@ -55,6 +55,7 @@ public class TennisEnemy : MonoBehaviour
 
     void HitBall()
     {
+        moveSpeedMultiplier = 1f;
         if (totalHits > 10)
         {
             totalHits = 0;

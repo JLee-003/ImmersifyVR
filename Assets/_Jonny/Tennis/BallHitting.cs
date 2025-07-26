@@ -26,8 +26,8 @@ public class BallHitting : MonoBehaviour
     [Tooltip("Max angle above the horizontal plane")]
     public float maxVerticalAngle = 0f;
 
-    GameObject enemyObj;
-    TennisEnemy tennisEnemy;
+    // GameObject enemyObj;
+    // TennisEnemy tennisEnemy;
 
     float targetSpeed = 2f;
 
@@ -37,13 +37,25 @@ public class BallHitting : MonoBehaviour
     void Start()
     {
         previousPosition = transform.position;
-
-        enemyObj = GameObject.FindGameObjectWithTag("Enemy");
-        tennisEnemy = enemyObj.GetComponent<TennisEnemy>();
+        /*
+        if (TennisEnemy.Instance != null)
+        {
+            tennisEnemy = TennisEnemy.Instance;
+            enemyObj = tennisEnemy.gameObject;
+        }
+        */
     }
 
     void Update()
     {
+        /*
+        if (TennisEnemy.Instance != null && tennisEnemy != null)
+        {
+            tennisEnemy = TennisEnemy.Instance;
+            enemyObj = tennisEnemy.gameObject;
+        }
+        */
+
         // Calculate velocity of the hand based on position delta
         currentVelocity = (transform.position - previousPosition) / Time.deltaTime;
         previousPosition = transform.position;
@@ -71,7 +83,7 @@ public class BallHitting : MonoBehaviour
 
             ReturnBall(other.gameObject);
         }
-    }
+    } 
 
     void ReturnBall(GameObject ball)
     {
@@ -82,6 +94,7 @@ public class BallHitting : MonoBehaviour
         float speed = Mathf.Clamp(rawSpeed, minHitSpeed, maxHitSpeed);
 
         // Clamp horizontal angle relative to enemyDir
+        /*
         Vector3 enemyDir = enemyObj.transform.position - transform.position;
         enemyDir.Normalize();
 
@@ -103,18 +116,20 @@ public class BallHitting : MonoBehaviour
         {
             rawDir = enemyDir;
         }
+        */
 
         ZeroGravProjectile projectile = ball.GetComponent<ZeroGravProjectile>();
         if (projectile != null)
         {
-            projectile.ChangeVelocity(rawDir * speed);
+            projectile.ChangeVelocity(rawDir * speed, true);
             AudioSource.PlayClipAtPoint(hitAudio, transform.position, 1f);
         }
 
-        EvaluateShot(speed);
+        // EvaluateShot(speed);
 
     }
-
+    
+    /*
     void EvaluateShot(float hitSpeed)
     {
         float multiplier = targetSpeed / hitSpeed;
@@ -125,6 +140,7 @@ public class BallHitting : MonoBehaviour
 
         tennisEnemy.moveSpeedMultiplier = multiplier;
     }
+    */
 
     
 
