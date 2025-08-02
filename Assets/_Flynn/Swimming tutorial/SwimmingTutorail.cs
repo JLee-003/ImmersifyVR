@@ -9,11 +9,7 @@ using System.Collections;
 public class SwimmingTutorial : MonoBehaviour
 {
     public GameObject greenPoint;
-    public GameObject firstFish;
-    public GameObject secondFish;
-    public GameObject thirdFish;
-    //public GameObject finalFish;
-    //public GameObject objectToShow;
+    GameObject[] tutorialFish;
     public UnityEngine.XR.Interaction.Toolkit.InputHelpers.Button triggerButton = UnityEngine.XR.Interaction.Toolkit.InputHelpers.Button.Trigger;
     [SerializeField] InputActionReference leftControllerSwimReference;
     [SerializeField] InputActionReference rightControllerSwimReference;
@@ -23,27 +19,28 @@ public class SwimmingTutorial : MonoBehaviour
 
     private bool gripButtonPressed = false;
     private bool hasReachedGreenPoint = false;
-    private bool hasCaughtFirstFish = false;
-    private bool hasCaughtSecondFish = false;
-    private bool hasCaughtThirdFish = false;
     private bool loadedScene = false;
-    Swimmer swimmer;
+    LineSwimmer swimmer;
+
+    public int tutorialFishCaught = 0;
+    int fishCaughtRequirement = 4;
 
     void Start()
     {
         greenPoint.SetActive(false);
-        firstFish.SetActive(false);
-        secondFish.SetActive(false);
-        thirdFish.SetActive(false);
-        //finalFish.SetActive(false);
+        tutorialFish = GameObject.FindGameObjectsWithTag("Fish");
         player = GameObject.FindWithTag("Player");
+        foreach (GameObject fish in tutorialFish)
+        {
+            fish.SetActive(false);
+        }
         if (player == null)
         {
             Debug.LogError("Player not found in the scene.");
         }
         else
         {
-            swimmer = player.GetComponent<Swimmer>();
+            swimmer = player.GetComponent<LineSwimmer>();
             moveProvider = player.GetComponentInChildren<ActionBasedContinuousMoveProvider>();
         }
     }
@@ -60,22 +57,15 @@ public class SwimmingTutorial : MonoBehaviour
         {
             hasReachedGreenPoint = true;
             greenPoint.SetActive(false);
-            firstFish.SetActive(true);
+            foreach (GameObject fish in tutorialFish)
+            {
+                fish.SetActive(true);
+            }
             moveProvider.moveSpeed = 0;
         }
-        if (player != null && hasReachedGreenPoint && !hasCaughtFirstFish && firstFish == null)
+
+        if (player != null && tutorialFishCaught >= fishCaughtRequirement)
         {
-            hasCaughtFirstFish = true;
-            secondFish.SetActive(true);
-        }
-        if (player != null && hasCaughtFirstFish && !hasCaughtSecondFish && secondFish == null)
-        {
-            hasCaughtSecondFish = true;
-            thirdFish.SetActive(true);
-        }
-        if (player != null && hasCaughtSecondFish && !hasCaughtThirdFish && thirdFish == null)
-        {
-            hasCaughtThirdFish = true;
             StartCoroutine(WaitAndLoadScene()); // Ensure WaitAndLoadScene is called here
             loadedScene = true;
             //Manually run water-exit code

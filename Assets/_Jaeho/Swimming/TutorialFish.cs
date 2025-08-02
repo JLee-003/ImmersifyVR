@@ -19,6 +19,8 @@ public class TutorialFish : MonoBehaviour
 
     [SerializeField] private bool stationary = false;
 
+    [SerializeField] private SwimmingTutorial tutorialManager;
+
     private Rigidbody rb;
     private float timer;
     private int currentCheckpointIndex = 0;
@@ -84,7 +86,8 @@ public class TutorialFish : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(removeAudio, transform.position, 1f);
             HapticFeedbackManager.Instance.InitiateHapticFeedback(true, true, 1f, 1f);
-            Destroy(gameObject);
+
+            tutorialManager.tutorialFishCaught++;
 
             // Instantiate the particle effect
             if (catchEffect != null)
@@ -92,6 +95,8 @@ public class TutorialFish : MonoBehaviour
                 GameObject effect = Instantiate(catchEffect, transform.position, Quaternion.identity);
                 Debug.Log("CAUGHT!");
             }
+
+            Destroy(gameObject);
         }
     }
 }
