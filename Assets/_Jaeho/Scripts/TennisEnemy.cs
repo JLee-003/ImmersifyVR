@@ -84,13 +84,18 @@ public class TennisEnemy : MonoBehaviour
 
     void MoveToBall(GameObject ball)
     {
+
         // ------ jonny implementation -----
         // x and y can move, z is fixed. predict the coordinates that it will reach the z axis. then move the enemy there.
         // enemy has a speed (moveSpeed). if enemy can't reach it in time that's one way for the player to beat the enemy
 
         // calculate z location <--- can be optimized, no need to calculate every frame. instead can calculate once when the ball is hit
         Vector3 ballVelocity = ball.GetComponent<Rigidbody>().velocity;
-        // is there someting weird that can happen when the ball is rotated so the z isn't actually z?
+
+
+        // if ball is moving away from enemy then dont move
+        if (ballVelocity.z < 0) return;
+
 
         // key physics formula: df = v*t + di since acceleration is 0. time is constant across because its the same object moving
         float timeToZ = Mathf.Abs(ball.transform.position.z - transform.position.z) / ballVelocity.z;

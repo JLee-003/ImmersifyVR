@@ -698,7 +698,7 @@ Transform:
   m_GameObject: {fileID: 522267095}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -11}
+  m_LocalPosition: {x: 0, y: 0.5, z: -6.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -803,7 +803,7 @@ Transform:
   m_GameObject: {fileID: 545146042}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 11.01, z: 0}
+  m_LocalPosition: {x: 0, y: 7.5, z: 0}
   m_LocalScale: {x: 15, y: 0.1, z: 25}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1376,6 +1376,7 @@ MonoBehaviour:
   scoreText: {fileID: 959361775}
   setText: {fileID: 1764234509}
   matchPointText: {fileID: 1074851818}
+  missedHits: 0
 --- !u!1001 &1181795752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1457,6 +1458,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 112808995215111200, guid: ca771e468866e02439abe027a5b83b2e,
+        type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 9137407139840720040}
     - target: {fileID: 4012177227442757239, guid: ca771e468866e02439abe027a5b83b2e,
         type: 3}
       propertyPath: m_AngularDrag
@@ -1500,7 +1506,7 @@ PrefabInstance:
     - target: {fileID: 8461101134120035008, guid: ca771e468866e02439abe027a5b83b2e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 8461101134120035008, guid: ca771e468866e02439abe027a5b83b2e,
         type: 3}
@@ -1820,7 +1826,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 0.1, z: 25}
+  m_LocalScale: {x: 10, y: 0.1, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1995,8 +2001,8 @@ Transform:
   m_GameObject: {fileID: 1592661059}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.5411, z: -12.5}
-  m_LocalScale: {x: 15, y: 11.082, z: 0.1}
+  m_LocalPosition: {x: 0, y: 3.75, z: -7.5}
+  m_LocalScale: {x: 10, y: 7.5, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2352,8 +2358,8 @@ Transform:
   m_GameObject: {fileID: 1816282036}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.5, y: 5.5411, z: 0}
-  m_LocalScale: {x: 0.1, y: 11.082, z: 25}
+  m_LocalPosition: {x: 5, y: 3.75, z: 0}
+  m_LocalScale: {x: 0.1, y: 7.5, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2562,8 +2568,8 @@ Transform:
   m_GameObject: {fileID: 1954592822}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.5, y: 5.5411, z: 0}
-  m_LocalScale: {x: 0.1, y: 11.082, z: 25}
+  m_LocalPosition: {x: -5, y: 3.75, z: 0}
+  m_LocalScale: {x: 0.1, y: 7.5, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2667,8 +2673,8 @@ Transform:
   m_GameObject: {fileID: 1958814422}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.5411, z: 12.5}
-  m_LocalScale: {x: 15, y: 11.082, z: 0.1}
+  m_LocalPosition: {x: 0, y: 3.75, z: 7.5}
+  m_LocalScale: {x: 10, y: 7.5, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2878,7 +2884,7 @@ Transform:
   m_GameObject: {fileID: 604752072510548779}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.75, z: 11}
+  m_LocalPosition: {x: 0, y: 0.75, z: 6.5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2928,11 +2934,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitForce: 3
-  moveSpeed: 3
-  missChance: 0.15
+  moveSpeed: 2.5
+  missChance: 0.02
   moveSpeedMultiplier: 1
-  minBoundaries: {x: -7.2, y: 0.5}
-  maxBoundaries: {x: 7.2, y: 12}
+  minBoundaries: {x: -5, y: 0.5}
+  maxBoundaries: {x: 5, y: 7.5}
   hitAudio: {fileID: 8300000, guid: 698fc5bb80f620b44889a6669322f0f6, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

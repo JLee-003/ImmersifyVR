@@ -7,10 +7,11 @@ public class PlayerReferences : MonoBehaviour
     public static PlayerReferences instance;
 
     public GameObject playerObject;
+    public Transform cameraTransform;
 
     private void Awake()
     {
-        if(instance != null)
+        if (instance != null)
         {
             Destroy(gameObject);
             return;

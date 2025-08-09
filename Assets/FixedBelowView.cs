@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FixedBelowView : MonoBehaviour
 {
-    public Transform xrCamera;  // Assign XR Camera in Inspector
+    private Transform xrCamera = PlayerReferences.instance.cameraTransform; 
     public float heightOffset = -1.0f;  // Distance below the player
 
     void Update()
@@ -13,5 +13,9 @@ public class FixedBelowView : MonoBehaviour
             Vector3 targetPosition = xrCamera.position + Vector3.down * Mathf.Abs(heightOffset);
             transform.position = targetPosition;
         }
+        else
+        {
+            Debug.Log("no camera detected");
+        }
     }
-}
+} 

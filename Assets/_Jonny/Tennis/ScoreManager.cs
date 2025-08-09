@@ -21,9 +21,9 @@ public class ScoreManager : MonoBehaviour
     GameObject enemyObj;
     GameObject ballObj;
 
-    Vector3 ballServePos = new Vector3(0, 1, -9);
-    Vector3 playerNeutralPos = new Vector3(0, 0.5f, -11);
-    Vector3 enemyNeutralPos = new Vector3(0, 0.75f, 11);
+    Vector3 ballServePos = new Vector3(0, 1f, -5f);
+    Vector3 playerNeutralPos = new Vector3(0, 0.5f, -6.5f);
+    Vector3 enemyNeutralPos = new Vector3(0, 0.75f, -6.5f);
 
 
     public int missedHits = 0;
