@@ -23,7 +23,7 @@ public class SwimmingTutorial : MonoBehaviour
     LineSwimmer swimmer;
 
     public int tutorialFishCaught = 0;
-    int fishCaughtRequirement = 4;
+    int fishCaughtRequirement = 3;
 
     void Start()
     {
