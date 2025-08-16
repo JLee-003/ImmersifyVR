@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class FixedBelowView : MonoBehaviour
 {
-    private Transform xrCamera = PlayerReferences.instance.cameraTransform; 
+    private Transform xrCamera; 
     public float heightOffset = -1.0f;  // Distance below the player
 
+    void Awake()
+    {
+        xrCamera = PlayerReferences.instance.cameraTransform;
+    }
     void Update()
     {
         if (xrCamera != null)

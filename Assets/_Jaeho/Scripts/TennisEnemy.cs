@@ -69,8 +69,6 @@ public class TennisEnemy : MonoBehaviour
         }
         else
         {
-            // enemy hits the ball -> reset "missed hits in a row"
-            ScoreManager.Instance.missedHits = 0;
             Vector3 dir = player.position - transform.position;
             dir.Normalize();
 

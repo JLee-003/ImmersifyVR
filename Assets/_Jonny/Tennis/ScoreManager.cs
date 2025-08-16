@@ -26,7 +26,6 @@ public class ScoreManager : MonoBehaviour
     Vector3 enemyNeutralPos = new Vector3(0, 0.75f, -6.5f);
 
 
-    public int missedHits = 0;
 
     // Start is called before the first frame update
     void Awake()
