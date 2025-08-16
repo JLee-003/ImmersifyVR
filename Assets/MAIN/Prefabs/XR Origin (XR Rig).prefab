@@ -1502,7 +1502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d28e94b3299bc42b763e98b10ea861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swimForce: 20
+  swimForce: 15
   dragForce: 1
   minForce: 0.1
   minTimeBetweenStrokes: 1
@@ -1667,6 +1667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObject: {fileID: 1542972532382618323}
+  cameraTransform: {fileID: 0}
 --- !u!114 &8841869502138735810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2193,7 +2194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bee0b8944ae845e3bdef58341d4b995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xrCamera: {fileID: 7304150444649512434}
   heightOffset: -0.7
 --- !u!1 &5619319115604057909
 GameObject:

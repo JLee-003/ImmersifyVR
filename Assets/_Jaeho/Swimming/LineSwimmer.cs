@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class LineSwimmer : MonoBehaviour
 {
     [Header("Values")]
-    [SerializeField] float swimForce = 100f;
+    [SerializeField] float swimForce = 15f;
     [SerializeField] float dragForce = 1f;
     [SerializeField] float minForce = 0.1f;
     [SerializeField] float minTimeBetweenStrokes = 1f;
@@ -76,7 +76,7 @@ public class LineSwimmer : MonoBehaviour
                 startPosLeft = leftControllerTransform.localPosition;
             }
 
-            HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 0.1f, 0.1f);
+            HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 0.5f, 0.1f);
             leftSwimStarted = true;
         }
 
@@ -89,7 +89,7 @@ public class LineSwimmer : MonoBehaviour
             velocity += worldVelocity * swimForce;
 
             cooldownTimer = 0f;
-            HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 0.25f, 0.4f);
+            HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 1.0f, 0.4f);
             leftSwimStarted = false;
         }
     }
@@ -105,7 +105,7 @@ public class LineSwimmer : MonoBehaviour
                 startPosRight = rightControllerTransform.localPosition;
             }
 
-            HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 0.1f, 0.1f);
+            HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 0.5f, 0.1f);
             rightSwimStarted = true;
         }
 
@@ -118,7 +118,7 @@ public class LineSwimmer : MonoBehaviour
             velocity += worldVelocity * swimForce;
 
             cooldownTimer = 0f;
-            HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 0.25f, 0.4f);
+            HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 1.0f, 0.4f);
             rightSwimStarted = false;
         }
     }
