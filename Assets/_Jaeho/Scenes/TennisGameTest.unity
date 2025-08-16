@@ -1467,6 +1467,11 @@ PrefabInstance:
       propertyPath: m_AngularDrag
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4027524433341262311, guid: ca771e468866e02439abe027a5b83b2e,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.06
+      objectReference: {fileID: 0}
     - target: {fileID: 4723789974576245706, guid: ca771e468866e02439abe027a5b83b2e,
         type: 3}
       propertyPath: m_Name

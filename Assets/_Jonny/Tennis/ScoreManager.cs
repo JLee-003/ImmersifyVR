@@ -54,11 +54,13 @@ public class ScoreManager : MonoBehaviour
     {
         playerScore++;
         updateScoreboard();
+        setCourtToNeutral();
     }
     public void enemyPoint()
     {
         enemyScore++;
         updateScoreboard();
+        setCourtToNeutral();
     }
     public void updateScoreboard()
     {
