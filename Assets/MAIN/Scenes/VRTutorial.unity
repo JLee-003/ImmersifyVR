@@ -7361,7 +7361,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Congrats! You\u2019ve made it to the end of the tutorial. To finish, walk
-    into one of the blue walls to choose your activity."
+    into one of the doors to choose your activity."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
