@@ -9,6 +9,8 @@ public class LocomotionManager : MonoBehaviour
     LineSwimmer SwimmingEvaluator;
     float waterWalkSpeed = 1.5f;
     float normalWalkSpeed = 3f;
+
+    [SerializeField] AudioClip waterEnterAudio;
     private void Start()
     {
         continuousMoveProvider = GetComponentInChildren<ActionBasedContinuousMoveProvider>();
@@ -24,6 +26,8 @@ public class LocomotionManager : MonoBehaviour
             continuousMoveProvider.moveSpeed = waterWalkSpeed;
             SwimmingEvaluator.enabled = true;
             Physics.gravity = new Vector3(0f, -0.0005f, 0f);
+
+            AudioSource.PlayClipAtPoint(waterEnterAudio, transform.position, 1f);
         }
     }
     private void OnTriggerExit(Collider other)

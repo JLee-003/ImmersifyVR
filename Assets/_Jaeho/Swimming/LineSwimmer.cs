@@ -23,6 +23,9 @@ public class LineSwimmer : MonoBehaviour
     [SerializeField] LineRenderer leftLineRenderer;
     [SerializeField] LineRenderer rightLineRenderer;
 
+    [Header("Audio Clips")]
+    [SerializeField] AudioClip swimAudio;
+
     CharacterController characterController;
     float cooldownTimer;
     Vector3 velocity;
@@ -89,7 +92,10 @@ public class LineSwimmer : MonoBehaviour
             velocity += worldVelocity * swimForce;
 
             cooldownTimer = 0f;
+
             HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 1.0f, 0.4f);
+            AudioSource.PlayClipAtPoint(swimAudio, transform.position, 1f);
+            
             leftSwimStarted = false;
         }
     }
@@ -118,7 +124,10 @@ public class LineSwimmer : MonoBehaviour
             velocity += worldVelocity * swimForce;
 
             cooldownTimer = 0f;
+
             HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 1.0f, 0.4f);
+            AudioSource.PlayClipAtPoint(swimAudio, transform.position, 1f);
+
             rightSwimStarted = false;
         }
     }
