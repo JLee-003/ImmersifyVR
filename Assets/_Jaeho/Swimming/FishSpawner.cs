@@ -16,10 +16,11 @@ public class FishInfo
 
     public int numberOfFish;
 
-    public float cooldown = 5f;
+    public float cooldown = 2.5f;
     [HideInInspector] public float respawnTimer = 0f;
 
     public List<GameObject> fishList = new List<GameObject>();
+
 }
 
 public class FishSpawner : MonoBehaviour
@@ -38,7 +39,7 @@ public class FishSpawner : MonoBehaviour
     private void Start()
     {
 
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player"); // how does this work with dual scene setup?
 
 
         foreach (FishInfo fishInfo in fishInfoList)

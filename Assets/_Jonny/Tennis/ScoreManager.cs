@@ -23,7 +23,7 @@ public class ScoreManager : MonoBehaviour
 
     Vector3 ballServePos = new Vector3(0, 1f, -5f);
     Vector3 playerNeutralPos = new Vector3(0, 0.5f, -6.5f);
-    Vector3 enemyNeutralPos = new Vector3(0, 0.75f, -6.5f);
+    Vector3 enemyNeutralPos = new Vector3(0, 0.75f, 6.5f);
 
 
 
@@ -107,6 +107,6 @@ public class ScoreManager : MonoBehaviour
         Teleport.Instance.tp(playerNeutralPos.x, playerNeutralPos.y, playerNeutralPos.z);
         enemyObj.transform.position = enemyNeutralPos;
         ballObj.transform.position = ballServePos;
-        ballObj.GetComponent<ZeroGravProjectile>().ChangeVelocity(Vector3.zero);
+        ballObj.GetComponent<ZeroGravProjectile>().SetVelocity(Vector3.zero);
     }
 }

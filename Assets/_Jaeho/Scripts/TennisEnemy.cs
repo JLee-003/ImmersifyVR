@@ -10,7 +10,7 @@ public class TennisEnemy : MonoBehaviour
     private int totalHits = 0;
 
     public float moveSpeedMultiplier = 1f;
-    
+
 
     [SerializeField] Vector2 minBoundaries;
     [SerializeField] Vector2 maxBoundaries;
@@ -72,7 +72,7 @@ public class TennisEnemy : MonoBehaviour
             Vector3 dir = player.position - transform.position;
             dir.Normalize();
 
-            ball.GetComponent<ZeroGravProjectile>().ChangeVelocity(dir * hitForce);
+            ball.GetComponent<ZeroGravProjectile>().SetVelocity(dir * hitForce);
             totalHits++;
             missChance += 0.025f;
 

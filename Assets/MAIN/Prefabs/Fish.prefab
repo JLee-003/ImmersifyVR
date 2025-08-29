@@ -153,10 +153,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshes:
-  - {fileID: -5414332994079535143, guid: 38f74cd884cda8242b4fdc167c4962f8, type: 3}
-  - {fileID: 3100006622114138374, guid: a8fd0d08c30426d4c978a4998752cf7d, type: 3}
-  - {fileID: 7834934524071737294, guid: ae51ad94fa7d3764d957aa512d506d00, type: 3}
-  - {fileID: -2068639166428788250, guid: ea93ead513f04c9478f78e3f40ba5b11, type: 3}
+  - mesh: {fileID: -5414332994079535143, guid: 38f74cd884cda8242b4fdc167c4962f8, type: 3}
+    size: {x: 2, y: 2, z: 2}
+  - mesh: {fileID: 3100006622114138374, guid: a8fd0d08c30426d4c978a4998752cf7d, type: 3}
+    size: {x: 2, y: 2, z: 2}
+  - mesh: {fileID: 7834934524071737294, guid: ae51ad94fa7d3764d957aa512d506d00, type: 3}
+    size: {x: 2, y: 2, z: 2}
+  - mesh: {fileID: -2068639166428788250, guid: ea93ead513f04c9478f78e3f40ba5b11, type: 3}
+    size: {x: 2, y: 2, z: 2}
+  - mesh: {fileID: -7748657787803452223, guid: ee7783e9f37bc4f4ab6c29c1e8886437, type: 3}
+    size: {x: 5, y: 5, z: 5}
+  - mesh: {fileID: 1231305428566372716, guid: d12e71447f7b73040a0b0fbe2df69453, type: 3}
+    size: {x: 2, y: 2, z: 2}
+  - mesh: {fileID: 6248245230399792777, guid: 67a05fb2cf20c3d41b72f3cc720def5d, type: 3}
+    size: {x: 2, y: 2, z: 2}
+  - mesh: {fileID: 3661388329890902608, guid: 47c7cc2f9dfbc1944a1ceb65da672419, type: 3}
+    size: {x: 2, y: 2, z: 2}
+  - mesh: {fileID: 7504751627607205505, guid: 022485f29bd7da742a91f941d60320e9, type: 3}
+    size: {x: 5, y: 5, z: 5}
   removeAudio: {fileID: 8300000, guid: c6d6b012d8330964e814d210bb4e3e8d, type: 3}
   type: 0
   catchEffect: {fileID: 3061336691144616840, guid: 55cfdd29497ea4688be1a5ede3460e09,

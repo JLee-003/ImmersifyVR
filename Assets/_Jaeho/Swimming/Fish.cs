@@ -2,11 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+
 public class Fish : MonoBehaviour
 {
+    [System.Serializable]
+    public class FishModels
+    {
+        public Mesh mesh;
+        public Vector3 size;
+    }
     MeshFilter meshFilter;
     //Renderer objRenderer;
-    public Mesh[] meshes;
+    public FishModels[] meshes;
     [SerializeField] AudioClip removeAudio;
 
     //public Material mat1, mat2;
@@ -22,12 +31,13 @@ public class Fish : MonoBehaviour
         meshFilter = GetComponentInChildren<MeshFilter>();
         //objRenderer = GetComponent<Renderer>();
         SetModel();
-        
+
     }
 
     void SetModel()
     {
-        meshFilter.mesh = meshes[type-1];
+        meshFilter.mesh = meshes[type - 1].mesh;
+        transform.localScale = meshes[type - 1].size;
     }
     private void OnTriggerEnter(Collider other)
     {
