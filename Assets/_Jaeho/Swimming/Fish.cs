@@ -37,7 +37,7 @@ public class Fish : MonoBehaviour
     void SetModel()
     {
         meshFilter.mesh = meshes[type - 1].mesh;
-        transform.localScale = meshes[type - 1].size;
+        transform.GetChild(0).localScale = meshes[type - 1].size;
     }
     private void OnTriggerEnter(Collider other)
     {

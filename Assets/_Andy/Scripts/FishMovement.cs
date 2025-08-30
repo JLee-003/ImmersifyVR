@@ -13,6 +13,8 @@ public class FishMovement : MonoBehaviour
 
     [SerializeField] private float followDistance;
 
+    private float randRange = 0.3f;
+
     private Transform player;
     private Rigidbody rb;
     private float timer;
@@ -26,19 +28,19 @@ public class FishMovement : MonoBehaviour
     private void Update()
     {
         timer -= Time.deltaTime;
-        if(rb.velocity.magnitude <= 0.8f || timer <= 0)
+        if (rb.velocity.magnitude <= 0.8f || timer <= 0)
         {
             Move();
         }
 
-        if(transform.position.y >= maxYLevel)
+        if (transform.position.y >= maxYLevel)
         {
             var curPos = transform.position;
             curPos.y = maxYLevel;
             transform.position = curPos;
 
             var curVel = rb.velocity;
-            if(curVel.y > 0) curVel.y = 0;
+            if (curVel.y > 0) curVel.y = 0;
             rb.velocity = curVel;
         }
 
@@ -58,7 +60,7 @@ public class FishMovement : MonoBehaviour
         var playerDir = player.position - transform.position;
         if (playerDir.sqrMagnitude <= followDistance * followDistance)
         {
-            Vector3 randomOffset = new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f));
+            Vector3 randomOffset = new Vector3(Random.Range(-1*randRange, randRange), Random.Range(-1*randRange, randRange), Random.Range(-1*randRange, randRange));
             var offsetDir = playerDir.normalized + randomOffset;
             rb.AddForce(offsetDir.normalized * randForce, ForceMode.Impulse);
         }
@@ -68,6 +70,14 @@ public class FishMovement : MonoBehaviour
             rb.AddForce(dir * randForce, ForceMode.Impulse);
         }
         timer = maxTime;
+    }
+
+    private void ApplyDifficulty()
+    {
+        float level = FishGame.Instance.difficultyLevel;
+
+        randRange = Mathf.Lerp(0.05f, 0.6f, level);        // small → easy, large → hard
+        followDistance = Mathf.Lerp(20f, 5f, level);       // large → easy, small → hard
     }
 
 }
