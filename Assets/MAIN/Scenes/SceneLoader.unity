@@ -455,7 +455,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   startingScene: FishActivityTutorial
+=======
+  startingScene: Swimming Game
+>>>>>>> Stashed changes
 =======
   startingScene: Swimming Game
 >>>>>>> Stashed changes

@@ -19,9 +19,12 @@ public class Teleport : MonoBehaviour
         }
     }
     
-    public async void tp(float x, float y, float z) {
+    public async void tp(float x, float y, float z, float? lookYDeg = null) {
         await Fader.Instance.FadeIn();
         transform.position = new Vector3(x, y, z);
+        float lookY = lookYDeg ?? transform.eulerAngles.x;
+
+        transform.rotation = Quaternion.Euler(0f, lookY, 0f);
         //xrOrigin.MoveCameraToWorldLocation(new Vector3(x, y, z));
         Debug.Log($"Teleporting to {x}, {y}, {z}");
         Debug.Log(transform.position);
