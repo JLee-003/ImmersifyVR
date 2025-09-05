@@ -111,7 +111,7 @@ public class LineSwimmer : MonoBehaviour
                 startPosRight = rightControllerTransform.localPosition;
             }
 
-            HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 0.5f, 0.1f);
+            HapticFeedbackManager.Instance?.InitiateHapticFeedback(false, true, 0.5f, 0.1f);
             rightSwimStarted = true;
         }
 
@@ -125,7 +125,7 @@ public class LineSwimmer : MonoBehaviour
 
             cooldownTimer = 0f;
 
-            HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 1.0f, 0.4f);
+            HapticFeedbackManager.Instance?.InitiateHapticFeedback(false, true, 1.0f, 0.4f);
             AudioSource.PlayClipAtPoint(swimAudio, transform.position, 1f);
 
             rightSwimStarted = false;

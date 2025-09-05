@@ -1349,7 +1349,6 @@ GameObject:
   - component: {fileID: 1944808976072388303}
   - component: {fileID: 7478899513093671679}
   - component: {fileID: -5157658466774883635}
-  - component: {fileID: 3704681105535894661}
   - component: {fileID: 4715035101591052721}
   - component: {fileID: 499453283319367990}
   - component: {fileID: 4156922284508672688}
@@ -1527,29 +1526,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54ad15f3d9cc5643bd849ea4673fbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3704681105535894661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1542972532382618323}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27c15c2bc27414733993269683f600ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swimForce: 100
-  dragForce: 1
-  minForce: 0.1
-  minTimeBetweenStrokes: 1
-  leftControllerSwimReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  rightControllerSwimReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  trackingReference: {fileID: 6541681293610120885}
-  leftControllerTransform: {fileID: 7732801129828780928}
-  rightControllerTransform: {fileID: 4301946589613925507}
 --- !u!120 &4715035101591052721
 LineRenderer:
   serializedVersion: 2
