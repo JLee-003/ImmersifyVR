@@ -454,7 +454,7 @@ MonoBehaviour:
   OnLoadEnd:
     m_PersistentCalls:
       m_Calls: []
-  startingScene: Swimming Game
+  startingScene: FishActivityTutorial
 --- !u!1001 &2446915245381026552
 PrefabInstance:
   m_ObjectHideFlags: 0

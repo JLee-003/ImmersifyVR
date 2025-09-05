@@ -53,7 +53,7 @@ public class SwimmingTutorial : MonoBehaviour
             greenPoint.SetActive(true);
         }
         // Green Point
-        if (player != null && gripButtonPressed == true && !hasReachedGreenPoint && Vector3.Distance(player.transform.position, greenPoint.transform.position) < 1.0f)
+        if (player != null && gripButtonPressed == true && !hasReachedGreenPoint && Vector3.Distance(player.transform.position, greenPoint.transform.position) < 3f)
         {
             hasReachedGreenPoint = true;
             greenPoint.SetActive(false);
