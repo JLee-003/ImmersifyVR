@@ -21,13 +21,22 @@ public class Teleport : MonoBehaviour
     
     public async void tp(float x, float y, float z, float? lookYDeg = null) {
         await Fader.Instance.FadeIn();
+        
+        // Set position
         transform.position = new Vector3(x, y, z);
-        float lookY = lookYDeg ?? transform.eulerAngles.x;
-
+        
+        // Set rotation - use the provided Y rotation or current Y rotation
+        float lookY = lookYDeg ?? transform.eulerAngles.y;
         transform.rotation = Quaternion.Euler(0f, lookY, 0f);
-        //xrOrigin.MoveCameraToWorldLocation(new Vector3(x, y, z));
-        Debug.Log($"Teleporting to {x}, {y}, {z}");
-        Debug.Log(transform.position);
+        
+        // Apply rotation to the XROrigin's base transform
+        if (xrOrigin != null)
+        {
+            xrOrigin.transform.rotation = Quaternion.Euler(0f, lookY, 0f);
+        }
+        
+        Debug.Log($"Teleporting to {x}, {y}, {z} with rotation Y: {lookY}");
+        Debug.Log($"Player position: {transform.position}, Player rotation: {transform.rotation.eulerAngles}");
         await Fader.Instance.FadeOut();
     }
 }

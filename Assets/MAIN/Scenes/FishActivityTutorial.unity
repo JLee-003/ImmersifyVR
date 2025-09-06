@@ -4084,6 +4084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 1889163969}
+  xrOrigin: {fileID: 0}
 --- !u!4 &1889163969
 Transform:
   m_ObjectHideFlags: 0
