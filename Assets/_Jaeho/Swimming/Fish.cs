@@ -12,11 +12,15 @@ public class Fish : MonoBehaviour
     {
         public Mesh mesh;
         public Vector3 size;
+        public Material material;
     }
     MeshFilter meshFilter;
     //Renderer objRenderer;
     public FishModels[] meshes;
     [SerializeField] AudioClip removeAudio;
+
+    [Header("Random Materials")]
+    public Material[] randomMaterials;
 
     //public Material mat1, mat2;
 
@@ -38,6 +42,18 @@ public class Fish : MonoBehaviour
     {
         meshFilter.mesh = meshes[type - 1].mesh;
         transform.GetChild(0).localScale = meshes[type - 1].size;
+        
+        // Apply the material from FishModels or choose randomly
+        if (meshes[type - 1].material != null)
+        {
+            GetComponentInChildren<MeshRenderer>().material = meshes[type - 1].material;
+        }
+        else if (randomMaterials != null && randomMaterials.Length > 0)
+        {
+            // Choose a random material from the randomMaterials array
+            int randomIndex = Random.Range(0, randomMaterials.Length);
+            GetComponentInChildren<MeshRenderer>().material = randomMaterials[randomIndex];
+        }
     }
     private void OnTriggerEnter(Collider other)
     {

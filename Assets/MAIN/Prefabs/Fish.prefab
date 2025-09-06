@@ -208,24 +208,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshes:
   - mesh: {fileID: -5414332994079535143, guid: 38f74cd884cda8242b4fdc167c4962f8, type: 3}
-    size: {x: 2, y: 2, z: 2}
+    size: {x: 1, y: 1, z: 1}
+    material: {fileID: 0}
   - mesh: {fileID: 3100006622114138374, guid: a8fd0d08c30426d4c978a4998752cf7d, type: 3}
     size: {x: 2, y: 2, z: 2}
+    material: {fileID: 0}
   - mesh: {fileID: 7834934524071737294, guid: ae51ad94fa7d3764d957aa512d506d00, type: 3}
-    size: {x: 2, y: 2, z: 2}
+    size: {x: 1, y: 1, z: 1}
+    material: {fileID: 0}
   - mesh: {fileID: -2068639166428788250, guid: ea93ead513f04c9478f78e3f40ba5b11, type: 3}
     size: {x: 2, y: 2, z: 2}
+    material: {fileID: 0}
   - mesh: {fileID: -2924836750920556797, guid: e76a3645d5a0d3143b4a868ba89f0dc4, type: 3}
-    size: {x: 10, y: 10, z: 10}
+    size: {x: 30, y: 30, z: 30}
+    material: {fileID: 2100000, guid: f27ef528b073a8843b614e5ee3019e7d, type: 2}
   - mesh: {fileID: 1231305428566372716, guid: d12e71447f7b73040a0b0fbe2df69453, type: 3}
-    size: {x: 10, y: 10, z: 10}
+    size: {x: 30, y: 30, z: 30}
+    material: {fileID: 5147803853671709035, guid: d12e71447f7b73040a0b0fbe2df69453,
+      type: 3}
   - mesh: {fileID: 6248245230399792777, guid: 67a05fb2cf20c3d41b72f3cc720def5d, type: 3}
-    size: {x: 10, y: 10, z: 10}
+    size: {x: 30, y: 30, z: 30}
+    material: {fileID: 2100000, guid: ec7330a0ae472e040871cffc96c5e79c, type: 2}
   - mesh: {fileID: 3661388329890902608, guid: 47c7cc2f9dfbc1944a1ceb65da672419, type: 3}
     size: {x: 10, y: 10, z: 10}
+    material: {fileID: 2100000, guid: 6f8176222aa35594aadec1b945bd5051, type: 2}
   - mesh: {fileID: 7504751627607205505, guid: 022485f29bd7da742a91f941d60320e9, type: 3}
     size: {x: 10, y: 10, z: 10}
+    material: {fileID: 822052532002645507, guid: 022485f29bd7da742a91f941d60320e9,
+      type: 3}
   removeAudio: {fileID: 8300000, guid: c6d6b012d8330964e814d210bb4e3e8d, type: 3}
+  randomMaterials:
+  - {fileID: 2100000, guid: 41795ef948aecbc4c9fe985bda7dc5f3, type: 2}
+  - {fileID: 2100000, guid: 5afaeb7abc17c1848b67f8d6788d82fc, type: 2}
+  - {fileID: 2100000, guid: 7b53c7324ff3a1e458ae970c9b993dca, type: 2}
+  - {fileID: 2100000, guid: b87e0bd4687befb4e835e0dcd44789a2, type: 2}
+  - {fileID: 2100000, guid: 0bd95aa5efd383947a2fb15e1156d778, type: 2}
+  - {fileID: 2100000, guid: 3d23cf9c705748b489fdaac206991afc, type: 2}
+  - {fileID: 2100000, guid: 07204c5cb7e73804bbfd1672df38863a, type: 2}
   type: 0
   catchEffect: {fileID: 3061336691144616840, guid: 55cfdd29497ea4688be1a5ede3460e09,
     type: 3}

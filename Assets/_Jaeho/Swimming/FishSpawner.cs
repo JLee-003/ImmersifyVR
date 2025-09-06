@@ -31,9 +31,7 @@ public class FishSpawner : MonoBehaviour
 
     [SerializeField] GameObject fishPrefab;
 
-    GameObject player;
-
-    public Material[] materials; 
+    GameObject player; 
 
 
     private void Start()
@@ -92,10 +90,6 @@ public class FishSpawner : MonoBehaviour
             {
                 GameObject fish = Instantiate(fishPrefab, randomPosition, Quaternion.identity);
                 fish.GetComponent<Fish>().type = fishInfo.type;
-
-                // random material
-                int randomIndex = Random.Range(0, materials.Length);
-                fish.GetComponentInChildren<MeshRenderer> ().material = materials[randomIndex];
 
                 fishInfo.fishList.Add(fish);
 

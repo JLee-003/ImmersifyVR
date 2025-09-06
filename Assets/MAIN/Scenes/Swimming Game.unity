@@ -13569,6 +13569,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishText: {fileID: 1378434437}
+  difficultyCheckWindow: 30
+  difficultyStep: 0.5
+  minDifficulty: -3
+  maxDifficulty: 5
 --- !u!1001 &1493549681
 PrefabInstance:
   m_ObjectHideFlags: 0
