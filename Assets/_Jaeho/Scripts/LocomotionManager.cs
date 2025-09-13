@@ -36,7 +36,7 @@ public class LocomotionManager : MonoBehaviour
         {
             continuousMoveProvider.moveSpeed = normalWalkSpeed;
             SwimmingEvaluator.enabled = false;
-            Physics.gravity = new Vector3(0f, -9.8f, 0f);
+            // Physics.gravity = new Vector3(0f, -9.8f, 0f);
         }
     }
 }
