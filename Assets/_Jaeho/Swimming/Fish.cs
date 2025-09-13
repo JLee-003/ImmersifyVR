@@ -13,6 +13,8 @@ public class Fish : MonoBehaviour
         public Mesh mesh;
         public Vector3 size;
         public Material material;
+        [Tooltip("Movement direction offset in Euler angles - defines what direction this fish considers 'forward'")]
+        public Vector3 movementDirection = Vector3.zero;
     }
     MeshFilter meshFilter;
     //Renderer objRenderer;

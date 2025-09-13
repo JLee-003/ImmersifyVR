@@ -18,11 +18,13 @@ public class FishMovement : MonoBehaviour
     private Transform player;
     private Rigidbody rb;
     private float timer;
+    private Fish fishScript;
 
     private void Awake()
     {
         player = PlayerReferences.instance.playerObject.transform;
         rb = GetComponent<Rigidbody>();
+        fishScript = GetComponent<Fish>();
     }
 
     private void Update()
@@ -46,9 +48,21 @@ public class FishMovement : MonoBehaviour
 
         if (rb.velocity.sqrMagnitude > 0.0001f)
         {
+            // Get the movement direction offset from the Fish script
+            Vector3 movementDirectionOffset = Vector3.zero;
+            if (fishScript != null && fishScript.meshes != null && fishScript.type > 0 && fishScript.type <= fishScript.meshes.Length)
+            {
+                movementDirectionOffset = fishScript.meshes[fishScript.type - 1].movementDirection;
+            }
+            
+            // Apply the movement direction offset when calculating rotation
+            Quaternion baseRotation = Quaternion.LookRotation(rb.velocity);
+            Quaternion offsetRotation = Quaternion.Euler(movementDirectionOffset);
+            Quaternion targetRotation = baseRotation * offsetRotation;
+            
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
-                Quaternion.LookRotation(rb.velocity),
+                targetRotation,
                 Time.deltaTime * smoothTime
             );
         }

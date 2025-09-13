@@ -14192,12 +14192,12 @@ MonoBehaviour:
     cooldown: 90
     respawnTimer: 0
     fishList: []
-  - minX: 60
-    minY: 19
-    minZ: 135
-    maxX: 150
+  - minX: 80
+    minY: 10
+    minZ: 180
+    maxX: 256
     maxY: 20
-    maxZ: 130
+    maxZ: 256
     type: 6
     numberOfFish: 30
     cooldown: 90
