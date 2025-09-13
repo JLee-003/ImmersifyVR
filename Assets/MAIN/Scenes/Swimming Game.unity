@@ -14143,66 +14143,80 @@ MonoBehaviour:
     maxX: 256
     maxY: 20
     maxZ: 256
-    type: 1
     numberOfFish: 40
     cooldown: 30
     respawnTimer: 0
     fishList: []
+    fishTypes:
+    - type: 1
+      chance: 1
   - minX: 40
     minY: 15
     minZ: 191
     maxX: 256
     maxY: 20
     maxZ: 256
-    type: 2
     numberOfFish: 40
     cooldown: 30
     respawnTimer: 0
     fishList: []
+    fishTypes:
+    - type: 2
+      chance: 1
   - minX: 40
     minY: 15
     minZ: 191
     maxX: 256
     maxY: 20
     maxZ: 256
-    type: 3
     numberOfFish: 45
     cooldown: 30
     respawnTimer: 0
     fishList: []
+    fishTypes:
+    - type: 3
+      chance: 1
   - minX: 20
     minY: 20
     minZ: 170
     maxX: 270
     maxY: 21
     maxZ: 198
-    type: 4
     numberOfFish: 30
     cooldown: 90
     respawnTimer: 0
     fishList: []
+    fishTypes:
+    - type: 4
+      chance: 1
   - minX: 179
     minY: 19
     minZ: 36
     maxX: 290
     maxY: 20
     maxZ: 150
-    type: 5
     numberOfFish: 30
     cooldown: 90
     respawnTimer: 0
     fishList: []
+    fishTypes:
+    - type: 5
+      chance: 0.8
+    - type: 7
+      chance: 0.2
   - minX: 80
     minY: 10
     minZ: 180
     maxX: 256
     maxY: 20
     maxZ: 256
-    type: 6
     numberOfFish: 30
     cooldown: 90
     respawnTimer: 0
     fishList: []
+    fishTypes:
+    - type: 6
+      chance: 1
   minimumPlayerDist: 15
   fishPrefab: {fileID: 7053705457185874877, guid: 4db633c22885a7648b26eaacf4d023a8,
     type: 3}
