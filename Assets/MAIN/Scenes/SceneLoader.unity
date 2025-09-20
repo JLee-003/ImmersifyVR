@@ -190,7 +190,7 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -364,7 +364,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 232ad995cafdf46cab35a8151f8bc3bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inWater: 0
 --- !u!1 &1448803113
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,7 +530,7 @@ MonoBehaviour:
   OnLoadEnd:
     m_PersistentCalls:
       m_Calls: []
-  startingScene: Swimming Game
+  startingScene: TennisGameTest
 --- !u!1001 &2446915245381026552
 PrefabInstance:
   m_ObjectHideFlags: 0
