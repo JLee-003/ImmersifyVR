@@ -23,9 +23,10 @@ public class LocomotionManager : MonoBehaviour
     {
         if (other.CompareTag("Water Volume"))
         {
+            Debug.Log("Entered water volume.");
             continuousMoveProvider.moveSpeed = waterWalkSpeed;
             SwimmingEvaluator.enabled = true;
-            Physics.gravity = new Vector3(0f, -0.01f, 0f);
+            Physics.gravity = new Vector3(0f, -0.005f, 0f);
 
             AudioSource.PlayClipAtPoint(waterEnterAudio, transform.position, 1f);
         }
@@ -34,6 +35,7 @@ public class LocomotionManager : MonoBehaviour
     {
         if (other.CompareTag("Water Volume"))
         {
+            Debug.Log("Exited water volume.");
             continuousMoveProvider.moveSpeed = normalWalkSpeed;
             SwimmingEvaluator.enabled = false;
             // Physics.gravity = new Vector3(0f, -9.8f, 0f);

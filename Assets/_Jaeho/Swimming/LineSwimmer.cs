@@ -8,7 +8,7 @@ public class LineSwimmer : MonoBehaviour
 {
     [Header("Values")]
     [SerializeField] float swimForce = 15f;
-    [SerializeField] float dragForce = 1f;
+    [SerializeField] float dragForce = 0.9f;
     [SerializeField] float minForce = 0.1f;
     [SerializeField] float minTimeBetweenStrokes = 1f;
 
@@ -66,6 +66,11 @@ public class LineSwimmer : MonoBehaviour
         }
 
         characterController.Move(velocity * Time.deltaTime);
+    }
+
+    void OnDisable()
+    {
+        velocity = Vector3.zero;
     }
 
     void LeftControllerSwim()
