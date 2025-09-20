@@ -15,6 +15,9 @@ public class SwimmingTutorial : MonoBehaviour
     [SerializeField] InputActionReference rightControllerSwimReference;
     private GameObject player;
 
+    ActionBasedContinuousMoveProvider continuousMoveProvider;
+    
+
     ActionBasedContinuousMoveProvider moveProvider;
 
     private bool gripButtonPressed = false;
@@ -43,6 +46,8 @@ public class SwimmingTutorial : MonoBehaviour
             swimmer = player.GetComponent<LineSwimmer>();
             moveProvider = player.GetComponentInChildren<ActionBasedContinuousMoveProvider>();
         }
+
+        //continuousMoveProvider = PlayerReferences.instance.playerObject.GetComponent<ActionBasedContinuousMoveProvider>();
     }
 
     void Update()
@@ -85,6 +90,7 @@ public class SwimmingTutorial : MonoBehaviour
             moveProvider.moveSpeed = 3f;
             swimmer.enabled = false;
             Physics.gravity = new Vector3(0f, -9.8f, 0f);
+            moveProvider.useGravity = true;
             SceneLoader.Instance.LoadNewScene("Swimming Game");
         }
         else

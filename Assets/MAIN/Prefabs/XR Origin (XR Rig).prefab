@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8622909862405225207}
   - component: {fileID: 5997596573810403699}
   - component: {fileID: 6557595560118672985}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1658,9 +1658,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4fe21e42f2edbc48a9acb23f4022a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightAButtonAction: {fileID: -3599823989380923159, guid: 0be0028c24f2a4c14a96b6aa39055933,
+  aButtonAction: {fileID: 3596941705063027535, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  rightBButtonAction: {fileID: -8069514856583376848, guid: 0be0028c24f2a4c14a96b6aa39055933,
+  bButtonAction: {fileID: -2246660829063534165, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!1 &1848559090598254508
 GameObject:
@@ -1817,6 +1817,7 @@ GameObject:
   - component: {fileID: 7958109934423600515}
   - component: {fileID: 1284010916647264174}
   - component: {fileID: 5148967604733086937}
+  - component: {fileID: 8531534581328937657}
   m_Layer: 0
   m_Name: Delay
   m_TagString: Untagged
@@ -1849,7 +1850,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1872,6 +1873,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 232ad995cafdf46cab35a8151f8bc3bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &8531534581328937657
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3102657141876181461}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4424728107471048950
 GameObject:
   m_ObjectHideFlags: 0

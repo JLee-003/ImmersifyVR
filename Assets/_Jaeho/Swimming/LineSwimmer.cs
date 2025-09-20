@@ -65,7 +65,13 @@ public class LineSwimmer : MonoBehaviour
             velocity = Vector3.zero;
         }
 
+        velocity += new Vector3(0f, -0.005f, 0f) * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
+
+        if (characterController.velocity.sqrMagnitude < 0.01f)
+        {
+            velocity = Vector3.zero;
+        }
     }
 
     void OnDisable()

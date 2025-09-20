@@ -4,13 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class TopSecretTeleport : MonoBehaviour
 {
-    [SerializeField] InputActionReference rightAButtonAction;
-    [SerializeField] InputActionReference rightBButtonAction;
+    [SerializeField] InputActionReference aButtonAction;
+    [SerializeField] InputActionReference bButtonAction;
 
     float teleportTimer = 0f;
+
+    LineSwimmer swimmer;
+    ActionBasedContinuousMoveProvider continuousMoveProvider;
 
     /*void Start()
     {
@@ -22,17 +26,23 @@ public class TopSecretTeleport : MonoBehaviour
         }
     }*/
 
+    private void Start()
+    {
+        continuousMoveProvider = PlayerReferences.instance.playerObject.GetComponentInChildren<ActionBasedContinuousMoveProvider>();
+        swimmer = PlayerReferences.instance.playerObject.GetComponent<LineSwimmer>();
+    }
+
     void Update()
     {
         bool aButtonPressed = false;
-        if (rightAButtonAction.action.IsPressed())
+        if (aButtonAction.action.IsPressed())
         {
             Debug.Log("A button pressed");
             aButtonPressed = true;
         }
 
         bool bButtonPressed = false;
-        if (rightBButtonAction.action.IsPressed())
+        if (bButtonAction.action.IsPressed())
         {
             Debug.Log("B button pressed");
             bButtonPressed = true;
@@ -72,6 +82,10 @@ public class TopSecretTeleport : MonoBehaviour
         {
             sceneName = "Lobby";
         }
+        continuousMoveProvider.moveSpeed = 3f;
+        swimmer.enabled = false;
+        Physics.gravity = new Vector3(0f, -9.8f, 0f);
+        continuousMoveProvider.useGravity = true;
 
         SceneLoader.Instance.LoadNewScene(sceneName);
     }

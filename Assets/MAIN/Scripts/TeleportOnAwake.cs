@@ -8,7 +8,7 @@ public class TeleportOnAwake : MonoBehaviour
     [SerializeField] Transform spawnPoint;
     [SerializeField] XROrigin xrOrigin;
     
-    private void Start()
+    private void Awake()
     {
         // Get the XROrigin if not assigned
         if (xrOrigin == null)
@@ -29,5 +29,7 @@ public class TeleportOnAwake : MonoBehaviour
             // Fallback to the old method if XROrigin is not found
             Teleport.Instance.tp(spawnPoint.position.x, spawnPoint.position.y, spawnPoint.position.z, spawnPoint.eulerAngles.y);
         }
+
+        Physics.gravity = new Vector3(0f, -9.8f, 0f);
     }
 }
