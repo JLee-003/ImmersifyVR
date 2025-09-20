@@ -19,7 +19,7 @@ public class ZeroGravProjectile : MonoBehaviour
     public void ChangeVelocity(Vector3 newVelocity, bool isPlayer = false)
     {
         newVelocity.z = Mathf.Clamp(newVelocity.z, 1.5f, 5f);
-        newVelocity.y = Mathf.Clamp(newVelocity.z, -2f, 2f);
+        newVelocity.y = Mathf.Clamp(newVelocity.y, -2f, 2f);
 
         rb.velocity = newVelocity;
 
