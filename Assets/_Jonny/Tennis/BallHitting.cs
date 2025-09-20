@@ -6,7 +6,6 @@ public class BallHitting : MonoBehaviour
     [Tooltip("Multiplier to scale the power of the hit.")]
     public float powerMultiplier = 1.5f;
 
-
     public float swingThreshold = 2.0f;
     public float pushbackForce = 2.0f;
 
@@ -20,128 +19,84 @@ public class BallHitting : MonoBehaviour
     public float minHitSpeed = 2f;
     public float maxHitSpeed = 15f;
 
-    [Tooltip("Max angle from the hand�s forward for horizontal deflection")]
+    [Tooltip("Max angle from the hand’s forward for horizontal deflection (unused)")]
     public float maxHorizontalAngle = 30f;
 
-    [Tooltip("Max angle above the horizontal plane")]
+    [Tooltip("Max angle above the horizontal plane (unused)")]
     public float maxVerticalAngle = 0f;
-
-    // GameObject enemyObj;
-    // TennisEnemy tennisEnemy;
-
-    float targetSpeed = 2f;
 
     [SerializeField] AudioClip hitAudio;
 
+    // NEW: ensure a minimum Z speed (forward/back) only
+    [Header("Z-Axis Safeguard")]
+    [Tooltip("Absolute minimum |Z| speed after a hit. Sign (+/-) is preserved from the swing.")]
+    public float minZSpeed = 3f;
 
     void Start()
     {
         previousPosition = transform.position;
-        /*
-        if (TennisEnemy.Instance != null)
-        {
-            tennisEnemy = TennisEnemy.Instance;
-            enemyObj = tennisEnemy.gameObject;
-        }
-        */
     }
 
     void Update()
     {
-        /*
-        if (TennisEnemy.Instance != null && tennisEnemy != null)
-        {
-            tennisEnemy = TennisEnemy.Instance;
-            enemyObj = tennisEnemy.gameObject;
-        }
-        */
-
-        // Calculate velocity of the hand based on position delta
+        // Hand/controller velocity from position delta
         currentVelocity = (transform.position - previousPosition) / Time.deltaTime;
         previousPosition = transform.position;
-
-        // Check if swing exceeds threshold and apply pushback to player
-        float swingSpeed = currentVelocity.magnitude;
-        if (swingSpeed > swingThreshold && xrOrigin != null)
-        {
-            //ApplyZeroGEffect(currentVelocity.normalized, swingSpeed);
-        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Ball"))
-        {
-            if (CompareTag("LeftHand"))
-            {
-                Debug.Log("This racket is from the left hand.");
-            }
-            else if (CompareTag("RightHand"))
-            {
-                Debug.Log("This racket is from the right hand.");
-            }
+        if (!other.CompareTag("Ball")) return;
 
-            ReturnBall(other.gameObject);
-        }
-    } 
+        if (CompareTag("LeftHand")) Debug.Log("This racket is from the left hand.");
+        else if (CompareTag("RightHand")) Debug.Log("This racket is from the right hand.");
+
+        ReturnBall(other.gameObject);
+    }
 
     void ReturnBall(GameObject ball)
     {
-        // Raw from your hand's velocity
-        Vector3 rawDir = currentVelocity.normalized;
+        // Build outgoing velocity from the swing
+        Vector3 rawDir = currentVelocity.sqrMagnitude > 1e-6f ? currentVelocity.normalized : transform.forward;
         float rawSpeed = currentVelocity.magnitude * powerMultiplier;
-
         float speed = Mathf.Clamp(rawSpeed, minHitSpeed, maxHitSpeed);
 
-        // Clamp horizontal angle relative to enemyDir
-        /*
-        Vector3 enemyDir = enemyObj.transform.position - transform.position;
-        enemyDir.Normalize();
+        Vector3 vel = rawDir * speed;
 
-        float horizAngle = Vector3.Angle(enemyDir, rawDir);
-        if (horizAngle > maxHorizontalAngle)
+        // Enforce a minimum Z forward speed
+        float absZ = Mathf.Abs(vel.z);
+        if (absZ < minZSpeed)
         {
-            rawDir = Vector3.RotateTowards(enemyDir, rawDir, maxHorizontalAngle * Mathf.Deg2Rad, 0f);
+            // Preserve player's chosen Z sign if any; else fall back to transform.forward.z or +Z
+            float zSign = Mathf.Sign(vel.z);
+            if (Mathf.Abs(zSign) < 1e-6f)
+            {
+                float fz = transform.forward.z;
+                zSign = Mathf.Abs(fz) > 1e-6f ? Mathf.Sign(fz) : 1f;
+            }
+
+            float desiredZ = zSign * minZSpeed;
+
+            // Keep Z at desired magnitude, trim X/Y only if needed to respect maxHitSpeed
+            float maxXY2 = Mathf.Max(0f, (maxHitSpeed * maxHitSpeed) - (desiredZ * desiredZ));
+            float curXY2 = (vel.x * vel.x) + (vel.y * vel.y);
+
+            if (curXY2 > maxXY2 && curXY2 > 1e-12f)
+            {
+                float scaleXY = Mathf.Sqrt(maxXY2 / curXY2);
+                vel.x *= scaleXY;
+                vel.y *= scaleXY;
+            }
+
+            vel.z = desiredZ;
         }
 
-        // Clamp vertical angle relative to horizontal plane
-        Vector3 flatDir = new Vector3(rawDir.x, 0f, rawDir.z).normalized;
-        float vertAngle = Vector3.Angle(rawDir, flatDir);
-        if (vertAngle > maxVerticalAngle)
-        {
-            rawDir = Vector3.RotateTowards(flatDir, rawDir, maxVerticalAngle * Mathf.Deg2Rad, 0f);
-        }
-
-        if (rawDir == Vector3.zero)
-        {
-            rawDir = enemyDir;
-        }
-        */
-
+        // Apply to projectile
         ZeroGravProjectile projectile = ball.GetComponent<ZeroGravProjectile>();
         if (projectile != null)
         {
-            projectile.ChangeVelocity(rawDir * speed, true);
-            AudioSource.PlayClipAtPoint(hitAudio, transform.position, 1f);
+            projectile.ChangeVelocity(vel, true);
+            if (hitAudio) AudioSource.PlayClipAtPoint(hitAudio, transform.position, 1f);
         }
-
-        // EvaluateShot(speed);
-
     }
-    
-    /*
-    void EvaluateShot(float hitSpeed)
-    {
-        float multiplier = targetSpeed / hitSpeed;
-
-        multiplier = Mathf.Clamp(multiplier, 0.1f, 2f);
-
-        Debug.Log(hitSpeed + ", " + multiplier);
-
-        tennisEnemy.moveSpeedMultiplier = multiplier;
-    }
-    */
-
-    
-
 }
