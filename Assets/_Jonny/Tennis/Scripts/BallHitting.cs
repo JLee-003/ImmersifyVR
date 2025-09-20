@@ -63,34 +63,6 @@ public class BallHitting : MonoBehaviour
 
         Vector3 vel = rawDir * speed;
 
-        // Enforce a minimum Z forward speed
-        float absZ = Mathf.Abs(vel.z);
-        if (absZ < minZSpeed)
-        {
-            // Preserve player's chosen Z sign if any; else fall back to transform.forward.z or +Z
-            float zSign = Mathf.Sign(vel.z);
-            if (Mathf.Abs(zSign) < 1e-6f)
-            {
-                float fz = transform.forward.z;
-                zSign = Mathf.Abs(fz) > 1e-6f ? Mathf.Sign(fz) : 1f;
-            }
-
-            float desiredZ = zSign * minZSpeed;
-
-            // Keep Z at desired magnitude, trim X/Y only if needed to respect maxHitSpeed
-            float maxXY2 = Mathf.Max(0f, (maxHitSpeed * maxHitSpeed) - (desiredZ * desiredZ));
-            float curXY2 = (vel.x * vel.x) + (vel.y * vel.y);
-
-            if (curXY2 > maxXY2 && curXY2 > 1e-12f)
-            {
-                float scaleXY = Mathf.Sqrt(maxXY2 / curXY2);
-                vel.x *= scaleXY;
-                vel.y *= scaleXY;
-            }
-
-            vel.z = desiredZ;
-        }
-
         // Apply to projectile
         ZeroGravProjectile projectile = ball.GetComponent<ZeroGravProjectile>();
         if (projectile != null)
