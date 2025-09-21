@@ -18,6 +18,8 @@ public class LocomotionManager : MonoBehaviour
 
         continuousMoveProvider.moveSpeed = normalWalkSpeed;
         SwimmingEvaluator.enabled = false;
+        Physics.gravity = new Vector3(0f, -9.8f, 0f);
+        continuousMoveProvider.useGravity = true;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -27,7 +29,7 @@ public class LocomotionManager : MonoBehaviour
             continuousMoveProvider.moveSpeed = waterWalkSpeed;
             continuousMoveProvider.useGravity = false;
             SwimmingEvaluator.enabled = true;
-            Physics.gravity = new Vector3(0f, -0.005f, 0f);
+            // Physics.gravity = new Vector3(0f, -0.005f, 0f);
 
             AudioSource.PlayClipAtPoint(waterEnterAudio, transform.position, 1f);
         }
