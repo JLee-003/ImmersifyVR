@@ -15,6 +15,8 @@ public class Fish : MonoBehaviour
         public Material material;
         [Tooltip("Movement direction offset in Euler angles - defines what direction this fish considers 'forward'")]
         public Vector3 movementDirection = Vector3.zero;
+        [Tooltip("Graphics offset position for this fish model")]
+        public Vector3 graphicsOffset = Vector3.zero;
     }
     MeshFilter meshFilter;
     //Renderer objRenderer;
@@ -45,6 +47,9 @@ public class Fish : MonoBehaviour
         meshFilter.mesh = meshes[type - 1].mesh;
         transform.GetChild(0).localScale = meshes[type - 1].size;
         
+        // Apply graphics offset from the specific fish model
+        transform.GetChild(0).localPosition = meshes[type - 1].graphicsOffset;
+        
         // Apply the material from FishModels or choose randomly
         if (meshes[type - 1].material != null)
         {
@@ -55,6 +60,13 @@ public class Fish : MonoBehaviour
             // Choose a random material from the randomMaterials array
             int randomIndex = Random.Range(0, randomMaterials.Length);
             GetComponentInChildren<MeshRenderer>().material = randomMaterials[randomIndex];
+        }
+        
+        // Rotate CatchCollider based on movementDirection
+        Transform catchCollider = transform.Find("CatchCollider");
+        if (catchCollider != null)
+        {
+            catchCollider.rotation = Quaternion.Euler(meshes[type - 1].movementDirection);
         }
     }
     private void OnTriggerEnter(Collider other)

@@ -27,8 +27,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5263784366926548379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80,8 +80,8 @@ Transform:
   m_GameObject: {fileID: 2777204758834033434}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 30, y: 30, z: 30}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5263784366926548379}
@@ -93,7 +93,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2777204758834033434}
-  m_Mesh: {fileID: -5414332994079535143, guid: 38f74cd884cda8242b4fdc167c4962f8, type: 3}
+  m_Mesh: {fileID: -2924836750920556797, guid: e76a3645d5a0d3143b4a868ba89f0dc4, type: 3}
 --- !u!23 &4608874515020519146
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -211,40 +211,49 @@ MonoBehaviour:
     size: {x: 1, y: 1, z: 1}
     material: {fileID: 0}
     movementDirection: {x: 0, y: 90, z: 0}
+    graphicsOffset: {x: 0, y: 0, z: 0}
   - mesh: {fileID: 3100006622114138374, guid: a8fd0d08c30426d4c978a4998752cf7d, type: 3}
     size: {x: 2, y: 2, z: 2}
     material: {fileID: 0}
     movementDirection: {x: 0, y: 90, z: 0}
+    graphicsOffset: {x: 0, y: 0, z: 0}
   - mesh: {fileID: 7834934524071737294, guid: ae51ad94fa7d3764d957aa512d506d00, type: 3}
     size: {x: 1, y: 1, z: 1}
     material: {fileID: 0}
     movementDirection: {x: 0, y: 90, z: 0}
+    graphicsOffset: {x: 0, y: 0, z: 0}
   - mesh: {fileID: -2068639166428788250, guid: ea93ead513f04c9478f78e3f40ba5b11, type: 3}
     size: {x: 2, y: 2, z: 2}
     material: {fileID: 0}
     movementDirection: {x: 0, y: 90, z: 0}
+    graphicsOffset: {x: 0, y: 0, z: 0}
   - mesh: {fileID: -2924836750920556797, guid: e76a3645d5a0d3143b4a868ba89f0dc4, type: 3}
     size: {x: 30, y: 30, z: 30}
     material: {fileID: 2100000, guid: f27ef528b073a8843b614e5ee3019e7d, type: 2}
     movementDirection: {x: 0, y: 0, z: 0}
+    graphicsOffset: {x: 0, y: -0.5, z: 0}
   - mesh: {fileID: 1231305428566372716, guid: d12e71447f7b73040a0b0fbe2df69453, type: 3}
     size: {x: 30, y: 30, z: 30}
     material: {fileID: 5147803853671709035, guid: d12e71447f7b73040a0b0fbe2df69453,
       type: 3}
     movementDirection: {x: 0, y: 0, z: 0}
+    graphicsOffset: {x: 0, y: -0.5, z: 0}
   - mesh: {fileID: 6248245230399792777, guid: 67a05fb2cf20c3d41b72f3cc720def5d, type: 3}
     size: {x: 20, y: 20, z: 20}
     material: {fileID: 2100000, guid: ec7330a0ae472e040871cffc96c5e79c, type: 2}
     movementDirection: {x: 0, y: 0, z: 0}
+    graphicsOffset: {x: 0, y: 0, z: 0}
   - mesh: {fileID: 3661388329890902608, guid: 47c7cc2f9dfbc1944a1ceb65da672419, type: 3}
-    size: {x: 10, y: 10, z: 10}
+    size: {x: 0.2, y: 0.2, z: 0.2}
     material: {fileID: 2100000, guid: 6f8176222aa35594aadec1b945bd5051, type: 2}
     movementDirection: {x: 0, y: 0, z: 0}
+    graphicsOffset: {x: 0, y: -0.4, z: 0}
   - mesh: {fileID: 7504751627607205505, guid: 022485f29bd7da742a91f941d60320e9, type: 3}
     size: {x: 10, y: 10, z: 10}
     material: {fileID: 822052532002645507, guid: 022485f29bd7da742a91f941d60320e9,
       type: 3}
     movementDirection: {x: 0, y: 0, z: 0}
+    graphicsOffset: {x: 0, y: -0.5, z: 0}
   removeAudio: {fileID: 8300000, guid: c6d6b012d8330964e814d210bb4e3e8d, type: 3}
   randomMaterials:
   - {fileID: 2100000, guid: 41795ef948aecbc4c9fe985bda7dc5f3, type: 2}
