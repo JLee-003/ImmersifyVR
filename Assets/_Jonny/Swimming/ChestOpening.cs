@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PrimeTween;
 
 public class ChestController : MonoBehaviour
 {
@@ -11,6 +12,11 @@ public class ChestController : MonoBehaviour
     [Header("Animation Settings")]
     public float openAngle = -90f;  // How far to rotate the lid
     public float openSpeed = 2f;    // Speed of rotation
+
+    [SerializeField] Vector3 startPos;
+    [SerializeField] Vector3 endPos;
+    [SerializeField] float startScale;
+    [SerializeField] float endScale;
 
     private bool isOpening = false;
     private bool hasOpened = false;
@@ -46,9 +52,6 @@ public class ChestController : MonoBehaviour
                 chestTop.localRotation = openRotation;
                 hasOpened = true;
                 isOpening = false;
-
-                // Reveal the fish
-                fish.SetActive(true);
             }
         }
     }
@@ -59,6 +62,11 @@ public class ChestController : MonoBehaviour
         if (!hasOpened && other.transform.root.CompareTag("Player"))
         {
             isOpening = true;
+
+            // Reveal the fish
+            fish.SetActive(true);
+            Tween.LocalPosition(fish.transform, startValue: startPos, endValue: endPos, duration: 2f, ease: Ease.InOutSine);
+            Tween.Scale(fish.transform, startValue: startScale, endValue: endScale, duration: 2f, ease: Ease.InOutSine);
         }
     }
 
