@@ -18,7 +18,7 @@ public class SwimmingTutorial : MonoBehaviour
     private GameObject player;
 
     ActionBasedContinuousMoveProvider continuousMoveProvider;
-    
+
 
     ActionBasedContinuousMoveProvider moveProvider;
 
@@ -27,8 +27,8 @@ public class SwimmingTutorial : MonoBehaviour
     private bool loadedScene = false;
     private bool handsMoved = false;
     private bool gripReleased = false;
-    private Vector3 leftControllerLastPosition;
-    private Vector3 rightControllerLastPosition;
+    private Vector3 leftControllerStartPosition;
+    private Vector3 rightControllerStartPosition;
     private CharacterController playerCharacterController;
     private GameObject leftController;
     private GameObject rightController;
@@ -36,6 +36,8 @@ public class SwimmingTutorial : MonoBehaviour
 
     public int tutorialFishCaught = 0;
     int fishCaughtRequirement = 3;
+
+    private BackgroundMusic _bgm;
 
     void Start()
     {
@@ -46,20 +48,20 @@ public class SwimmingTutorial : MonoBehaviour
         {
             fish.SetActive(false);
         }
-        
+
         // Initialize LandText with initial message
         if (LandText != null)
         {
             LandText.text = "To move, gently push the left joystick in the direction you want to walk.";
         }
-        
+
         // Initialize swimMotionText with initial message
         if (swimMotionText != null)
         {
             swimMotionText.text = "Push the grip buttons on both controllers to start the action";
         }
-        
-        
+
+
         if (player == null)
         {
             Debug.LogError("Player not found in the scene.");
@@ -83,7 +85,7 @@ public class SwimmingTutorial : MonoBehaviour
         // Find left and right controller references by tag
         GameObject[] leftHands = GameObject.FindGameObjectsWithTag("LeftHand");
         GameObject[] rightHands = GameObject.FindGameObjectsWithTag("RightHand");
-        
+
         if (leftHands.Length > 0)
         {
             leftController = leftHands[0]; // Take the first one found
@@ -92,7 +94,7 @@ public class SwimmingTutorial : MonoBehaviour
         {
             Debug.LogError("No GameObject with 'LeftHand' tag found.");
         }
-        
+
         if (rightHands.Length > 0)
         {
             rightController = rightHands[0]; // Take the first one found
@@ -101,16 +103,8 @@ public class SwimmingTutorial : MonoBehaviour
         {
             Debug.LogError("No GameObject with 'RightHand' tag found.");
         }
-        
-        // Initialize controller positions for velocity calculation
-        if (leftController != null)
-        {
-            leftControllerLastPosition = leftController.transform.localPosition;
-        }
-        if (rightController != null)
-        {
-            rightControllerLastPosition = rightController.transform.localPosition;
-        }
+
+        _bgm = FindObjectOfType<BackgroundMusic>();
     }
 
 
@@ -121,7 +115,7 @@ public class SwimmingTutorial : MonoBehaviour
         {
             Vector3 velocity = playerCharacterController.velocity;
             float velocityMagnitude = velocity.magnitude;
-            
+
             if (velocityMagnitude > 0.1f) // Check if player is moving
             {
                 LandText.text = "Try to walk into the water!";
@@ -131,60 +125,68 @@ public class SwimmingTutorial : MonoBehaviour
                 LandText.text = "To move, gently push the left joystick in the direction you want to walk.";
             }
         }
-        
-        if (!hasReachedGreenPoint && leftControllerSwimReference.action.IsPressed() || rightControllerSwimReference.action.IsPressed())
+
+        if (!gripButtonPressed)
         {
-            gripButtonPressed = true;
-            greenPoint.SetActive(true);
-            
-            // Change text when grip is pressed
-            if (swimMotionText != null && !handsMoved)
+            bool leftGripPressed = leftControllerSwimReference.action.IsPressed();
+            bool rightGripPressed = rightControllerSwimReference.action.IsPressed();
+
+            if (leftGripPressed || rightGripPressed)
             {
-                swimMotionText.text = "Move both your hands in any direction";
+                gripButtonPressed = true;
+                greenPoint.SetActive(true);
+
+                leftControllerStartPosition = leftController.transform.localPosition;
+                rightControllerStartPosition = rightController.transform.localPosition;
+
+                // Change text when grip is pressed
+                if (swimMotionText != null && !handsMoved)
+                {
+                    swimMotionText.text = "Move both your hands in any direction";
+                }
             }
+
         }
-        
+
         // Check for hand movement when grip is pressed
-        if (gripButtonPressed && !handsMoved && leftController != null && rightController != null)
+        if (gripButtonPressed && !handsMoved)
         {
-            // Calculate velocity using local position changes
-            Vector3 leftCurrentPosition = leftController.transform.localPosition;
-            Vector3 rightCurrentPosition = rightController.transform.localPosition;
-            
-            Vector3 leftVelocity = (leftCurrentPosition - leftControllerLastPosition) / Time.deltaTime;
-            Vector3 rightVelocity = (rightCurrentPosition - rightControllerLastPosition) / Time.deltaTime;
-            
-            if (leftVelocity.sqrMagnitude > 0.05f || rightVelocity.sqrMagnitude > 0.05f)
+            if (leftController != null && rightController != null)
             {
-                handsMoved = true;
-                if (swimMotionText != null)
+                // Calculate distancce using local position changes
+                Vector3 leftCurrentPosition = leftController.transform.localPosition;
+                Vector3 rightCurrentPosition = rightController.transform.localPosition;
+
+                float leftDist = (leftCurrentPosition - leftControllerStartPosition).magnitude;
+                float rightDist = (rightCurrentPosition - rightControllerStartPosition).magnitude;
+
+                if (leftDist > 0.5f || rightDist > 0.5f)
                 {
-                    swimMotionText.text = "Let go of the grip button after your stroke to finish the action";
+                    handsMoved = true;
+                    if (swimMotionText != null)
+                    {
+                        swimMotionText.text = "Let go of the grip button after your stroke to finish the action";
+                    }
                 }
             }
-            
-            // Update last positions for next frame
-            leftControllerLastPosition = leftCurrentPosition;
-            rightControllerLastPosition = rightCurrentPosition;
         }
-        
         // Check for grip release after hands have moved
-        
-        if (handsMoved && !gripReleased)
+
+        bool leftGripReleased = !leftControllerSwimReference.action.IsPressed();
+        bool rightGripReleased = !rightControllerSwimReference.action.IsPressed();
+
+        if (leftGripReleased && rightGripReleased)
         {
-            bool leftGripReleased = !leftControllerSwimReference.action.IsPressed();
-            bool rightGripReleased = !rightControllerSwimReference.action.IsPressed();
-            
-            if (leftGripReleased && rightGripReleased)
+            gripButtonPressed = false;
+
+            handsMoved = false;
+
+            if (swimMotionText != null)
             {
-                gripReleased = true;
-                if (swimMotionText != null)
-                {
-                    swimMotionText.text = "Great job! Now keep doing that to swim around!";
-                }
+                swimMotionText.text = "Push the grip buttons on both controllers to start the action";
             }
         }
-        
+
 
 
         // Green Point
@@ -222,6 +224,9 @@ public class SwimmingTutorial : MonoBehaviour
             swimmer.enabled = false;
             Physics.gravity = new Vector3(0f, -9.8f, 0f);
             moveProvider.useGravity = true;
+
+            _bgm.SetUnderwater(false);
+
             SceneLoader.Instance.LoadNewScene("Swimming Game");
         }
         else
