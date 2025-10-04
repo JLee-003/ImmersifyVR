@@ -10,6 +10,8 @@ public class LocomotionManager : MonoBehaviour
     float waterWalkSpeed = 1.5f;
     float normalWalkSpeed = 3f;
 
+    private BackgroundMusic _bgm;
+
     [SerializeField] AudioClip waterEnterAudio;
     private void Start()
     {
@@ -20,6 +22,8 @@ public class LocomotionManager : MonoBehaviour
         SwimmingEvaluator.enabled = false;
         Physics.gravity = new Vector3(0f, -9.8f, 0f);
         continuousMoveProvider.useGravity = true;
+
+        _bgm = FindObjectOfType<BackgroundMusic>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -32,6 +36,8 @@ public class LocomotionManager : MonoBehaviour
             // Physics.gravity = new Vector3(0f, -0.005f, 0f);
 
             AudioSource.PlayClipAtPoint(waterEnterAudio, transform.position, 1f);
+            _bgm?.SetUnderwater(true);
+
         }
     }
     private void OnTriggerExit(Collider other)
@@ -44,6 +50,7 @@ public class LocomotionManager : MonoBehaviour
             SwimmingEvaluator.enabled = false;
 
             Physics.gravity = new Vector3(0f, -9.8f, 0f);
+            _bgm?.SetUnderwater(false);
         }
     }
 }
