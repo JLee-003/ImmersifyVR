@@ -75,7 +75,7 @@ public class Fish : MonoBehaviour
         {
             Money.Instance.AddMoney(value);
             AudioSource.PlayClipAtPoint(removeAudio, transform.position, 1f);
-            HapticFeedbackManager.Instance.InitiateHapticFeedback(true, true, 1f, 1f);
+            HapticFeedbackManager.Instance.InitiateHapticFeedback(true, true, 1f, 0.75f);
 
             // Instantiate the particle effect
             if (catchEffect != null)

@@ -90,7 +90,7 @@ public class LineSwimmer : MonoBehaviour
                 startPosLeft = leftControllerTransform.localPosition;
             }
 
-            HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 0.5f, 0.1f);
+            HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 0.3f, 0.1f);
             leftSwimStarted = true;
         }
 
@@ -104,7 +104,7 @@ public class LineSwimmer : MonoBehaviour
 
             cooldownTimer = 0f;
 
-            HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 1.0f, 0.4f);
+            HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 0.3f, 0.2f);
             AudioSource.PlayClipAtPoint(swimAudio, transform.position, 1f);
             
             leftSwimStarted = false;
@@ -122,7 +122,7 @@ public class LineSwimmer : MonoBehaviour
                 startPosRight = rightControllerTransform.localPosition;
             }
 
-            HapticFeedbackManager.Instance?.InitiateHapticFeedback(false, true, 0.5f, 0.1f);
+            HapticFeedbackManager.Instance?.InitiateHapticFeedback(false, true, 0.3f, 0.1f);
             rightSwimStarted = true;
         }
 
@@ -136,7 +136,7 @@ public class LineSwimmer : MonoBehaviour
 
             cooldownTimer = 0f;
 
-            HapticFeedbackManager.Instance?.InitiateHapticFeedback(false, true, 1.0f, 0.4f);
+            HapticFeedbackManager.Instance?.InitiateHapticFeedback(false, true, 0.4f, 0.2f);
             AudioSource.PlayClipAtPoint(swimAudio, transform.position, 1f);
 
             rightSwimStarted = false;
