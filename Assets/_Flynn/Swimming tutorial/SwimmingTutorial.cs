@@ -160,7 +160,7 @@ public class SwimmingTutorial : MonoBehaviour
                 float leftDist = (leftCurrentPosition - leftControllerStartPosition).magnitude;
                 float rightDist = (rightCurrentPosition - rightControllerStartPosition).magnitude;
 
-                if (leftDist > 0.5f || rightDist > 0.5f)
+                if (leftDist > 0.3f || rightDist > 0.3f)
                 {
                     handsMoved = true;
                     if (swimMotionText != null)
@@ -190,7 +190,7 @@ public class SwimmingTutorial : MonoBehaviour
 
 
         // Green Point
-        if (player != null && gripButtonPressed == true && !hasReachedGreenPoint && Vector3.Distance(player.transform.position, greenPoint.transform.position) < 3f)
+        if (player != null && !hasReachedGreenPoint && Vector3.Distance(player.transform.position, greenPoint.transform.position) < 3f)
         {
             hasReachedGreenPoint = true;
             greenPoint.SetActive(false);
