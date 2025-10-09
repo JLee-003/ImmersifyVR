@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000002, guid: 535cd142d51f04c48af5a80d64e4a324,
+  m_LightingDataAsset: {fileID: 112000000, guid: 535cd142d51f04c48af5a80d64e4a324,
     type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
@@ -242,17 +242,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5092bb37385b6b4c9ae3ca289d1d0e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 0.8
+  volume: 0.9
   sceneMusic:
   - sceneName: VRTutorial
     clip: {fileID: 8300000, guid: 379925d4f98a0d5479ebafa8f2f86721, type: 3}
-    volume: 0.2
+    volume: 0.15
   - sceneName: TennisGameTest
     clip: {fileID: 8300000, guid: 63ab45e2a64d792408678b92f9e27103, type: 3}
     volume: 0.2
   - sceneName: Swimming Game
     clip: {fileID: 8300000, guid: 379925d4f98a0d5479ebafa8f2f86721, type: 3}
-    volume: 0.2
+    volume: 0.15
   startUnderwater: 0
   cutoffAbove: 22000
   cutoffUnder: 450

@@ -16,6 +16,8 @@ public class TopSecretTeleport : MonoBehaviour
     LineSwimmer swimmer;
     ActionBasedContinuousMoveProvider continuousMoveProvider;
 
+    private BackgroundMusic _bgm;
+
     /*void Start()
     {
         var rightHandedControllers = new List<InputDevice>();
@@ -30,6 +32,8 @@ public class TopSecretTeleport : MonoBehaviour
     {
         continuousMoveProvider = PlayerReferences.instance.playerObject.GetComponentInChildren<ActionBasedContinuousMoveProvider>();
         swimmer = PlayerReferences.instance.playerObject.GetComponent<LineSwimmer>();
+
+        _bgm = FindObjectOfType<BackgroundMusic>();
     }
 
     void Update()
@@ -86,6 +90,7 @@ public class TopSecretTeleport : MonoBehaviour
         swimmer.enabled = false;
         Physics.gravity = new Vector3(0f, -9.8f, 0f);
         continuousMoveProvider.useGravity = true;
+        _bgm?.SetUnderwater(false);
 
         SceneLoader.Instance.LoadNewScene(sceneName);
     }

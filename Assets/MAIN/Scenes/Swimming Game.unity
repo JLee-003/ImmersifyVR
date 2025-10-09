@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000004, guid: 535cd142d51f04c48af5a80d64e4a324,
+  m_LightingDataAsset: {fileID: 112000000, guid: 16d02c5f465b2d9499710eda6bdb1860,
     type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
@@ -8404,7 +8404,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 25.5, y: 3.45, z: 26.5}
   m_LocalScale: {x: 6.3999996, y: 6.3999996, z: 6.3999996}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
