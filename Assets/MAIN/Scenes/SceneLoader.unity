@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 535cd142d51f04c48af5a80d64e4a324,
+  m_LightingDataAsset: {fileID: 112000002, guid: 535cd142d51f04c48af5a80d64e4a324,
     type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
@@ -189,7 +189,7 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -593,7 +593,7 @@ MonoBehaviour:
   OnLoadEnd:
     m_PersistentCalls:
       m_Calls: []
-  startingScene: VRTutorial
+  startingScene: SpaceballLv2
 --- !u!1001 &2446915245381026552
 PrefabInstance:
   m_ObjectHideFlags: 0
