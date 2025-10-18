@@ -766,6 +766,7 @@ MonoBehaviour:
   hitForce: 3
   moveSpeed: 6
   missChance: 0.02
+  hitRandomness: 0.25
   moveSpeedMultiplier: 1
   minBoundaries: {x: -4, y: 0.5}
   maxBoundaries: {x: 4, y: 5}
@@ -813,7 +814,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7b53c7324ff3a1e458ae970c9b993dca, type: 2}
+  - {fileID: 2100000, guid: d1462fdad56c781419afa331c40d10f9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -7,6 +7,7 @@ public class TennisEnemy : MonoBehaviour
     [SerializeField] float hitForce = 3f;
     [SerializeField] float moveSpeed = 2f;
     [SerializeField] float missChance = 0.025f;
+    [SerializeField] [Range(0f, 1f)] float hitRandomness = 0f; // 0 = no randomness, 1 = very random
     private int totalHits = 0;
 
     public float moveSpeedMultiplier = 1f;
@@ -70,6 +71,17 @@ public class TennisEnemy : MonoBehaviour
         else
         {
             Vector3 dir = player.position - transform.position;
+            
+            // Apply randomness to the hit direction
+            if (hitRandomness > 0f)
+            {
+                // Add random offset to x and y components based on randomness
+                // Higher randomness = larger random offset
+                float maxOffset = hitRandomness * 2f; // Scale factor for randomness
+                dir.x += Random.Range(-maxOffset, maxOffset);
+                dir.y += Random.Range(-maxOffset, maxOffset);
+            }
+            
             dir.Normalize();
 
             ball.GetComponent<ZeroGravProjectile>().SetVelocity(dir * hitForce);

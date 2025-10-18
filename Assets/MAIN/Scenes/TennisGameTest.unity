@@ -1378,7 +1378,7 @@ MonoBehaviour:
   matchPointText: {fileID: 1074851818}
   levelScenes:
   - TennisGameTest
-  - SpaceballL2
+  - SpaceballLv2
   ballServePos: {x: 0, y: 1, z: -3.5}
   playerNeutralPos: {x: 0, y: 0.5, z: -5}
   enemyNeutralPos: {x: 0, y: 0.75, z: 4}
@@ -2881,6 +2881,7 @@ MonoBehaviour:
   hitForce: 3
   moveSpeed: 6
   missChance: 0.02
+  hitRandomness: 0
   moveSpeedMultiplier: 1
   minBoundaries: {x: -4, y: 0.5}
   maxBoundaries: {x: 4, y: 5}
