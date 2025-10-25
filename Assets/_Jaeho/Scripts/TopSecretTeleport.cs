@@ -88,7 +88,7 @@ public class TopSecretTeleport : MonoBehaviour
             bButtonPressed = true;
         }
 
-        if (xButtonPressed && yButtonPressed)
+        if (aButtonPressed && bButtonPressed)
         {
             restartTimer += Time.deltaTime;
         }
