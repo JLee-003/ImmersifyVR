@@ -483,6 +483,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Origin (XR Rig)
       objectReference: {fileID: 0}
+    - target: {fileID: 4156922284508672688, guid: d873ee7be2c786c41a42a0c73cde767f,
+        type: 3}
+      propertyPath: aButtonAction
+      value: 
+      objectReference: {fileID: 6679699698201052325, guid: c348712bda248c246b8c49b3db54643f,
+        type: 3}
+    - target: {fileID: 4156922284508672688, guid: d873ee7be2c786c41a42a0c73cde767f,
+        type: 3}
+      propertyPath: bButtonAction
+      value: 
+      objectReference: {fileID: -3454163885705617278, guid: c348712bda248c246b8c49b3db54643f,
+        type: 3}
+    - target: {fileID: 4156922284508672688, guid: d873ee7be2c786c41a42a0c73cde767f,
+        type: 3}
+      propertyPath: xButtonAction
+      value: 
+      objectReference: {fileID: 3596941705063027535, guid: c348712bda248c246b8c49b3db54643f,
+        type: 3}
+    - target: {fileID: 4156922284508672688, guid: d873ee7be2c786c41a42a0c73cde767f,
+        type: 3}
+      propertyPath: yButtonAction
+      value: 
+      objectReference: {fileID: -2246660829063534165, guid: c348712bda248c246b8c49b3db54643f,
+        type: 3}
     - target: {fileID: 6541681293610120885, guid: d873ee7be2c786c41a42a0c73cde767f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -536,72 +560,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 743044146508822154, guid: d873ee7be2c786c41a42a0c73cde767f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1541476723}
-    - targetCorrespondingSourceObject: {fileID: 1245685381312009993, guid: d873ee7be2c786c41a42a0c73cde767f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1541476722}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d873ee7be2c786c41a42a0c73cde767f, type: 3}
---- !u!1 &1541476720 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1245685381312009993, guid: d873ee7be2c786c41a42a0c73cde767f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1541476719}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1541476721 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 743044146508822154, guid: d873ee7be2c786c41a42a0c73cde767f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1541476719}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1541476722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1541476720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5183e615ee7244817ac35f57d866d1c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneHandModels:
-  - sceneName: TennisGameTest
-    handModelPrefab: {fileID: 6862015792295112376, guid: 13e80274251684027a235e4b56de4886,
-      type: 3}
-  - sceneName: Swimming Game
-    handModelPrefab: {fileID: 1169363922829043519, guid: fc5399829774d4a54ac624c0bd730d28,
-      type: 3}
-  defaultHandModel: {fileID: 6826421384047665998, guid: 45c01e7bd86bb4cd799df0a2aa9d3108,
-    type: 3}
-  isLeftHand: 0
---- !u!114 &1541476723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1541476721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5183e615ee7244817ac35f57d866d1c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneHandModels:
-  - sceneName: TennisGameTest
-    handModelPrefab: {fileID: 6862015792295112376, guid: 13e80274251684027a235e4b56de4886,
-      type: 3}
-  - sceneName: Swimming Game
-    handModelPrefab: {fileID: 1169363922829043519, guid: fc5399829774d4a54ac624c0bd730d28,
-      type: 3}
-  defaultHandModel: {fileID: 6826421384047665998, guid: 45c01e7bd86bb4cd799df0a2aa9d3108,
-    type: 3}
-  isLeftHand: 1
 --- !u!1 &1745328652
 GameObject:
   m_ObjectHideFlags: 0

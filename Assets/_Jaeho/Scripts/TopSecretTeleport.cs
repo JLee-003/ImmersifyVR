@@ -8,10 +8,13 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class TopSecretTeleport : MonoBehaviour
 {
+    [SerializeField] InputActionReference xButtonAction;
+    [SerializeField] InputActionReference yButtonAction;
     [SerializeField] InputActionReference aButtonAction;
     [SerializeField] InputActionReference bButtonAction;
 
     float teleportTimer = 0f;
+    float restartTimer = 0f;
 
     LineSwimmer swimmer;
     ActionBasedContinuousMoveProvider continuousMoveProvider;
@@ -38,21 +41,21 @@ public class TopSecretTeleport : MonoBehaviour
 
     void Update()
     {
-        bool aButtonPressed = false;
-        if (aButtonAction.action.IsPressed())
+        bool xButtonPressed = false;
+        if (xButtonAction.action.IsPressed())
         {
-            Debug.Log("A button pressed");
-            aButtonPressed = true;
+            Debug.Log("X button pressed");
+            xButtonPressed = true;
         }
 
-        bool bButtonPressed = false;
-        if (bButtonAction.action.IsPressed())
+        bool yButtonPressed = false;
+        if (yButtonAction.action.IsPressed())
         {
-            Debug.Log("B button pressed");
-            bButtonPressed = true;
+            Debug.Log("Y button pressed");
+            yButtonPressed = true;
         }
 
-        if (aButtonPressed && bButtonPressed)
+        if (xButtonPressed && yButtonPressed)
         {
             teleportTimer += Time.deltaTime;
         }
@@ -68,6 +71,41 @@ public class TopSecretTeleport : MonoBehaviour
 
             TeleportToOtherScene();
         }
+
+        // restart game if A/B Button pressed
+
+        bool aButtonPressed = false;
+        if (aButtonAction.action.IsPressed())
+        {
+            Debug.Log("A button pressed");
+            aButtonPressed = true;
+        }
+
+        bool bButtonPressed = false;
+        if (bButtonAction.action.IsPressed())
+        {
+            Debug.Log("B button pressed");
+            bButtonPressed = true;
+        }
+
+        if (xButtonPressed && yButtonPressed)
+        {
+            restartTimer += Time.deltaTime;
+        }
+
+        else
+        {
+            restartTimer = 0f;
+        }
+
+        if (restartTimer >= 5f)
+        {
+            restartTimer = 0f;
+
+            RestartGame();
+        }
+
+
     }
 
     void TeleportToOtherScene()
@@ -78,7 +116,7 @@ public class TopSecretTeleport : MonoBehaviour
         {
             sceneName = "FishActivityTutorial";
         }
-        else if(currentScene == "Swimming Game")
+        else if (currentScene == "Swimming Game")
         {
             sceneName = "TennisGameTest";
         }
@@ -86,6 +124,19 @@ public class TopSecretTeleport : MonoBehaviour
         {
             sceneName = "Lobby";
         }
+        continuousMoveProvider.moveSpeed = 3f;
+        swimmer.enabled = false;
+        Physics.gravity = new Vector3(0f, -9.8f, 0f);
+        continuousMoveProvider.useGravity = true;
+        _bgm?.SetUnderwater(false);
+
+        SceneLoader.Instance.LoadNewScene(sceneName);
+    }
+    
+    void RestartGame()
+    {
+        string sceneName = "VRTutorial";
+
         continuousMoveProvider.moveSpeed = 3f;
         swimmer.enabled = false;
         Physics.gravity = new Vector3(0f, -9.8f, 0f);

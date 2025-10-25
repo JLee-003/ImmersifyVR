@@ -454,19 +454,19 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "A Button",
+                    "name": "X Button",
                     "type": "Button",
                     "id": "a708cebf-86cc-4d00-bdc9-de62766e603e",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "B Button",
+                    "name": "Y Button",
                     "type": "Button",
                     "id": "a460781b-91d8-4c7a-84e0-a493707d8bcf",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -718,11 +718,11 @@
                 {
                     "name": "",
                     "id": "a8559821-bd53-4c9c-b3d9-b41b4ee0d910",
-                    "path": "<XRController>{LeftHand}/{PrimaryButton}",
+                    "path": "XRController>{LeftHand}/{PrimaryButton}}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "A Button",
+                    "action": "X Button",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -733,7 +733,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "B Button",
+                    "action": "Y Button",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1308,6 +1308,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "A Button",
+                    "type": "Button",
+                    "id": "bb76accc-80f0-4cd0-9d3e-35983c004ac1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "B Button",
+                    "type": "Button",
+                    "id": "74b25f61-c989-4b23-937e-36578d3f2385",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1552,6 +1570,28 @@
                     "action": "Velocity",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f884ecab-0a20-4b5a-a0a2-302f17dc9bf8",
+                    "path": "<XRController>{RightHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "A Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "997b1db9-5efc-43eb-aed7-458c852135ec",
+                    "path": "<XRController>{RightHand}/{SecondaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "B Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -1563,7 +1603,7 @@
                     "name": "Select",
                     "type": "Button",
                     "id": "ac96c10b-c955-4a46-8e67-bf16bc069b53",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -1581,7 +1621,7 @@
                     "name": "Activate",
                     "type": "Button",
                     "id": "41976d89-60de-4deb-bff9-16b4af96b290",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
