@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -7,46 +5,70 @@ public class LocomotionManager : MonoBehaviour
 {
     ActionBasedContinuousMoveProvider continuousMoveProvider;
     LineSwimmer SwimmingEvaluator;
+    CharacterController characterController;
+
+    //speeds
     float waterWalkSpeed = 1.5f;
     float normalWalkSpeed = 3f;
 
+    [Header("Underwater")]
+    [SerializeField] float sinkSpeed = 0.1f;   // m/s downward while in water
+
+    [Header("Audio/FX")]
+    [SerializeField] AudioClip waterEnterAudio;
     private BackgroundMusic _bgm;
 
-    [SerializeField] AudioClip waterEnterAudio;
-    private void Start()
+    bool inWater = false;
+
+    void Start()
     {
         continuousMoveProvider = GetComponentInChildren<ActionBasedContinuousMoveProvider>();
         SwimmingEvaluator = GetComponent<LineSwimmer>();
+        characterController = GetComponent<CharacterController>();
 
         continuousMoveProvider.moveSpeed = normalWalkSpeed;
         SwimmingEvaluator.enabled = false;
+
+        // Land defaults
         Physics.gravity = new Vector3(0f, -9.8f, 0f);
         continuousMoveProvider.useGravity = true;
 
         _bgm = FindObjectOfType<BackgroundMusic>();
     }
-    private void OnTriggerEnter(Collider other)
+
+    void Update()
     {
-        if (other.CompareTag("Water Volume"))
+        // When in water, we do the vertical ourselves
+        if (inWater && characterController)
         {
-            Debug.Log("Entered water volume.");
-            continuousMoveProvider.moveSpeed = waterWalkSpeed;
-            continuousMoveProvider.useGravity = false;
-            SwimmingEvaluator.enabled = true;
-            // Physics.gravity = new Vector3(0f, -0.005f, 0f);
-
-            AudioSource.PlayClipAtPoint(waterEnterAudio, transform.position, 1f);
-            _bgm?.SetUnderwater(true);
-
+            Vector3 step = Vector3.down * sinkSpeed * Time.deltaTime;
+            characterController.Move(step);
         }
     }
-    private void OnTriggerExit(Collider other)
+
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Water Volume"))
         {
-            Debug.Log("Exited water volume.");
+            inWater = true;
+
+            continuousMoveProvider.moveSpeed = waterWalkSpeed;
+            continuousMoveProvider.useGravity = false;   // turn OFF built-in gravity
+            SwimmingEvaluator.enabled = true;
+
+            if (waterEnterAudio) AudioSource.PlayClipAtPoint(waterEnterAudio, transform.position, 1f);
+            _bgm?.SetUnderwater(true);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Water Volume"))
+        {
+            inWater = false;
+
             continuousMoveProvider.moveSpeed = normalWalkSpeed;
-            continuousMoveProvider.useGravity = true;
+            continuousMoveProvider.useGravity = true;    // restore built-in gravity
             SwimmingEvaluator.enabled = false;
 
             Physics.gravity = new Vector3(0f, -9.8f, 0f);
