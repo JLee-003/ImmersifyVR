@@ -29,6 +29,7 @@ public class LineSwimmer : MonoBehaviour
     CharacterController characterController;
     float cooldownTimer;
     Vector3 velocity;
+    float totalDistanceSwum = 0f;
 
     Vector3 startPosLeft;
     Vector3 endPosLeft;
@@ -66,7 +67,11 @@ public class LineSwimmer : MonoBehaviour
         }
 
         velocity += new Vector3(0f, -0.005f, 0f) * Time.deltaTime;
-        characterController.Move(velocity * Time.deltaTime);
+        Vector3 movement = velocity * Time.deltaTime;
+        characterController.Move(movement);
+        
+        // Track total distance swum
+        totalDistanceSwum += movement.magnitude;
 
         if (characterController.velocity.sqrMagnitude < 0.01f)
         {
@@ -181,6 +186,18 @@ public class LineSwimmer : MonoBehaviour
         lr.material = new Material(Shader.Find("Sprites/Default"));
         lr.startColor = new Color(0f, 0.8f, 1f); // light cyan
         lr.endColor = new Color(0f, 0f, 1f);   // dark blue
+    }
+
+    // Public method to get total distance swum
+    public float GetTotalDistanceSwum()
+    {
+        return totalDistanceSwum;
+    }
+
+    // Public method to reset distance counter
+    public void ResetDistanceSwum()
+    {
+        totalDistanceSwum = 0f;
     }
 
 }

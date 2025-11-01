@@ -804,10 +804,10 @@ MonoBehaviour:
   - sceneName: TennisGameTest
     handModelPrefab: {fileID: 6862015792295112376, guid: 13e80274251684027a235e4b56de4886,
       type: 3}
-  - sceneName: Swimming Game
-    handModelPrefab: {fileID: 1169363922829043519, guid: fc5399829774d4a54ac624c0bd730d28,
+  - sceneName: SpaceballLv2
+    handModelPrefab: {fileID: 6862015792295112376, guid: 13e80274251684027a235e4b56de4886,
       type: 3}
-  defaultHandModel: {fileID: 6826421384047665998, guid: 45c01e7bd86bb4cd799df0a2aa9d3108,
+  defaultHandModel: {fileID: 6862015792295112376, guid: 13e80274251684027a235e4b56de4886,
     type: 3}
   isLeftHand: 1
 --- !u!1 &1245685381312009993
@@ -1243,10 +1243,10 @@ MonoBehaviour:
   - sceneName: TennisGameTest
     handModelPrefab: {fileID: 6862015792295112376, guid: 13e80274251684027a235e4b56de4886,
       type: 3}
-  - sceneName: Swimming Game
-    handModelPrefab: {fileID: 1169363922829043519, guid: fc5399829774d4a54ac624c0bd730d28,
+  - sceneName: SpaceballLv2
+    handModelPrefab: {fileID: 6862015792295112376, guid: 13e80274251684027a235e4b56de4886,
       type: 3}
-  defaultHandModel: {fileID: 6826421384047665998, guid: 45c01e7bd86bb4cd799df0a2aa9d3108,
+  defaultHandModel: {fileID: 6862015792295112376, guid: 13e80274251684027a235e4b56de4886,
     type: 3}
   isLeftHand: 0
 --- !u!1 &1542972532382618323
@@ -1843,6 +1843,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &3426933963814765517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3187295974148786131}
+  m_Layer: 9
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3187295974148786131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3426933963814765517}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7304150444649512434}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4424728107471048950
 GameObject:
   m_ObjectHideFlags: 0
@@ -2134,7 +2165,7 @@ MonoBehaviour:
   m_MoveSpeed: 3
   m_EnableStrafe: 1
   m_EnableFly: 0
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_GravityApplicationMode: 1
   m_ForwardSource: {fileID: 0}
   m_LeftHandMoveAction:

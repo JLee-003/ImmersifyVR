@@ -14032,8 +14032,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 190, y: 50}
+  m_AnchoredPosition: {x: 0.22, y: 0}
+  m_SizeDelta: {x: 335.99, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1378434437
 MonoBehaviour:
@@ -14055,7 +14055,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Fish Caught: 0'
+  m_text: 'Fish caught: 0
+
+    Swimming distance: 0
+
+    Time in session: 00:00'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14969,7 +14973,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bee0b8944ae845e3bdef58341d4b995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heightOffset: -0.7
+  distanceFromCamera: 1
+  faceCamera: 1
 --- !u!114 &1477911561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15059,19 +15064,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477911559}
-  m_LocalRotation: {x: 0.52037394, y: 0.4787599, z: -0.52037394, w: 0.4787599}
-  m_LocalPosition: {x: 0, y: 0, z: 40}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 40.15733}
   m_LocalScale: {x: 0.0019999999, y: 0.0019999999, z: 0.0019999999}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1960212144}
   - {fileID: 1378434436}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 99.94179, y: 55.420025}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 357.32898, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1477911566
 MonoBehaviour:
@@ -15085,11 +15090,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2232b61851c4768bc4c67f005a9226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishText: {fileID: 1378434437}
+  inactivityThreshold: 5
   difficultyCheckWindow: 30
   difficultyStep: 0.5
   minDifficulty: -3
   maxDifficulty: 5
+  movementThreshold: 0.01
+  rotationThreshold: 0.5
 --- !u!1001 &1493549681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18905,8 +18912,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -3.54}
+  m_SizeDelta: {x: 0, y: 161.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1960212145
 MonoBehaviour:

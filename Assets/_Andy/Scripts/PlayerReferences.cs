@@ -8,6 +8,7 @@ public class PlayerReferences : MonoBehaviour
 
     public GameObject playerObject;
     public Transform cameraTransform;
+    public LineSwimmer swimObject;
 
     private void Awake()
     {
