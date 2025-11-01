@@ -36,6 +36,7 @@ Transform:
   m_Children:
   - {fileID: 3797256180444342971}
   - {fileID: 1041563497237249621}
+  - {fileID: 3187295974148786131}
   m_Father: {fileID: 2844683663180697640}
   m_LocalEulerAnglesHint: {x: 4.77, y: 0, z: 0}
 --- !u!20 &7519318343564365066
@@ -1565,6 +1566,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerObject: {fileID: 1542972532382618323}
   cameraTransform: {fileID: 7304150444649512434}
+  swimObject: {fileID: 7478899513093671679}
 --- !u!114 &4156922284508672688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1605,6 +1607,10 @@ MonoBehaviour:
   rightController: {fileID: 4301946589613925507}
   cameraTransform: {fileID: 1041563497237249621}
   thrusterAudio: {fileID: 8300000, guid: 5a93ff26869bacf408b73218b02631e6, type: 3}
+  enabledInScenes:
+  - SpaceballTutorial
+  - TennisGameTest
+  - SpaceballLv2
 --- !u!1 &1848559090598254508
 GameObject:
   m_ObjectHideFlags: 0

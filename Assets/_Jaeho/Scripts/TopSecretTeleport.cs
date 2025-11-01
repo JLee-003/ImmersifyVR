@@ -16,11 +16,6 @@ public class TopSecretTeleport : MonoBehaviour
     float teleportTimer = 0f;
     float restartTimer = 0f;
 
-    LineSwimmer swimmer;
-    ActionBasedContinuousMoveProvider continuousMoveProvider;
-
-    private BackgroundMusic _bgm;
-
     /*void Start()
     {
         var rightHandedControllers = new List<InputDevice>();
@@ -30,14 +25,6 @@ public class TopSecretTeleport : MonoBehaviour
             rightController = rightHandedControllers[0];
         }
     }*/
-
-    private void Start()
-    {
-        continuousMoveProvider = PlayerReferences.instance.playerObject.GetComponentInChildren<ActionBasedContinuousMoveProvider>();
-        swimmer = PlayerReferences.instance.playerObject.GetComponent<LineSwimmer>();
-
-        _bgm = FindObjectOfType<BackgroundMusic>();
-    }
 
     void Update()
     {
@@ -124,11 +111,7 @@ public class TopSecretTeleport : MonoBehaviour
         {
             sceneName = "Lobby";
         }
-        continuousMoveProvider.moveSpeed = 3f;
-        swimmer.enabled = false;
-        Physics.gravity = new Vector3(0f, -9.8f, 0f);
-        continuousMoveProvider.useGravity = true;
-        _bgm?.SetUnderwater(false);
+        LocomotionManager.Instance.ResetLandDefaults();
 
         SceneLoader.Instance.LoadNewScene(sceneName);
     }
@@ -137,11 +120,7 @@ public class TopSecretTeleport : MonoBehaviour
     {
         string sceneName = "VRTutorial";
 
-        continuousMoveProvider.moveSpeed = 3f;
-        swimmer.enabled = false;
-        Physics.gravity = new Vector3(0f, -9.8f, 0f);
-        continuousMoveProvider.useGravity = true;
-        _bgm?.SetUnderwater(false);
+        LocomotionManager.Instance.ResetLandDefaults();
 
         SceneLoader.Instance.LoadNewScene(sceneName);
     }

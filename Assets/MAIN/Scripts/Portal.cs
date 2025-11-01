@@ -14,6 +14,4 @@ public class Portal : MonoBehaviour
             SceneLoader.Instance.LoadNewScene(sceneName);
         }
     }
-
-
 }

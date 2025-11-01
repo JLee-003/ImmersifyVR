@@ -3,6 +3,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class LocomotionManager : MonoBehaviour
 {
+    public static LocomotionManager Instance { get; private set; }
+
     ActionBasedContinuousMoveProvider continuousMoveProvider;
     LineSwimmer swimmingEvaluator;
     CharacterController characterController;
@@ -20,20 +22,28 @@ public class LocomotionManager : MonoBehaviour
 
     bool inWater = false;
 
+    private void Awake()
+    {
+        // If there is an instance, and it's not me, delete myself.
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     void Start()
     {
         continuousMoveProvider = GetComponentInChildren<ActionBasedContinuousMoveProvider>();
         swimmingEvaluator = GetComponent<LineSwimmer>();
         characterController = GetComponent<CharacterController>();
-
-        continuousMoveProvider.moveSpeed = normalWalkSpeed;
-        swimmingEvaluator.enabled = false;
-
-        // Land defaults
-        Physics.gravity = new Vector3(0f, -9.8f, 0f);
-        continuousMoveProvider.useGravity = true;
-
         _bgm = FindObjectOfType<BackgroundMusic>();
+
+        ResetLandDefaults();
     }
 
     void Update()
@@ -65,14 +75,18 @@ public class LocomotionManager : MonoBehaviour
     {
         if (other.CompareTag("Water Volume"))
         {
-            inWater = false;
-
-            continuousMoveProvider.moveSpeed = normalWalkSpeed;
-            continuousMoveProvider.useGravity = true;    // restore built-in gravity
-            swimmingEvaluator.enabled = false;
-
-            Physics.gravity = new Vector3(0f, -9.8f, 0f);
-            _bgm?.SetUnderwater(false);
+            ResetLandDefaults();
         }
+    }
+
+    public void ResetLandDefaults()
+    {
+        inWater = false;
+
+        continuousMoveProvider.moveSpeed = normalWalkSpeed;
+        continuousMoveProvider.useGravity = true;    // restore built-in gravity
+        swimmingEvaluator.enabled = false;
+
+        _bgm?.SetUnderwater(false);
     }
 }

@@ -32,12 +32,9 @@ public class SwimmingTutorial : MonoBehaviour
     private CharacterController playerCharacterController;
     private GameObject leftController;
     private GameObject rightController;
-    LineSwimmer swimmer;
 
     public int tutorialFishCaught = 0;
     int fishCaughtRequirement = 3;
-
-    private BackgroundMusic _bgm;
 
     void Start()
     {
@@ -68,7 +65,6 @@ public class SwimmingTutorial : MonoBehaviour
         }
         else
         {
-            swimmer = player.GetComponent<LineSwimmer>();
             moveProvider = player.GetComponentInChildren<ActionBasedContinuousMoveProvider>();
         }
 
@@ -103,8 +99,6 @@ public class SwimmingTutorial : MonoBehaviour
         {
             Debug.LogError("No GameObject with 'RightHand' tag found.");
         }
-
-        _bgm = FindObjectOfType<BackgroundMusic>();
     }
 
 
@@ -207,9 +201,9 @@ public class SwimmingTutorial : MonoBehaviour
             StartCoroutine(WaitAndLoadScene()); // Ensure WaitAndLoadScene is called here
             loadedScene = true;
             //Manually run water-exit code
-            moveProvider.moveSpeed = 3f;
+            /*moveProvider.moveSpeed = 3f;
             swimmer.enabled = false;
-            Physics.gravity = new Vector3(0f, -9.8f, 0f);
+            moveProvider.useGravity = true;*/
         }
     }
 
@@ -220,12 +214,7 @@ public class SwimmingTutorial : MonoBehaviour
         {
             Debug.Log("SceneLoader instance found. Loading scene 'Swimming Game'...");
             //Manually run water-exit code; again, just in case
-            moveProvider.moveSpeed = 3f;
-            swimmer.enabled = false;
-            Physics.gravity = new Vector3(0f, -9.8f, 0f);
-            moveProvider.useGravity = true;
-
-            _bgm.SetUnderwater(false);
+            LocomotionManager.Instance.ResetLandDefaults();
 
             SceneLoader.Instance.LoadNewScene("Swimming Game");
         }
