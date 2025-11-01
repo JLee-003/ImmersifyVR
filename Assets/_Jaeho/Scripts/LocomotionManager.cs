@@ -4,7 +4,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class LocomotionManager : MonoBehaviour
 {
     ActionBasedContinuousMoveProvider continuousMoveProvider;
-    LineSwimmer SwimmingEvaluator;
+    LineSwimmer swimmingEvaluator;
     CharacterController characterController;
 
     //speeds
@@ -23,11 +23,11 @@ public class LocomotionManager : MonoBehaviour
     void Start()
     {
         continuousMoveProvider = GetComponentInChildren<ActionBasedContinuousMoveProvider>();
-        SwimmingEvaluator = GetComponent<LineSwimmer>();
+        swimmingEvaluator = GetComponent<LineSwimmer>();
         characterController = GetComponent<CharacterController>();
 
         continuousMoveProvider.moveSpeed = normalWalkSpeed;
-        SwimmingEvaluator.enabled = false;
+        swimmingEvaluator.enabled = false;
 
         // Land defaults
         Physics.gravity = new Vector3(0f, -9.8f, 0f);
@@ -54,7 +54,7 @@ public class LocomotionManager : MonoBehaviour
 
             continuousMoveProvider.moveSpeed = waterWalkSpeed;
             continuousMoveProvider.useGravity = false;   // turn OFF built-in gravity
-            SwimmingEvaluator.enabled = true;
+            swimmingEvaluator.enabled = true;
 
             if (waterEnterAudio) AudioSource.PlayClipAtPoint(waterEnterAudio, transform.position, 1f);
             _bgm?.SetUnderwater(true);
@@ -69,7 +69,7 @@ public class LocomotionManager : MonoBehaviour
 
             continuousMoveProvider.moveSpeed = normalWalkSpeed;
             continuousMoveProvider.useGravity = true;    // restore built-in gravity
-            SwimmingEvaluator.enabled = false;
+            swimmingEvaluator.enabled = false;
 
             Physics.gravity = new Vector3(0f, -9.8f, 0f);
             _bgm?.SetUnderwater(false);

@@ -483,6 +483,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Origin (XR Rig)
       objectReference: {fileID: 0}
+    - target: {fileID: 3318197864416306340, guid: d873ee7be2c786c41a42a0c73cde767f,
+        type: 3}
+      propertyPath: enabledInScenes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3318197864416306340, guid: d873ee7be2c786c41a42a0c73cde767f,
+        type: 3}
+      propertyPath: enabledInScenes.Array.data[0]
+      value: TennisGameTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 3318197864416306340, guid: d873ee7be2c786c41a42a0c73cde767f,
+        type: 3}
+      propertyPath: enabledInScenes.Array.data[1]
+      value: SpaceballLv2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3318197864416306340, guid: d873ee7be2c786c41a42a0c73cde767f,
+        type: 3}
+      propertyPath: enabledInScenes.Array.data[2]
+      value: SpaceballLv2
+      objectReference: {fileID: 0}
     - target: {fileID: 6541681293610120885, guid: d873ee7be2c786c41a42a0c73cde767f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -588,7 +608,7 @@ MonoBehaviour:
   OnLoadEnd:
     m_PersistentCalls:
       m_Calls: []
-  startingScene: TennisGameTest
+  startingScene: VRTutorial
 --- !u!1001 &2446915245381026552
 PrefabInstance:
   m_ObjectHideFlags: 0

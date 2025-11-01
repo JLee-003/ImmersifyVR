@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class HandBoosters : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class HandBoosters : MonoBehaviour
     [SerializeField] Transform rightController;
     [SerializeField] Transform cameraTransform;
     [SerializeField] AudioClip thrusterAudio;
+
+    // Scene gating (explicit allowlist)
+    [Tooltip("Thrusters are enabled ONLY in scenes listed here (exact names).")]
+    [SerializeField] string[] enabledInScenes = new string[0];
 
     float maxVelocity = 3f;
     float boostAddMin = 0.75f;
@@ -28,6 +33,8 @@ public class HandBoosters : MonoBehaviour
     private AudioSource rightThrusterSource;
 
     Vector3 velocity;
+
+    bool _sceneAllowed = false;
 
     void Start()
     {
@@ -46,10 +53,49 @@ public class HandBoosters : MonoBehaviour
 
         leftThrusterSource.playOnAwake = false;
         rightThrusterSource.playOnAwake = false;
+
+        // Evaluate scene on startup and hook future loads
+        EvaluateSceneGate();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // Re-check when scenes change
+    void OnSceneLoaded(Scene s, LoadSceneMode m)
+    {
+        EvaluateSceneGate();
+    }
+
+    // Allow only listed scenes
+    void EvaluateSceneGate()
+    {
+        if (enabledInScenes == null || enabledInScenes.Length == 0)
+        {
+            _sceneAllowed = false;
+        }
+        else
+        {
+            string current = SceneManager.GetActiveScene().name;
+            _sceneAllowed = System.Array.IndexOf(enabledInScenes, current) >= 0;
+        }
+
+        if (!_sceneAllowed)
+        {
+            if (leftThrusterSource && leftThrusterSource.isPlaying) leftThrusterSource.Stop();
+            if (rightThrusterSource && rightThrusterSource.isPlaying) rightThrusterSource.Stop();
+            velocity = Vector3.zero;
+        }
     }
 
     void Update()
     {
+        // Not an allowed scene? Do nothing
+        if (!_sceneAllowed) return;
+
         continuousMoveProvider.useGravity = false;
 
         bool leftBoosting = leftControllerSwimReference.action.IsPressed();
@@ -76,7 +122,6 @@ public class HandBoosters : MonoBehaviour
     {
         if (isBoosting)
         {
-            // Start playing if not already
             if (!source.isPlaying)
             {
                 source.transform.position = hand.position;
@@ -84,13 +129,11 @@ public class HandBoosters : MonoBehaviour
             }
             else
             {
-                // Update position while playing (so it follows hand)
                 source.transform.position = hand.position;
             }
         }
         else if (source.isPlaying)
         {
-            // Stop sound smoothly
             source.Stop();
         }
     }
