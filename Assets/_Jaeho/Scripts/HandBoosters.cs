@@ -18,10 +18,10 @@ public class HandBoosters : MonoBehaviour
     [Tooltip("Thrusters are enabled ONLY in scenes listed here (exact names).")]
     [SerializeField] string[] enabledInScenes = new string[0];
 
-    float maxVelocity = 3f;
-    float boostAddMin = 0.75f;
-    float boostAddMax = 1.25f;
-    float boostDrag = 0.99f;
+    float maxVelocity = 4f;
+    float boostAddMin = 3f;
+    float boostAddMax = 6f;
+    float boostDrag = 0.1f;
 
     float leftBoostForce;
     float rightBoostForce;
@@ -112,7 +112,15 @@ public class HandBoosters : MonoBehaviour
             AddRightBoost();
 
         if (!leftBoosting && !rightBoosting)
-            velocity -= velocity * boostDrag * Time.deltaTime;
+        {
+            // frame-rate independent damping, exponential
+            float dragFactor = Mathf.Pow(boostDrag, Time.deltaTime);
+            velocity *= dragFactor;
+
+            // snap to zero when very small
+            /*if (velocity.sqrMagnitude < 0.0001f)
+                velocity = Vector3.zero;*/
+        }
 
         velocity = Vector3.ClampMagnitude(velocity, maxVelocity);
         characterController.Move(velocity * Time.deltaTime);
