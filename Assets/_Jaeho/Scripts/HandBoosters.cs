@@ -99,6 +99,8 @@ public class HandBoosters : MonoBehaviour
         continuousMoveProvider.useGravity = false;
         continuousMoveProvider.moveSpeed = 0f;
 
+        Debug.Log("HAND BOOSTERS IS ON");
+
         bool leftBoosting = leftControllerSwimReference.action.IsPressed();
         bool rightBoosting = rightControllerSwimReference.action.IsPressed();
 

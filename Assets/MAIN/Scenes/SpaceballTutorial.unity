@@ -2180,35 +2180,10 @@ PrefabInstance:
       propertyPath: enemy
       value: 
       objectReference: {fileID: 9137407139840720040}
-    - target: {fileID: 4012177227442757239, guid: ca771e468866e02439abe027a5b83b2e,
-        type: 3}
-      propertyPath: m_AngularDrag
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4723789974576245706, guid: ca771e468866e02439abe027a5b83b2e,
         type: 3}
       propertyPath: m_Name
       value: Tennis Ball
-      objectReference: {fileID: 0}
-    - target: {fileID: 7099082398395857749, guid: ca771e468866e02439abe027a5b83b2e,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8461101134120035008, guid: ca771e468866e02439abe027a5b83b2e,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8461101134120035008, guid: ca771e468866e02439abe027a5b83b2e,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8461101134120035008, guid: ca771e468866e02439abe027a5b83b2e,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8461101134120035008, guid: ca771e468866e02439abe027a5b83b2e,
         type: 3}
@@ -3758,8 +3733,8 @@ MonoBehaviour:
   missChance: 0.02
   hitRandomness: 0
   moveSpeedMultiplier: 1
-  minBoundaries: {x: -5, y: 0.5}
-  maxBoundaries: {x: 5, y: 7.5}
+  minBoundaries: {x: -2.5, y: 0.5}
+  maxBoundaries: {x: 2.5, y: 5}
   hitAudio: {fileID: 8300000, guid: 698fc5bb80f620b44889a6669322f0f6, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
