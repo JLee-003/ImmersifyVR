@@ -159,8 +159,7 @@ public class ScoreManager : MonoBehaviour
         else
         {
             Debug.Log("No more levels! Player has completed all levels.");
-            // Optionally, you could loop back to first level or show a completion screen
-            // SceneLoader.Instance.LoadNewScene(levelScenes[0]); // Uncomment to loop back
+            currentLevelIndex--;
         }
     }
 }
