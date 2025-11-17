@@ -68,6 +68,12 @@ public class HandBoosters : MonoBehaviour
     void OnSceneLoaded(Scene s, LoadSceneMode m)
     {
         EvaluateSceneGate();
+
+        if (_sceneAllowed)
+        {
+            continuousMoveProvider.useGravity = false;
+            continuousMoveProvider.moveSpeed = 0f;
+        }
     }
 
     // Allow only listed scenes
@@ -95,9 +101,6 @@ public class HandBoosters : MonoBehaviour
     {
         // Not an allowed scene? Do nothing
         if (!_sceneAllowed) return;
-
-        continuousMoveProvider.useGravity = false;
-        continuousMoveProvider.moveSpeed = 0f;
 
         Debug.Log("HAND BOOSTERS IS ON");
 
