@@ -124,10 +124,20 @@ public class ScoreManager : MonoBehaviour
     public void setCourtToNeutral()
     {
         Debug.Log("Resetting court to neutral serving state.");
+
         Teleport.Instance.tp(playerNeutralPos.x, playerNeutralPos.y, playerNeutralPos.z);
-        enemyObj.transform.position = enemyNeutralPos;
-        ballObj.transform.position = ballServePos;
+
         ballObj.GetComponent<ZeroGravProjectile>().SetVelocity(Vector3.zero);
+
+        Invoke(nameof(resetCourtPos), 0.5f);
+
+    }
+
+    void resetCourtPos()
+    {
+        enemyObj.transform.position = enemyNeutralPos;
+        ballObj.GetComponent<ZeroGravProjectile>().SetVelocity(Vector3.zero);
+        ballObj.transform.position = ballServePos;
     }
 
     void LoadNextLevel()
