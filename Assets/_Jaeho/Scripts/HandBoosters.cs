@@ -72,7 +72,7 @@ public class HandBoosters : MonoBehaviour
         if (_sceneAllowed)
         {
             continuousMoveProvider.useGravity = false;
-            continuousMoveProvider.moveSpeed = 0f;
+            //continuousMoveProvider.moveSpeed = 0f;
         }
     }
 

@@ -69,6 +69,7 @@ public class BallHitting : MonoBehaviour
         {
             projectile.ChangeVelocity(vel, true);
             if (hitAudio) AudioSource.PlayClipAtPoint(hitAudio, transform.position, 1f);
+            HapticFeedbackManager.Instance.InitiateHapticFeedback(true, true, 1f, 0.5f);
         }
     }
 }

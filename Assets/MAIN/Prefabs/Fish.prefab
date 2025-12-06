@@ -254,7 +254,7 @@ MonoBehaviour:
       type: 3}
     movementDirection: {x: 0, y: 0, z: 0}
     graphicsOffset: {x: 0, y: -0.5, z: 0}
-  removeAudio: {fileID: 8300000, guid: c6d6b012d8330964e814d210bb4e3e8d, type: 3}
+  removeAudio: {fileID: 8300000, guid: 8db7bff6bc3571b4e9e6b34df675b738, type: 3}
   randomMaterials:
   - {fileID: 2100000, guid: 41795ef948aecbc4c9fe985bda7dc5f3, type: 2}
   - {fileID: 2100000, guid: 5afaeb7abc17c1848b67f8d6788d82fc, type: 2}
