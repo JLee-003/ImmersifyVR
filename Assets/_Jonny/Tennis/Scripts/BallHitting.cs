@@ -32,9 +32,35 @@ public class BallHitting : MonoBehaviour
     [Tooltip("Absolute minimum |Z| speed after a hit. Sign (+/-) is preserved from the swing.")]
     public float minZSpeed = 3f;
 
+    bool leftHaptic = true;
+    bool rightHaptic = true;
+
     void Start()
     {
         previousPosition = transform.position;
+
+        Transform parentHand = transform.parent;
+        if (parentHand != null)
+        {
+            if (parentHand.CompareTag("LeftHand"))
+            {
+                leftHaptic = true;
+                rightHaptic = false;
+            }
+            else if (parentHand.CompareTag("RightHand"))
+            {
+                leftHaptic = false;
+                rightHaptic = true;
+            }
+            else
+            {
+                Debug.LogWarning($"BoosterParticles: Parent '{parentHand.name}' does not have LeftHand or RightHand tag!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("BoosterParticles: No parent found!");
+        }
     }
 
     void Update()
@@ -69,7 +95,7 @@ public class BallHitting : MonoBehaviour
         {
             projectile.ChangeVelocity(vel, true);
             if (hitAudio) AudioSource.PlayClipAtPoint(hitAudio, transform.position, 1f);
-            HapticFeedbackManager.Instance.InitiateHapticFeedback(true, true, 1f, 0.5f);
+            HapticFeedbackManager.Instance.InitiateHapticFeedback(leftHaptic, rightHaptic, 1f, 0.5f);
         }
     }
 }
