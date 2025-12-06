@@ -189,7 +189,7 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -609,7 +609,7 @@ MonoBehaviour:
   OnLoadEnd:
     m_PersistentCalls:
       m_Calls: []
-  startingScene: TennisGameTest
+  startingScene: VRTutorial
 --- !u!1001 &2446915245381026552
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -695,6 +695,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HandBoosterParticles
+      objectReference: {fileID: 0}
+    - target: {fileID: 646870136703618162, guid: 24c220ffe8d7d457a874cabb55b69698,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3596803817977043768, guid: 24c220ffe8d7d457a874cabb55b69698,
         type: 3}
