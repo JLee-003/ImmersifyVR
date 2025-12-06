@@ -247,9 +247,18 @@ MonoBehaviour:
   - sceneName: VRTutorial
     clip: {fileID: 8300000, guid: 379925d4f98a0d5479ebafa8f2f86721, type: 3}
     volume: 0.15
+  - sceneName: SpaceballTutorial
+    clip: {fileID: 8300000, guid: 63ab45e2a64d792408678b92f9e27103, type: 3}
+    volume: 0.2
   - sceneName: TennisGameTest
     clip: {fileID: 8300000, guid: 63ab45e2a64d792408678b92f9e27103, type: 3}
     volume: 0.2
+  - sceneName: SpaceballLv2
+    clip: {fileID: 8300000, guid: 63ab45e2a64d792408678b92f9e27103, type: 3}
+    volume: 0.2
+  - sceneName: FishActivityTutorial
+    clip: {fileID: 8300000, guid: 379925d4f98a0d5479ebafa8f2f86721, type: 3}
+    volume: 0.15
   - sceneName: Swimming Game
     clip: {fileID: 8300000, guid: 379925d4f98a0d5479ebafa8f2f86721, type: 3}
     volume: 0.15
