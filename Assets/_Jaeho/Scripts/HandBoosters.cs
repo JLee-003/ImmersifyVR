@@ -36,6 +36,10 @@ public class HandBoosters : MonoBehaviour
 
     bool _sceneAllowed = false;
 
+    // Public properties to expose boosting state
+    public bool IsLeftBoosting { get; private set; }
+    public bool IsRightBoosting { get; private set; }
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -106,6 +110,10 @@ public class HandBoosters : MonoBehaviour
 
         bool leftBoosting = leftControllerSwimReference.action.IsPressed();
         bool rightBoosting = rightControllerSwimReference.action.IsPressed();
+
+        // Update public properties
+        IsLeftBoosting = leftBoosting;
+        IsRightBoosting = rightBoosting;
 
         // Play or stop looping audio based on grip input
         HandleThrusterAudio(leftThrusterSource, leftBoosting, leftController);

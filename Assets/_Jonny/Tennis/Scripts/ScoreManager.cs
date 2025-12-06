@@ -26,9 +26,7 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] Vector3 ballServePos;
     [SerializeField] Vector3 playerNeutralPos;
-    [SerializeField] Vector3 enemyNeutralPos;
-
-    [SerializeField] GameObject playerWinScreen;
+    [SerializeField] Vector3 enemyNeutralPos;    
 
 
 
