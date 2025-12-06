@@ -99,7 +99,8 @@ public class TopSecretTeleport : MonoBehaviour
     {
         string currentScene = SceneManager.GetActiveScene().name;
         string sceneName;
-        if (currentScene == "TennisGameTest")
+        sceneName = "Lobby";
+        /*if (currentScene == "TennisGameTest")
         {
             sceneName = "FishActivityTutorial";
         }
@@ -110,7 +111,7 @@ public class TopSecretTeleport : MonoBehaviour
         else
         {
             sceneName = "Lobby";
-        }
+        }*/
         LocomotionManager.Instance.ResetLandDefaults();
 
         SceneLoader.Instance.LoadNewScene(sceneName);
