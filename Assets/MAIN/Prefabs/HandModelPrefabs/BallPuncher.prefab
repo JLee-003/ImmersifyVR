@@ -227,6 +227,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5822612753463435652, guid: 24c220ffe8d7d457a874cabb55b69698,
         type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5822612753463435652, guid: 24c220ffe8d7d457a874cabb55b69698,
+        type: 3}
+      propertyPath: ShapeModule.angle
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5822612753463435652, guid: 24c220ffe8d7d457a874cabb55b69698,
+        type: 3}
       propertyPath: InitialModule.size3D
       value: 1
       objectReference: {fileID: 0}
@@ -247,8 +257,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5822612753463435652, guid: 24c220ffe8d7d457a874cabb55b69698,
         type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 3
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5822612753463435652, guid: 24c220ffe8d7d457a874cabb55b69698,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

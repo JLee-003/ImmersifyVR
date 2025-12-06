@@ -2791,6 +2791,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TennisEnemy_UFO
       objectReference: {fileID: 0}
+    - target: {fileID: 6363790887895094179, guid: 196a014f91f13452ba6d7c90d1498982,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
