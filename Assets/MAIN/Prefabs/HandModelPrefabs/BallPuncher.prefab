@@ -126,5 +126,5 @@ MonoBehaviour:
   maxHitSpeed: 15
   maxHorizontalAngle: 30
   maxVerticalAngle: 10
-  hitAudio: {fileID: 8300000, guid: 698fc5bb80f620b44889a6669322f0f6, type: 3}
+  hitAudio: {fileID: 8300000, guid: 6e994d8e5099ea44b9536d5937c7ea7f, type: 3}
   minZSpeed: 3
