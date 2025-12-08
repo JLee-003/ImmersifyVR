@@ -13,6 +13,9 @@ public class BoosterParticles : MonoBehaviour
 
     void Start()
     {
+
+
+
         // Check parent tag to determine if this is left or right hand
         Transform parentHand = transform.parent;
         if (parentHand != null)
@@ -62,10 +65,12 @@ public class BoosterParticles : MonoBehaviour
         }
         else
         {
-            // Ensure particles start stopped
+            particles.Play(); // initialize
             var emission = particles.emission;
-            emission.enabled = false;
+            emission.enabled = false; // start disabled
         }
+
+
     }
 
     void Update()
@@ -89,10 +94,13 @@ public class BoosterParticles : MonoBehaviour
             // Enable emission
             var emission = particles.emission;
             emission.enabled = true;
+
+            Debug.Log("PARTICLES TURNED ON");
         }
         else
         {
             // Disable emission when not boosting
+            Debug.Log("PARTICLES TURNED OFF");
             var emission = particles.emission;
             emission.enabled = false;
         }
