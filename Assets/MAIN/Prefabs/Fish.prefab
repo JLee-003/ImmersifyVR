@@ -308,6 +308,9 @@ MonoBehaviour:
   maxYLevel: 26
   minForce: 18
   maxForce: 29
-  maxTime: 3.5
+  minTime: 4.5
+  maxTime: 6
   smoothTime: 8.5
   followDistance: 10
+  nearPlayerHoldTime: 0.8
+  nearPlayerRadius: 5

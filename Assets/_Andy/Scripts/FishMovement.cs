@@ -8,10 +8,15 @@ public class FishMovement : MonoBehaviour
     [SerializeField] private float minForce;
     [SerializeField] private float maxForce;
 
+    [SerializeField] private float minTime;
     [SerializeField] private float maxTime;
     [SerializeField] private float smoothTime;
 
     [SerializeField] private float followDistance;
+
+    [SerializeField] float nearPlayerHoldTime = 0.8f;
+    [SerializeField] float nearPlayerRadius = 2.5f;
+    private float holdTimer;
 
     private float randRange = 0.3f;
 
@@ -29,11 +34,23 @@ public class FishMovement : MonoBehaviour
 
     private void Update()
     {
+        float distSqr = (player.position - transform.position).sqrMagnitude;
+
+        if (distSqr <= nearPlayerRadius * nearPlayerRadius)
+        {
+            holdTimer = nearPlayerHoldTime; // keep refreshing while you're close
+        }
+        else
+        {
+            holdTimer = Mathf.Max(0f, holdTimer - Time.deltaTime);
+        }
+
         timer -= Time.deltaTime;
-        if (rb.velocity.magnitude <= 0.8f || timer <= 0)
+        if (timer <= 0 && holdTimer <= 0f)
         {
             Move();
         }
+
 
         if (transform.position.y >= maxYLevel)
         {
@@ -83,7 +100,7 @@ public class FishMovement : MonoBehaviour
             var dir = Random.insideUnitSphere;
             rb.AddForce(dir * randForce, ForceMode.Impulse);
         }
-        timer = maxTime;
+        timer = Random.Range(minTime, maxTime);
     }
 
     private void ApplyDifficulty()
