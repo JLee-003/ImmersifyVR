@@ -76,7 +76,7 @@ public class HandBoosters : MonoBehaviour
         if (_sceneAllowed)
         {
             continuousMoveProvider.useGravity = false;
-            //continuousMoveProvider.moveSpeed = 0f;
+            continuousMoveProvider.moveSpeed = 0f;
         }
     }
 
@@ -164,6 +164,7 @@ public class HandBoosters : MonoBehaviour
     {
         Vector3 boostDirection = cameraTransform.position - leftController.position;
         boostDirection.Normalize();
+        boostDirection.z = 0;
 
         Debug.Log(leftController.localPosition);
 
@@ -178,6 +179,7 @@ public class HandBoosters : MonoBehaviour
     {
         Vector3 boostDirection = cameraTransform.position - rightController.position;
         boostDirection.Normalize();
+        boostDirection.z = 0;
 
         float dot = -Vector3.Dot(rightController.forward, boostDirection);
         rightBoostForce = Mathf.Lerp(boostAddMin, boostAddMax, (dot + 1) / 2);
