@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class FishGame : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class FishGame : MonoBehaviour
     private GameObject statsDisplayTextObject;
     private LineSwimmer lineSwimmer;
     [SerializeField] private float inactivityThreshold = 5f;
+    
+    // UI positioning
+    private Vector3 fixedUIPosition;
+    private bool uiPositionFixed = false;
+    private FixedBelowView fixedBelowViewComponent;
 
     public float difficultyLevel { get; private set; } = 0f;
 
@@ -26,10 +32,8 @@ public class FishGame : MonoBehaviour
 
     // Player inactivity tracking
     private Vector3 lastPlayerPosition;
-    private Quaternion lastPlayerRotation;
     private float timeSinceLastMovement = 0f;
     [SerializeField] private float movementThreshold = 0.01f;
-    [SerializeField] private float rotationThreshold = 0.5f;
 
     // Game timer
     private float gameTime = 0f;
@@ -51,6 +55,13 @@ public class FishGame : MonoBehaviour
     {
         InitializePlayerTracking();
         InitializeStatsDisplay();
+        
+        // Disable FixedBelowView if present - we want fixed global position instead
+        fixedBelowViewComponent = GetComponent<FixedBelowView>();
+        if (fixedBelowViewComponent != null)
+        {
+            fixedBelowViewComponent.enabled = false;
+        }
         
         if (PlayerReferences.instance != null)
         {
@@ -121,6 +132,23 @@ public class FishGame : MonoBehaviour
 
         if (shouldShowStats)
         {
+            // Fix UI position in global space when first showing
+            if (!uiPositionFixed && PlayerReferences.instance != null && PlayerReferences.instance.cameraTransform != null)
+            {
+                Transform playerTransform = PlayerReferences.instance.cameraTransform;
+                // Position UI in front of player at fixed distance, then lock it
+                fixedUIPosition = playerTransform.position + playerTransform.forward * 2.0f;
+                transform.position = fixedUIPosition;
+                transform.rotation = Quaternion.LookRotation(transform.position - playerTransform.position);
+                uiPositionFixed = true;
+            }
+            
+            // Keep UI at fixed global position
+            if (uiPositionFixed)
+            {
+                transform.position = fixedUIPosition;
+            }
+            
             statsDisplayPanel.SetActive(true);
             statsDisplayTextObject.SetActive(true);
             UpdateStatsText();
@@ -129,6 +157,8 @@ public class FishGame : MonoBehaviour
         {
             statsDisplayPanel.SetActive(false);
             statsDisplayTextObject.SetActive(false);
+            // Reset position flag when hidden so it repositions next time
+            uiPositionFixed = false;
         }
     }
 
@@ -156,7 +186,6 @@ public class FishGame : MonoBehaviour
         if (PlayerReferences.instance != null && PlayerReferences.instance.cameraTransform != null)
         {
             lastPlayerPosition = PlayerReferences.instance.cameraTransform.position;
-            lastPlayerRotation = PlayerReferences.instance.cameraTransform.rotation;
             timeSinceLastMovement = 0f;
         }
     }
@@ -168,20 +197,47 @@ public class FishGame : MonoBehaviour
 
         Transform playerTransform = PlayerReferences.instance.cameraTransform;
         
-        // Check if player has moved or rotated
+        bool playerMoved = false;
+        bool gripPressed = false;
+        
+        // Check if player has moved (position changed)
         float positionDelta = Vector3.Distance(playerTransform.position, lastPlayerPosition);
-        float rotationDelta = Quaternion.Angle(playerTransform.rotation, lastPlayerRotation);
-
-        if (positionDelta > movementThreshold || rotationDelta > rotationThreshold)
+        if (positionDelta > movementThreshold)
         {
-            // Player moved or rotated - reset timer
-            timeSinceLastMovement = 0f;
+            playerMoved = true;
             lastPlayerPosition = playerTransform.position;
-            lastPlayerRotation = playerTransform.rotation;
+        }
+        
+        // Check if grip button is pressed (using same method as LineSwimmer, from PlayerReferences)
+        if (PlayerReferences.instance != null)
+        {
+            if (PlayerReferences.instance.leftControllerSwimReference != null && 
+                PlayerReferences.instance.leftControllerSwimReference.action != null)
+            {
+                if (PlayerReferences.instance.leftControllerSwimReference.action.IsPressed())
+                {
+                    gripPressed = true;
+                }
+            }
+            
+            if (PlayerReferences.instance.rightControllerSwimReference != null && 
+                PlayerReferences.instance.rightControllerSwimReference.action != null)
+            {
+                if (PlayerReferences.instance.rightControllerSwimReference.action.IsPressed())
+                {
+                    gripPressed = true;
+                }
+            }
+        }
+
+        if (playerMoved || gripPressed)
+        {
+            // Player moved or grip button pressed - reset timer (UI disappears)
+            timeSinceLastMovement = 0f;
         }
         else
         {
-            // Player hasn't moved - increment timer
+            // Player hasn't moved and no grip pressed - increment timer
             timeSinceLastMovement += Time.deltaTime;
         }
     }

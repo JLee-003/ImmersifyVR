@@ -314,3 +314,6 @@ MonoBehaviour:
   followDistance: 10
   nearPlayerHoldTime: 0.8
   nearPlayerRadius: 5
+  farAwayFromPlayerRadius: 20
+  farAwayFromPlayerMinForce: 29
+  farAwayFromPlayerMaxForce: 49

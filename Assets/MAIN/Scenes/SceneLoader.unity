@@ -487,6 +487,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 499453283319367990, guid: d873ee7be2c786c41a42a0c73cde767f,
+        type: 3}
+      propertyPath: leftControllerSwimReference
+      value: 
+      objectReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f,
+        type: 3}
+    - target: {fileID: 499453283319367990, guid: d873ee7be2c786c41a42a0c73cde767f,
+        type: 3}
+      propertyPath: rightControllerSwimReference
+      value: 
+      objectReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f,
+        type: 3}
     - target: {fileID: 1542972532382618323, guid: d873ee7be2c786c41a42a0c73cde767f,
         type: 3}
       propertyPath: m_Name
@@ -618,7 +630,7 @@ MonoBehaviour:
   OnLoadEnd:
     m_PersistentCalls:
       m_Calls: []
-  startingScene: SpaceballLv2
+  startingScene: Swimming Game
 --- !u!1001 &2446915245381026552
 PrefabInstance:
   m_ObjectHideFlags: 0

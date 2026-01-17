@@ -16,6 +16,10 @@ public class FishMovement : MonoBehaviour
 
     [SerializeField] float nearPlayerHoldTime = 0.8f;
     [SerializeField] float nearPlayerRadius = 2.5f;
+    [SerializeField] float farAwayFromPlayerRadius = 20f;
+    [SerializeField] float farAwayFromPlayerMinForce;
+    [SerializeField] float farAwayFromPlayerMaxForce;
+
     private float holdTimer;
 
     private float randRange = 0.3f;
@@ -87,9 +91,15 @@ public class FishMovement : MonoBehaviour
 
     private void Move()
     {
-        float randForce = Random.Range(minForce, maxForce);
         var playerDir = player.position - transform.position;
-        if (playerDir.sqrMagnitude <= followDistance * followDistance)
+        float distSqr = playerDir.sqrMagnitude;
+        
+        // Use farAwayFromPlayerMinForce/MaxForce when fish is far from player, otherwise use random force
+        float randForce = distSqr > farAwayFromPlayerRadius * farAwayFromPlayerRadius 
+            ? Random.Range(farAwayFromPlayerMinForce, farAwayFromPlayerMaxForce)
+            : Random.Range(minForce, maxForce);
+        
+        if (distSqr <= followDistance * followDistance)
         {
             Vector3 randomOffset = new Vector3(Random.Range(-1*randRange, randRange), Random.Range(-1*randRange, randRange), Random.Range(-1*randRange, randRange));
             var offsetDir = playerDir.normalized + randomOffset;
