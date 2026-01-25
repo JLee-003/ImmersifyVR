@@ -4,35 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/MAIN/Scenes/SceneLoader.unity
-    guid: 13e854c005d27453da7e73b4ee4abee4
-  - enabled: 1
-    path: Assets/MAIN/Scenes/VRTutorial.unity
-    guid: 24b219dbe729ebc49931dcacc287876d
-  - enabled: 1
-    path: Assets/MAIN/Scenes/FishActivityTutorial.unity
-    guid: 7aac271ecbae4ec46a26e8b6c5713b3d
-  - enabled: 1
-    path: Assets/MAIN/Scenes/Swimming Game.unity
-    guid: 0ac0f9dbcae9b4ad0836012cb7366b01
-  - enabled: 1
-    path: Assets/MAIN/Scenes/TennisGameTest.unity
-    guid: f55e8caeacfaa3b42b47c9776445c6b7
-  - enabled: 1
-    path: Assets/MAIN/Scenes/Lobby.unity
-    guid: 9fc3ebad12c3f6c459072f52538be7d3
-  - enabled: 1
-    path: Assets/MAIN/Scenes/SpaceballLv2.unity
-    guid: 60b332f6a595041b39e45cea37faa8c5
-  - enabled: 1
-    path: Assets/MAIN/Scenes/SpaceballTutorial.unity
-    guid: 65fff7e70ee824299ae122f4d2b07d08
+  m_Scenes: []
   m_configObjects:
-    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f86be8e2fa28caa4eaf9e781d4509e9d,
-      type: 2}
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 3435526652d26eb43986168660d86eae,
-      type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: e605155394cd21b419cd4d1bd4125bc1,
       type: 2}

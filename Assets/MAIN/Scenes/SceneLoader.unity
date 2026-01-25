@@ -487,22 +487,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 499453283319367990, guid: d873ee7be2c786c41a42a0c73cde767f,
+    - target: {fileID: 60135875602859589, guid: d873ee7be2c786c41a42a0c73cde767f,
         type: 3}
-      propertyPath: leftControllerSwimReference
-      value: 
-      objectReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f,
-        type: 3}
-    - target: {fileID: 499453283319367990, guid: d873ee7be2c786c41a42a0c73cde767f,
-        type: 3}
-      propertyPath: rightControllerSwimReference
-      value: 
-      objectReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f,
-        type: 3}
+      propertyPath: sceneHandModels.Array.data[0].sceneName
+      value: SpaceballLv1
+      objectReference: {fileID: 0}
     - target: {fileID: 1542972532382618323, guid: d873ee7be2c786c41a42a0c73cde767f,
         type: 3}
       propertyPath: m_Name
       value: XR Origin (XR Rig)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418868035628547945, guid: d873ee7be2c786c41a42a0c73cde767f,
+        type: 3}
+      propertyPath: sceneHandModels.Array.data[0].sceneName
+      value: SpaceballLv1
       objectReference: {fileID: 0}
     - target: {fileID: 6541681293610120885, guid: d873ee7be2c786c41a42a0c73cde767f,
         type: 3}
@@ -554,29 +552,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7519318343564365066, guid: d873ee7be2c786c41a42a0c73cde767f,
-        type: 3}
-      propertyPath: m_BackGroundColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7519318343564365066, guid: d873ee7be2c786c41a42a0c73cde767f,
-        type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7519318343564365066, guid: d873ee7be2c786c41a42a0c73cde767f,
-        type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7519318343564365066, guid: d873ee7be2c786c41a42a0c73cde767f,
-        type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 3426933963814765517, guid: d873ee7be2c786c41a42a0c73cde767f, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d873ee7be2c786c41a42a0c73cde767f, type: 3}
@@ -630,7 +607,7 @@ MonoBehaviour:
   OnLoadEnd:
     m_PersistentCalls:
       m_Calls: []
-  startingScene: Swimming Game
+  startingScene: SpaceballTutorial
 --- !u!1001 &2446915245381026552
 PrefabInstance:
   m_ObjectHideFlags: 0

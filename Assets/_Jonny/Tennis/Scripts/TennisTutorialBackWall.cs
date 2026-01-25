@@ -39,6 +39,6 @@ private IEnumerator EndTutorialSequence()
 
     yield return new WaitForSeconds(3f);
 
-    SceneLoader.Instance.LoadNewScene("TennisGameTest");
+    SceneLoader.Instance.LoadNewScene("SpaceballLv1");
 }
 }

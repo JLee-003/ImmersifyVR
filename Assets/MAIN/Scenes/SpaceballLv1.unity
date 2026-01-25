@@ -1376,9 +1376,15 @@ MonoBehaviour:
   scoreText: {fileID: 959361775}
   setText: {fileID: 1764234509}
   matchPointText: {fileID: 1074851818}
+  enemyScore: 0
+  enemySetScore: 0
+  playerScore: 0
+  playerSetScore: 0
+  winCondition: 5
   levelScenes:
-  - TennisGameTest
+  - SpaceballLv1
   - SpaceballLv2
+  enemyObj: {fileID: 1626606612}
   ballServePos: {x: 0, y: 1.5, z: -4}
   playerNeutralPos: {x: 0, y: 0.5, z: -4.5}
   enemyNeutralPos: {x: 0, y: 0.75, z: 4}

@@ -12,16 +12,16 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI setText;
     [SerializeField] TextMeshProUGUI matchPointText;
 
-    int enemyScore = 0;
-    int enemySetScore = 0;
-    int playerScore = 0;
-    int playerSetScore = 0;
-    int winCondition = 5;
+    public int enemyScore = 0;
+    public int enemySetScore = 0;
+    public int playerScore = 0;
+    public int playerSetScore = 0;
+    public int winCondition = 5;
 
     [SerializeField] string[] levelScenes; // Array of scene names for level progression
     int currentLevelIndex = 0; // Tracks which level the player is on
 
-    GameObject enemyObj;
+    [SerializeField] GameObject enemyObj;
     GameObject ballObj;
 
     [SerializeField] Vector3 ballServePos;
@@ -48,7 +48,6 @@ public class ScoreManager : MonoBehaviour
         GameObject scoreTextObject = GameObject.Find("GameScoreText");
         scoreText = scoreTextObject.GetComponent<TMPro.TextMeshProUGUI>();
 
-        enemyObj = GameObject.FindGameObjectWithTag("Enemy");
         ballObj = GameObject.FindGameObjectWithTag("Ball");
     }
 
@@ -92,6 +91,7 @@ public class ScoreManager : MonoBehaviour
 
         }
     }
+
     public void resetMatch()
     {
         if (enemySetScore >= 3) //Player loses

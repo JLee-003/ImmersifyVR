@@ -100,7 +100,7 @@ public class TopSecretTeleport : MonoBehaviour
         string currentScene = SceneManager.GetActiveScene().name;
         string sceneName;
         sceneName = "Lobby";
-        /*if (currentScene == "TennisGameTest")
+        /*if (currentScene == "SpaceballLv1")
         {
             sceneName = "FishActivityTutorial";
         }
