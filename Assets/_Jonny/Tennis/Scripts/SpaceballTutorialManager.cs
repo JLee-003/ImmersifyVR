@@ -10,6 +10,7 @@ public class SpaceballTutorialManager : MonoBehaviour
     [SerializeField] private TennisEnemy tennisEnemy;
     [SerializeField] private GameObject tennisBall;
     [SerializeField] private Transform spawnPoint;
+    [SerializeField] private GameObject moveBallCanvas;
     [SerializeField] private float closeDistanceSqr = 1f;
     [SerializeField] private Vector2 randomBallXBounds = new Vector2(-3.5f, 3.5f);
     [SerializeField] private Vector2 randomBallYBounds = new Vector2(0.5f, 3f);
@@ -17,6 +18,7 @@ public class SpaceballTutorialManager : MonoBehaviour
     [SerializeField] private float randomBallZ = 0f;
     [SerializeField] private float ballRestVelocityThreshold = 0.1f;
     [SerializeField] private string enemyBackWallTag = "EnemyPointZone";
+    [SerializeField] private int tutorialTargetCount = 3;
 
 
     private int currentTargetIndex = 0;
@@ -36,18 +38,16 @@ public class SpaceballTutorialManager : MonoBehaviour
     {
         WaitingForClose,
         ReadyToHit,
-        MoveBallInstruction,
         ScorePoint,
         PointScored
     }
 
     private TutorialPhase phase = TutorialPhase.WaitingForClose;
 
-    private const string MoveCloserText = "Move closer to the ball";
-    private const string FirstSwingText = "Now swing your arm to hit the ball in the green zone!";
-    private const string MoveBallText = "Good job! Move the ball with your hands + grip.";
-    private const string HitTargetText = "Now hit the ball to the target!";
-    private const string ScorePointText = "Now try to score a point!";
+    private const string MoveCloserText = "Good job! Move to the ball: hold your hands opposite the direction of the ball and press the grip button.";
+    private const string FirstSwingText = "Now swing your arm to hit the ball. Try to hit the ball in the green zone!";
+    private const string HitTargetText = "Now hit the ball in the green zone!";
+    private const string ScorePointText = "Now try to score a point on the enemy's side!";
     private const string PointScoredText = "Great job! You scored a point!";
 
     void Start()
@@ -70,6 +70,12 @@ public class SpaceballTutorialManager : MonoBehaviour
                 if (target != null)
                 {
                     target.SetActive(false);
+                    TutorialTargetTrigger relay = target.GetComponent<TutorialTargetTrigger>();
+                    if (relay == null)
+                    {
+                        relay = target.AddComponent<TutorialTargetTrigger>();
+                    }
+                    relay.Initialize(this);
                 }
             }
         }
@@ -77,6 +83,11 @@ public class SpaceballTutorialManager : MonoBehaviour
         if (tennisEnemy != null)
         {
             tennisEnemy.gameObject.SetActive(false);
+        }
+
+        if (moveBallCanvas != null)
+        {
+            moveBallCanvas.SetActive(false);
         }
 
         if (tennisBall != null)
@@ -141,6 +152,7 @@ public class SpaceballTutorialManager : MonoBehaviour
         switch (phase)
         {
             case TutorialPhase.WaitingForClose:
+                SetMoveBallCanvasActive(true);
                 if (!isClose)
                 {
                     tutorialText.text = MoveCloserText;
@@ -158,19 +170,12 @@ public class SpaceballTutorialManager : MonoBehaviour
                 tutorialText.text = currentTargetIndex == 0 ? FirstSwingText : HitTargetText;
                 break;
 
-            case TutorialPhase.MoveBallInstruction:
-                tutorialText.text = MoveBallText;
-                if (isClose)
-                {
-                    ballInMotion = false;
-                    phase = TutorialPhase.ReadyToHit;
-                    tutorialText.text = HitTargetText;
-                }
-                break;
-
             case TutorialPhase.ReadyToHit:
+                SetMoveBallCanvasActive(false);
                 if (!isClose)
                 {
+                    phase = TutorialPhase.WaitingForClose;
+                    SetMoveBallCanvasActive(true);
                     tutorialText.text = MoveCloserText;
                     return;
                 }
@@ -182,11 +187,11 @@ public class SpaceballTutorialManager : MonoBehaviour
                 }
 
                 UpdateMissDetection();
+                if (phase != TutorialPhase.ReadyToHit)
+                {
+                    return;
+                }
                 tutorialText.text = currentTargetIndex == 0 ? FirstSwingText : HitTargetText;
-                break;
-            case TutorialPhase.PointScored:  
-                tutorialText.text = PointScoredText;
-                SceneLoader.Instance.LoadNewScene("SpaceballLv1");
                 break;
         }
     }
@@ -206,7 +211,8 @@ public class SpaceballTutorialManager : MonoBehaviour
 
     private bool IsTargetComplete(int index)
     {
-        if (index < 0 || index >= tutorialTargets.Length)
+        int activeTargetCount = GetActiveTargetCount();
+        if (index < 0 || index >= activeTargetCount)
         {
             return false;
         }
@@ -217,7 +223,8 @@ public class SpaceballTutorialManager : MonoBehaviour
 
     private void ActivateTarget(int index)
     {
-        if (tutorialTargets == null || index < 0 || index >= tutorialTargets.Length)
+        int activeTargetCount = GetActiveTargetCount();
+        if (index < 0 || index >= activeTargetCount)
         {
             return;
         }
@@ -235,7 +242,8 @@ public class SpaceballTutorialManager : MonoBehaviour
         currentTargetIndex++;
         ballInMotion = false;
 
-        if (currentTargetIndex >= tutorialTargets.Length)
+        int activeTargetCount = GetActiveTargetCount();
+        if (currentTargetIndex >= activeTargetCount)
         {
             StartScorePhase();
             return;
@@ -243,13 +251,14 @@ public class SpaceballTutorialManager : MonoBehaviour
 
         ActivateTarget(currentTargetIndex);
         RandomizeBallPosition();
-        phase = TutorialPhase.MoveBallInstruction;
-        tutorialText.text = MoveBallText;
+        phase = TutorialPhase.WaitingForClose;
+        tutorialText.text = MoveCloserText;
     }
 
     private void DisableTarget(int index)
     {
-        if (tutorialTargets == null || index < 0 || index >= tutorialTargets.Length)
+        int activeTargetCount = GetActiveTargetCount();
+        if (index < 0 || index >= activeTargetCount)
         {
             return;
         }
@@ -285,6 +294,7 @@ public class SpaceballTutorialManager : MonoBehaviour
         ResetBallToCurrentPosition();
         phase = TutorialPhase.WaitingForClose;
         tutorialText.text = MoveCloserText;
+        SetMoveBallCanvasActive(true);
     }
 
     private void RandomizeBallPosition()
@@ -344,6 +354,7 @@ public class SpaceballTutorialManager : MonoBehaviour
 
     private void StartScorePhase()
     {
+        SetMoveBallCanvasActive(false);
         foreach (GameObject target in tutorialTargets)
         {
             if (target != null)
@@ -379,14 +390,47 @@ public class SpaceballTutorialManager : MonoBehaviour
         phase = TutorialPhase.ScorePoint;
     }
 
+    private void SetMoveBallCanvasActive(bool isActive)
+    {
+        if (moveBallCanvas != null)
+        {
+            moveBallCanvas.SetActive(isActive);
+        }
+    }
+
     internal void OnBallTriggerEnter(Collider other)
     {
-        if (phase != TutorialPhase.ReadyToHit)
+        if (phase != TutorialPhase.ReadyToHit && phase != TutorialPhase.WaitingForClose)
         {
             return;
         }
 
         if (IsCurrentTargetHit(other))
+        {
+            HandleTargetHit();
+        }
+    }
+
+    internal void OnTargetTriggered(GameObject targetObject)
+    {
+        if ((phase != TutorialPhase.ReadyToHit && phase != TutorialPhase.WaitingForClose) || targetObject == null)
+        {
+            return;
+        }
+
+        int activeTargetCount = GetActiveTargetCount();
+        if (currentTargetIndex < 0 || currentTargetIndex >= activeTargetCount)
+        {
+            return;
+        }
+
+        GameObject currentTarget = tutorialTargets[currentTargetIndex];
+        if (currentTarget == null)
+        {
+            return;
+        }
+
+        if (targetObject == currentTarget || targetObject.transform.IsChildOf(currentTarget.transform))
         {
             HandleTargetHit();
         }
@@ -423,7 +467,8 @@ public class SpaceballTutorialManager : MonoBehaviour
             return false;
         }
 
-        if (currentTargetIndex < 0 || currentTargetIndex >= tutorialTargets.Length)
+        int activeTargetCount = GetActiveTargetCount();
+        if (currentTargetIndex < 0 || currentTargetIndex >= activeTargetCount)
         {
             return false;
         }
@@ -435,6 +480,21 @@ public class SpaceballTutorialManager : MonoBehaviour
         }
 
         return other.gameObject == currentTarget || other.transform.IsChildOf(currentTarget.transform);
+    }
+
+    private int GetActiveTargetCount()
+    {
+        if (tutorialTargets == null || tutorialTargets.Length == 0)
+        {
+            return 0;
+        }
+
+        if (tutorialTargetCount <= 0)
+        {
+            return tutorialTargets.Length;
+        }
+
+        return Mathf.Min(tutorialTargetCount, tutorialTargets.Length);
     }
 }
 
@@ -460,6 +520,29 @@ public class BallTutorialCollisionRelay : MonoBehaviour
         if (manager != null)
         {
             manager.OnBallCollisionEnter(collision);
+        }
+    }
+}
+
+public class TutorialTargetTrigger : MonoBehaviour
+{
+    private SpaceballTutorialManager manager;
+
+    public void Initialize(SpaceballTutorialManager tutorialManager)
+    {
+        manager = tutorialManager;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (manager == null || other == null)
+        {
+            return;
+        }
+
+        if (other.CompareTag("Ball"))
+        {
+            manager.OnTargetTriggered(gameObject);
         }
     }
 }
