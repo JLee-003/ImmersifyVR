@@ -17,6 +17,7 @@ public class ScoreManager : MonoBehaviour
     public int playerScore = 0;
     public int playerSetScore = 0;
     public int winCondition = 5;
+    public int nextLevelCondition = 3;
 
     [SerializeField] string[] levelScenes; // Array of scene names for level progression
     int currentLevelIndex = 0; // Tracks which level the player is on
@@ -94,13 +95,13 @@ public class ScoreManager : MonoBehaviour
 
     public void resetMatch()
     {
-        if (enemySetScore >= winCondition) //Player loses
+        if (enemySetScore >= nextLevelCondition) //Player loses
         {
             Debug.Log("Match reset.");
             return;
         }
 
-        if (playerSetScore >= winCondition) //Player wins
+        if (playerSetScore >= nextLevelCondition) //Player wins
         {
             Debug.Log("Player wins the match! Moving to next level.");
             LoadNextLevel();

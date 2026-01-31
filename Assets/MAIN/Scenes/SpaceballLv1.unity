@@ -1380,7 +1380,7 @@ MonoBehaviour:
   enemySetScore: 0
   playerScore: 0
   playerSetScore: 0
-  winCondition: 3
+  winCondition: 5
   levelScenes:
   - SpaceballLv1
   - SpaceballLv2
