@@ -189,7 +189,7 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -250,7 +250,7 @@ MonoBehaviour:
   - sceneName: SpaceballTutorial
     clip: {fileID: 8300000, guid: 63ab45e2a64d792408678b92f9e27103, type: 3}
     volume: 0.2
-  - sceneName: TennisGameTest
+  - sceneName: SpaceballLv1
     clip: {fileID: 8300000, guid: 63ab45e2a64d792408678b92f9e27103, type: 3}
     volume: 0.2
   - sceneName: SpaceballLv2
@@ -607,7 +607,7 @@ MonoBehaviour:
   OnLoadEnd:
     m_PersistentCalls:
       m_Calls: []
-  startingScene: SpaceballTutorial
+  startingScene: VRTutorial
 --- !u!1001 &2446915245381026552
 PrefabInstance:
   m_ObjectHideFlags: 0

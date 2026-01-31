@@ -94,13 +94,13 @@ public class ScoreManager : MonoBehaviour
 
     public void resetMatch()
     {
-        if (enemySetScore >= 3) //Player loses
+        if (enemySetScore >= winCondition) //Player loses
         {
             Debug.Log("Match reset.");
             return;
         }
 
-        if (playerSetScore >= 3) //Player wins
+        if (playerSetScore >= winCondition) //Player wins
         {
             Debug.Log("Player wins the match! Moving to next level.");
             LoadNextLevel();
