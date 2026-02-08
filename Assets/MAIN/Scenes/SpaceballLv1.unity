@@ -1381,6 +1381,7 @@ MonoBehaviour:
   playerScore: 0
   playerSetScore: 0
   winCondition: 5
+  nextLevelCondition: 3
   levelScenes:
   - SpaceballLv1
   - SpaceballLv2
@@ -2080,6 +2081,7 @@ MonoBehaviour:
   moveSpeed: 6
   missChance: 0.02
   hitRandomness: 0
+  missOffsetRange: 1.5
   moveSpeedMultiplier: 1
   minBoundaries: {x: -4, y: 0.5}
   maxBoundaries: {x: 4, y: 5}
