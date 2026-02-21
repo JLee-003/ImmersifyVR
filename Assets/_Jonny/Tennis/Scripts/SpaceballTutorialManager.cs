@@ -19,6 +19,7 @@ public class SpaceballTutorialManager : MonoBehaviour
     [SerializeField] private float ballRestVelocityThreshold = 0.1f;
     [SerializeField] private string enemyBackWallTag = "EnemyPointZone";
     [SerializeField] private int tutorialTargetCount = 3;
+    [SerializeField] private float minDistanceFromPlayer = 2f; // Minimum distance to spawn ball from player
 
 
     private int currentTargetIndex = 0;
@@ -45,16 +46,21 @@ public class SpaceballTutorialManager : MonoBehaviour
     private TutorialPhase phase = TutorialPhase.WaitingForClose;
 
     private const string MoveCloserText = "Good job! Move to the ball: hold your hands opposite the direction of the ball and press the grip button.";
+    private const string MoveRightText = "Good job! Hold your hands to your right and press the grip button to move to the ball.";
+    private const string MoveLeftText = "Good job! Hold your hands to your left and press the grip button to move to the ball.";
     private const string FirstSwingText = "Now swing your arm to hit the ball. Try to hit the ball in the green zone!";
     private const string HitTargetText = "Now hit the ball in the green zone!";
     private const string ScorePointText = "Now try to score a point on the enemy's side!";
     private const string PointScoredText = "Great job! You scored a point!";
+    
+    private string currentMoveText = "";
 
     void Start()
     {
+        currentMoveText = MoveCloserText;
         if (tutorialText != null)
         {
-            tutorialText.text = MoveCloserText;
+            tutorialText.text = currentMoveText;
         }
 
         if (PlayerReferences.instance != null && PlayerReferences.instance.playerObject != null)
@@ -155,7 +161,7 @@ public class SpaceballTutorialManager : MonoBehaviour
                 SetMoveBallCanvasActive(true);
                 if (!isClose)
                 {
-                    tutorialText.text = MoveCloserText;
+                    tutorialText.text = currentMoveText;
                     return;
                 }
 
@@ -176,7 +182,7 @@ public class SpaceballTutorialManager : MonoBehaviour
                 {
                     phase = TutorialPhase.WaitingForClose;
                     SetMoveBallCanvasActive(true);
-                    tutorialText.text = MoveCloserText;
+                    tutorialText.text = currentMoveText;
                     return;
                 }
 
@@ -250,9 +256,9 @@ public class SpaceballTutorialManager : MonoBehaviour
         }
 
         ActivateTarget(currentTargetIndex);
-        RandomizeBallPosition();
+        RandomizeBallPosition(); // This sets currentMoveText based on ball position
         phase = TutorialPhase.WaitingForClose;
-        tutorialText.text = MoveCloserText;
+        tutorialText.text = currentMoveText;
     }
 
     private void DisableTarget(int index)
@@ -293,24 +299,62 @@ public class SpaceballTutorialManager : MonoBehaviour
         ballInMotion = false;
         ResetBallToCurrentPosition();
         phase = TutorialPhase.WaitingForClose;
-        tutorialText.text = MoveCloserText;
+        tutorialText.text = currentMoveText;
         SetMoveBallCanvasActive(true);
     }
 
     private void RandomizeBallPosition()
     {
-        if (tennisBall == null)
+        if (tennisBall == null || playerTransform == null)
         {
             return;
         }
 
-        float minX = Mathf.Min(randomBallXBounds.x, randomBallXBounds.y);
-        float maxX = Mathf.Max(randomBallXBounds.x, randomBallXBounds.y);
         float minY = Mathf.Min(randomBallYBounds.x, randomBallYBounds.y);
         float maxY = Mathf.Max(randomBallYBounds.x, randomBallYBounds.y);
-
         float z = useDefaultBallZ ? defaultBallPosition.z : randomBallZ;
-        Vector3 newPosition = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), z);
+
+        Vector3 newPosition;
+
+        // Determine if this is first (left) or second (right) random spawn
+        if (currentTargetIndex == 1)
+        {
+            // First random spawn - LEFT of player
+            float minX = Mathf.Min(randomBallXBounds.x, randomBallXBounds.y);
+            float maxX = playerTransform.position.x - minDistanceFromPlayer;
+            
+            // Ensure we have a valid range
+            if (maxX < minX)
+            {
+                maxX = minX;
+            }
+            
+            newPosition = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), z);
+            currentMoveText = MoveRightText; // Ball is to the left, move right
+        }
+        else if (currentTargetIndex == 2)
+        {
+            // Second random spawn - RIGHT of player
+            float minX = playerTransform.position.x + minDistanceFromPlayer;
+            float maxX = Mathf.Max(randomBallXBounds.x, randomBallXBounds.y);
+            
+            // Ensure we have a valid range
+            if (minX > maxX)
+            {
+                minX = maxX;
+            }
+            
+            newPosition = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), z);
+            currentMoveText = MoveLeftText; // Ball is to the right, move left
+        }
+        else
+        {
+            // Fallback to default behavior
+            float minX = Mathf.Min(randomBallXBounds.x, randomBallXBounds.y);
+            float maxX = Mathf.Max(randomBallXBounds.x, randomBallXBounds.y);
+            newPosition = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), z);
+            currentMoveText = MoveCloserText;
+        }
 
         currentBallPosition = newPosition;
         tennisBall.transform.position = newPosition;
