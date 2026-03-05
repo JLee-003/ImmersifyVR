@@ -5,26 +5,44 @@ public class PickaxeClimb : MonoBehaviour
 {
     XRGrabInteractable grabInteractable;
     Rigidbody rb;
+
     [SerializeField] Transform controllerTarget;
 
-    [Header("Player")]
     CharacterController characterController;
     ActionBasedContinuousMoveProvider moveProvider;
 
-    [Header("Climb Settings")]
+    [Header("Climb")]
     [SerializeField] float climbStrength = 1f;
     [SerializeField] float maxMovePerFixed = 0.25f;
+
+    [Header("Disengage (local Z pull-away)")]
     [SerializeField] float disengageDistance = 0.35f;
-    [SerializeField] float deadZone = 0.0005f;
+
+    [Header("Stability")]
+    [SerializeField] float deadZone = 0.006f;
+    [SerializeField] bool pullOnly = true;
+    [SerializeField] float pullThreshold = 0.0015f;
+
+    [Header("Anti-jitter (CharacterController vs Wall)")]
+    [SerializeField] string playerLayerName = "Player";
+    [SerializeField] string climbWallLayerName = "ClimbWall";
+    [SerializeField] bool ignoreWallCollisionWhileEngaged = true;
+    [SerializeField] bool setStepOffsetZeroWhileEngaged = true;
 
     bool engaged;
-
     Transform weakPoint;
     RigidbodyConstraints originalConstraints;
 
-    // NEW: track controller local position over time
+    bool prevMoveProviderEnabled;
+    bool prevUseGravity;
+
+    float originalStepOffset;
+    bool wallCollisionIgnored;
+
+    Vector3 currentLocalController;
     Vector3 lastLocalController;
-    Vector3 engagedLocalController; // baseline for disengage axis
+    Vector3 engagedLocalController;
+    bool hasSample;
 
     void Start()
     {
@@ -34,50 +52,49 @@ public class PickaxeClimb : MonoBehaviour
 
         characterController = PlayerReferences.instance.playerObject.GetComponent<CharacterController>();
         moveProvider = PlayerReferences.instance.playerObject.GetComponentInChildren<ActionBasedContinuousMoveProvider>();
+
+        if (characterController) originalStepOffset = characterController.stepOffset;
+    }
+
+    void Update()
+    {
+        if (!engaged || !weakPoint) return;
+        currentLocalController = weakPoint.InverseTransformPoint(controllerTarget.position);
+        hasSample = true;
     }
 
     void FixedUpdate()
     {
-        if (!engaged) return;
-        if (!weakPoint) return;
+        if (!engaged || !weakPoint || !hasSample) return;
 
-        // Controller position in weakpoint local space
-        Vector3 localController = weakPoint.InverseTransformPoint(controllerTarget.position);
-
-        // Disengage check: ONLY along local Z, relative to engage baseline
-        float zPullAway = Mathf.Abs(localController.z - engagedLocalController.z);
+        float zPullAway = Mathf.Abs(currentLocalController.z - engagedLocalController.z);
         if (zPullAway > disengageDistance)
         {
             Disengage();
             return;
         }
 
-        // NEW: Move based on controller DELTA since last frame (XY only)
-        Vector3 deltaLocal = localController - lastLocalController;
+        Vector3 deltaLocal = currentLocalController - lastLocalController;
+        lastLocalController = currentLocalController;
 
-        // Ignore Z for climbing (reserved for disengage)
         deltaLocal.z = 0f;
 
         if (deltaLocal.sqrMagnitude < deadZone * deadZone)
-        {
-            lastLocalController = localController; // still update to avoid accumulating tiny drift
             return;
+
+        if (pullOnly)
+        {
+            if (Mathf.Abs(deltaLocal.x) < pullThreshold && Mathf.Abs(deltaLocal.y) < pullThreshold)
+                return;
         }
 
-        // Convert local delta to world direction. IMPORTANT: TransformVector (not TransformPoint).
         Vector3 worldDelta = weakPoint.TransformVector(deltaLocal);
-
-        // Climb: player moves opposite hand motion
         Vector3 move = -worldDelta * climbStrength;
 
-        // Clamp per physics step
         if (move.magnitude > maxMovePerFixed)
             move = move.normalized * maxMovePerFixed;
 
         characterController.Move(move);
-
-        // Update for next step
-        lastLocalController = localController;
     }
 
     public void TryEngage(Transform wp)
@@ -89,7 +106,6 @@ public class PickaxeClimb : MonoBehaviour
 
     void Engage()
     {
-        Debug.Log("Pickaxe Engaged");
         engaged = true;
 
         grabInteractable.trackPosition = false;
@@ -100,17 +116,28 @@ public class PickaxeClimb : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezePosition;
 
         if (moveProvider)
-            moveProvider.useGravity = false;
+        {
+            prevMoveProviderEnabled = moveProvider.enabled;
+            prevUseGravity = moveProvider.useGravity;
 
-        // NEW: initialize controller tracking in weakpoint space
-        Vector3 localController = weakPoint.InverseTransformPoint(controllerTarget.position);
-        lastLocalController = localController;
-        engagedLocalController = localController;
+            moveProvider.useGravity = false;
+            moveProvider.enabled = false;
+        }
+
+        if (characterController && setStepOffsetZeroWhileEngaged)
+            characterController.stepOffset = 0f;
+
+        if (ignoreWallCollisionWhileEngaged)
+            SetWallCollisionIgnore(true);
+
+        currentLocalController = weakPoint.InverseTransformPoint(controllerTarget.position);
+        lastLocalController = currentLocalController;
+        engagedLocalController = currentLocalController;
+        hasSample = true;
     }
 
-    void Disengage()
+    public void Disengage()
     {
-        Debug.Log("Pickaxe Disengaged");
         engaged = false;
 
         grabInteractable.trackPosition = true;
@@ -119,8 +146,29 @@ public class PickaxeClimb : MonoBehaviour
         rb.constraints = originalConstraints;
 
         if (moveProvider)
-            moveProvider.useGravity = true;
+        {
+            moveProvider.enabled = prevMoveProviderEnabled;
+            moveProvider.useGravity = prevUseGravity;
+        }
+
+        if (characterController && setStepOffsetZeroWhileEngaged)
+            characterController.stepOffset = originalStepOffset;
+
+        if (ignoreWallCollisionWhileEngaged)
+            SetWallCollisionIgnore(false);
 
         weakPoint = null;
+        hasSample = false;
+    }
+
+    void SetWallCollisionIgnore(bool ignore)
+    {
+        int playerLayer = LayerMask.NameToLayer(playerLayerName);
+        int wallLayer = LayerMask.NameToLayer(climbWallLayerName);
+
+        if (playerLayer < 0 || wallLayer < 0) return;
+
+        Physics.IgnoreLayerCollision(playerLayer, wallLayer, ignore);
+        wallCollisionIgnored = ignore;
     }
 }
