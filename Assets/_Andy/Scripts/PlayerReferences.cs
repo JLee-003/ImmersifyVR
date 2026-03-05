@@ -12,6 +12,8 @@ public class PlayerReferences : MonoBehaviour
     public LineSwimmer swimObject;
     public InputActionReference leftControllerSwimReference;
     public InputActionReference rightControllerSwimReference;
+    public GameObject leftController;
+    public GameObject rightController;
 
     private void Awake()
     {

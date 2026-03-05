@@ -1570,6 +1570,8 @@ MonoBehaviour:
     type: 3}
   rightControllerSwimReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
+  leftController: {fileID: 743044146508822154}
+  rightController: {fileID: 1245685381312009993}
 --- !u!114 &4156922284508672688
 MonoBehaviour:
   m_ObjectHideFlags: 0
