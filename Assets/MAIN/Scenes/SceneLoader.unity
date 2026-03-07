@@ -250,9 +250,6 @@ MonoBehaviour:
   - sceneName: SpaceballTutorial
     clip: {fileID: 8300000, guid: 63ab45e2a64d792408678b92f9e27103, type: 3}
     volume: 0.2
-  - sceneName: SpaceballLv1
-    clip: {fileID: 8300000, guid: 63ab45e2a64d792408678b92f9e27103, type: 3}
-    volume: 0.2
   - sceneName: SpaceballLv2
     clip: {fileID: 8300000, guid: 63ab45e2a64d792408678b92f9e27103, type: 3}
     volume: 0.2
@@ -262,6 +259,12 @@ MonoBehaviour:
   - sceneName: Swimming Game
     clip: {fileID: 8300000, guid: 379925d4f98a0d5479ebafa8f2f86721, type: 3}
     volume: 0.15
+  - sceneName: SpaceballLv1
+    clip: {fileID: 8300000, guid: 63ab45e2a64d792408678b92f9e27103, type: 3}
+    volume: 0.2
+  - sceneName: SpaceballLv3
+    clip: {fileID: 8300000, guid: 63ab45e2a64d792408678b92f9e27103, type: 3}
+    volume: 0.2
   startUnderwater: 0
   cutoffAbove: 22000
   cutoffUnder: 450
@@ -512,6 +515,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: XR Origin (XR Rig)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3318197864416306340, guid: d873ee7be2c786c41a42a0c73cde767f,
+        type: 3}
+      propertyPath: enabledInScenes.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3318197864416306340, guid: d873ee7be2c786c41a42a0c73cde767f,
+        type: 3}
+      propertyPath: enabledInScenes.Array.data[3]
+      value: SpaceballLv3
       objectReference: {fileID: 0}
     - target: {fileID: 4418868035628547945, guid: d873ee7be2c786c41a42a0c73cde767f,
         type: 3}

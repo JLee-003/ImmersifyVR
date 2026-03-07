@@ -12,6 +12,13 @@ public class TennisEnemy : MonoBehaviour
     [SerializeField] float stoppingDistance = 0.1f; // Stop moving when this close to target position
     private int totalHits = 0;
 
+    [Header("Wall Bounce Settings")]
+    [SerializeField] [Range(0f, 1f)] float bounceChance = 0f; // Chance to bounce off walls instead of hitting straight
+    [SerializeField] GameObject leftWall;
+    [SerializeField] GameObject rightWall;
+    [SerializeField] GameObject topWall;
+    [SerializeField] GameObject bottomWall;
+
     public float moveSpeedMultiplier = 1f;
 
 
@@ -78,16 +85,30 @@ public class TennisEnemy : MonoBehaviour
             missChance = 0.025f;
         }
 
-        Vector3 dir = player.position - transform.position;
+        Vector3 dir;
         
-        // Apply randomness to the hit direction
-        if (hitRandomness > 0f)
+        // Decide between straight shot and wall bounce
+        if (Random.value < bounceChance)
         {
-            // Add random offset to x and y components based on randomness
-            // Higher randomness = larger random offset
-            float maxOffset = hitRandomness * 2f; // Scale factor for randomness
-            dir.x += Random.Range(-maxOffset, maxOffset);
-            dir.y += Random.Range(-maxOffset, maxOffset);
+            // Wall bounce shot
+            Vector3 targetPos = GetRandomPlayerTarget();
+            
+            // Decide between 1 bounce (2/3 chance) or 2 bounces (1/3 chance)
+            int numBounces = Random.value < 0.6667f ? 1 : 2;
+            
+            dir = CalculateBounceDirection(targetPos, numBounces);
+        }
+        else
+        {
+            // Straight shot to player with randomness
+            dir = player.position - transform.position;
+            
+            if (hitRandomness > 0f)
+            {
+                float maxOffset = hitRandomness * 2f;
+                dir.x += Random.Range(-maxOffset, maxOffset);
+                dir.y += Random.Range(-maxOffset, maxOffset);
+            }
         }
         
         dir.Normalize();
@@ -200,6 +221,124 @@ public class TennisEnemy : MonoBehaviour
 
 
     }
+
+    Vector3 GetRandomPlayerTarget()
+    {
+        Vector3 targetPos = player.position;
+        
+        if (hitRandomness > 0f)
+        {
+            float maxOffset = hitRandomness * 2f;
+            targetPos.x += Random.Range(-maxOffset, maxOffset);
+            targetPos.y += Random.Range(-maxOffset, maxOffset);
+        }
+        
+        return targetPos;
+    }
+
+    Vector3 CalculateBounceDirection(Vector3 targetPos, int numBounces)
+    {
+        if (numBounces == 1)
+        {
+            return CalculateSingleBounce(targetPos);
+        }
+        else if (numBounces == 2)
+        {
+            return CalculateDoubleBounce(targetPos);
+        }
+        
+        return (targetPos - transform.position).normalized;
+    }
+
+    Vector3 CalculateSingleBounce(Vector3 targetPos)
+    {
+        GameObject[] walls = { leftWall, rightWall, topWall, bottomWall };
+        GameObject selectedWall = walls[Random.Range(0, walls.Length)];
+        
+        if (selectedWall == null)
+        {
+            return (targetPos - transform.position).normalized;
+        }
+        
+        Vector3 wallPos = selectedWall.transform.position;
+        Vector3 wallNormal = GetWallNormal(selectedWall);
+        
+        Vector3 desiredOutgoing = (targetPos - wallPos).normalized;
+        Vector3 requiredIncoming = Vector3.Reflect(desiredOutgoing, -wallNormal).normalized;
+        
+        Vector3 bouncePoint = CalculateBouncePoint(transform.position, requiredIncoming, selectedWall, wallNormal);
+        
+        Vector3 finalDir = (bouncePoint - transform.position).normalized;
+        
+        return finalDir;
+    }
+
+    Vector3 CalculateDoubleBounce(Vector3 targetPos)
+    {
+        GameObject[] walls = { leftWall, rightWall, topWall, bottomWall };
+        GameObject wall1 = walls[Random.Range(0, walls.Length)];
+        GameObject wall2 = walls[Random.Range(0, walls.Length)];
+        
+        if (wall1 == null || wall2 == null)
+        {
+            return (targetPos - transform.position).normalized;
+        }
+        
+        Vector3 wall2Pos = wall2.transform.position;
+        Vector3 wall2Normal = GetWallNormal(wall2);
+        
+        Vector3 desiredFinalOutgoing = (targetPos - wall2Pos).normalized;
+        Vector3 toWall2 = Vector3.Reflect(desiredFinalOutgoing, -wall2Normal).normalized;
+        
+        Vector3 wall1Pos = wall1.transform.position;
+        Vector3 wall1Normal = GetWallNormal(wall1);
+        
+        Vector3 bounce2Point = CalculateBouncePoint(wall1Pos, toWall2, wall2, wall2Normal);
+        Vector3 fromWall1ToWall2 = (bounce2Point - wall1Pos).normalized;
+        Vector3 toWall1 = Vector3.Reflect(fromWall1ToWall2, -wall1Normal).normalized;
+        
+        Vector3 bounce1Point = CalculateBouncePoint(transform.position, toWall1, wall1, wall1Normal);
+        
+        Vector3 finalDir = (bounce1Point - transform.position).normalized;
+        
+        return finalDir;
+    }
+
+    Vector3 GetWallNormal(GameObject wall)
+    {
+        if (wall == leftWall) return Vector3.right;
+        if (wall == rightWall) return Vector3.left;
+        if (wall == topWall) return Vector3.down;
+        if (wall == bottomWall) return Vector3.up;
+        return Vector3.forward;
+    }
+
+    Vector3 CalculateBouncePoint(Vector3 startPos, Vector3 direction, GameObject wall, Vector3 wallNormal)
+    {
+        Vector3 wallPos = wall.transform.position;
+        
+        if (wall == leftWall || wall == rightWall)
+        {
+            float wallX = wallPos.x;
+            if (Mathf.Abs(direction.x) < 0.001f) return wallPos;
+            
+            float t = (wallX - startPos.x) / direction.x;
+            float hitY = startPos.y + direction.y * t;
+            float hitZ = startPos.z + direction.z * t;
+            return new Vector3(wallX, hitY, hitZ);
+        }
+        else
+        {
+            float wallY = wallPos.y;
+            if (Mathf.Abs(direction.y) < 0.001f) return wallPos;
+            
+            float t = (wallY - startPos.y) / direction.y;
+            float hitX = startPos.x + direction.x * t;
+            float hitZ = startPos.z + direction.z * t;
+            return new Vector3(hitX, wallY, hitZ);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == ball)

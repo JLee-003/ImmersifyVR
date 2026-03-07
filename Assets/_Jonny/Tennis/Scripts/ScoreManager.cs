@@ -20,7 +20,7 @@ public class ScoreManager : MonoBehaviour
     public int nextLevelCondition = 3;
 
     [SerializeField] string[] levelScenes; // Array of scene names for level progression
-    int currentLevelIndex = 0; // Tracks which level the player is on
+    public int currentLevelIndex = 0; // Tracks which level the player is on
 
     [SerializeField] GameObject enemyObj;
     GameObject ballObj;
@@ -167,8 +167,20 @@ public class ScoreManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("No more levels! Player has completed all levels.");
+            // Final level - continue playing with infinite set scores
             currentLevelIndex--;
+            Debug.Log("Final level reached. Set scores will continue to accumulate.");
+            
+            // Reset point scores to start next set
+            playerScore = 0;
+            enemyScore = 0;
+            scoreText.text = "00 : 00";
+            
+            // Update set score display (keeps accumulating)
+            setText.text = $"{playerSetScore} : {enemySetScore}";
+            
+            // Reset court to neutral
+            setCourtToNeutral();
         }
     }
 }

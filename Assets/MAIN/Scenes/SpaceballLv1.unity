@@ -2082,6 +2082,12 @@ MonoBehaviour:
   missChance: 0.02
   hitRandomness: 0
   missOffsetRange: 1.5
+  stoppingDistance: 0.1
+  bounceChance: 0.2
+  leftWall: {fileID: 0}
+  rightWall: {fileID: 0}
+  topWall: {fileID: 0}
+  bottomWall: {fileID: 0}
   moveSpeedMultiplier: 1
   minBoundaries: {x: -4, y: 0.5}
   maxBoundaries: {x: 4, y: 5}
