@@ -490,63 +490,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 60135875602859589, guid: d873ee7be2c786c41a42a0c73cde767f,
-        type: 3}
-      propertyPath: sceneHandModels.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 60135875602859589, guid: d873ee7be2c786c41a42a0c73cde767f,
-        type: 3}
-      propertyPath: sceneHandModels.Array.data[0].sceneName
-      value: SpaceballLv1
-      objectReference: {fileID: 0}
-    - target: {fileID: 60135875602859589, guid: d873ee7be2c786c41a42a0c73cde767f,
-        type: 3}
-      propertyPath: sceneHandModels.Array.data[2].sceneName
-      value: ClimbingPrototype
-      objectReference: {fileID: 0}
-    - target: {fileID: 60135875602859589, guid: d873ee7be2c786c41a42a0c73cde767f,
-        type: 3}
-      propertyPath: sceneHandModels.Array.data[2].handModelPrefab
-      value: 
-      objectReference: {fileID: 6862015792295112376, guid: 13e80274251684027a235e4b56de4886,
-        type: 3}
     - target: {fileID: 1542972532382618323, guid: d873ee7be2c786c41a42a0c73cde767f,
         type: 3}
       propertyPath: m_Name
       value: XR Origin (XR Rig)
       objectReference: {fileID: 0}
-    - target: {fileID: 3318197864416306340, guid: d873ee7be2c786c41a42a0c73cde767f,
-        type: 3}
-      propertyPath: enabledInScenes.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318197864416306340, guid: d873ee7be2c786c41a42a0c73cde767f,
-        type: 3}
-      propertyPath: enabledInScenes.Array.data[3]
-      value: SpaceballLv3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4418868035628547945, guid: d873ee7be2c786c41a42a0c73cde767f,
-        type: 3}
-      propertyPath: sceneHandModels.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4418868035628547945, guid: d873ee7be2c786c41a42a0c73cde767f,
-        type: 3}
-      propertyPath: sceneHandModels.Array.data[0].sceneName
-      value: SpaceballLv1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4418868035628547945, guid: d873ee7be2c786c41a42a0c73cde767f,
-        type: 3}
-      propertyPath: sceneHandModels.Array.data[2].sceneName
-      value: ClimbingPrototype
-      objectReference: {fileID: 0}
-    - target: {fileID: 4418868035628547945, guid: d873ee7be2c786c41a42a0c73cde767f,
-        type: 3}
-      propertyPath: sceneHandModels.Array.data[2].handModelPrefab
-      value: 
-      objectReference: {fileID: 6862015792295112376, guid: 13e80274251684027a235e4b56de4886,
-        type: 3}
     - target: {fileID: 6541681293610120885, guid: d873ee7be2c786c41a42a0c73cde767f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -652,7 +600,7 @@ MonoBehaviour:
   OnLoadEnd:
     m_PersistentCalls:
       m_Calls: []
-  startingScene: ClimbingPrototype
+  startingScene: Lobby
 --- !u!1001 &2446915245381026552
 PrefabInstance:
   m_ObjectHideFlags: 0

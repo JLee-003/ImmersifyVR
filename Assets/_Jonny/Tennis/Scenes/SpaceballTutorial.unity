@@ -464,6 +464,7 @@ MonoBehaviour:
   ballRestVelocityThreshold: 0.1
   enemyBackWallTag: EnemyPointZone
   tutorialTargetCount: 3
+  minDistanceFromPlayer: 2
 --- !u!1 &277663802
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,13 +502,15 @@ MonoBehaviour:
   playerScore: 0
   playerSetScore: 0
   winCondition: 5
+  nextLevelCondition: 3
   levelScenes:
   - SpaceballTutorial
   - SpaceballLv1
   - SpaceballLv2
+  currentLevelIndex: 0
   enemyObj: {fileID: 1129165047}
-  ballServePos: {x: 0, y: 1.5, z: -4}
-  playerNeutralPos: {x: 0, y: 0.5, z: -4.5}
+  ballServePos: {x: 0, y: 2.5, z: -4}
+  playerNeutralPos: {x: 0, y: 1.5, z: -4.5}
   enemyNeutralPos: {x: 0, y: 0.75, z: 4}
 --- !u!4 &277663804
 Transform:
@@ -2545,6 +2548,13 @@ MonoBehaviour:
   moveSpeed: 4
   missChance: 0.05
   hitRandomness: 0
+  missOffsetRange: 1.5
+  stoppingDistance: 0.1
+  bounceChance: 0
+  leftWall: {fileID: 0}
+  rightWall: {fileID: 0}
+  topWall: {fileID: 0}
+  bottomWall: {fileID: 0}
   moveSpeedMultiplier: 1
   minBoundaries: {x: -4, y: 0.5}
   maxBoundaries: {x: 4, y: 5}
@@ -3118,7 +3128,7 @@ Transform:
   m_GameObject: {fileID: 1405120871}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -8.38, z: 10}
+  m_LocalPosition: {x: 0, y: -12.35, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
