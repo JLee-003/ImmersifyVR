@@ -12,4 +12,10 @@ public class ForceGrab : MonoBehaviour
         //transform.position = PlayerReferences.instance.rightController.transform.position;
         grabInteractable.interactionManager.SelectEnter(PlayerReferences.instance.rightController.GetComponentInChildren<XRDirectInteractor>() as IXRSelectInteractor, grabInteractable);
     }
+    private void Update()
+    {
+        grabInteractable = GetComponent<XRGrabInteractable>();
+        //transform.position = PlayerReferences.instance.rightController.transform.position;
+        grabInteractable.interactionManager.SelectEnter(PlayerReferences.instance.rightController.GetComponentInChildren<XRDirectInteractor>() as IXRSelectInteractor, grabInteractable);
+    }
 }
