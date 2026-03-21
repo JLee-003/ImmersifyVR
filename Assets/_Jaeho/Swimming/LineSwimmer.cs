@@ -26,6 +26,14 @@ public class LineSwimmer : MonoBehaviour
     [Header("Audio Clips")]
     [SerializeField] AudioClip swimAudio;
 
+    [Header("Turning")]
+    [SerializeField] float turnForce = 120f;
+    [SerializeField] float turnDrag = 4f;
+    [SerializeField] float minTurnStroke = 0.05f;
+    [SerializeField] float maxTurnPerStroke = 90f;
+
+    float yawVelocity;
+
     CharacterController characterController;
     float cooldownTimer;
     Vector3 velocity;
@@ -55,6 +63,8 @@ public class LineSwimmer : MonoBehaviour
         RightControllerSwim();
 
         UpdateStrokeLines();
+
+        ApplyTurning();
 
         // Apply drag force
         if (velocity.sqrMagnitude > 0.01f)
@@ -106,6 +116,7 @@ public class LineSwimmer : MonoBehaviour
 
             Vector3 worldVelocity = trackingReference.TransformDirection(leftActionVector);
             velocity += worldVelocity * swimForce;
+            AddTurnFromStroke(leftActionVector);
 
             cooldownTimer = 0f;
 
@@ -138,6 +149,7 @@ public class LineSwimmer : MonoBehaviour
 
             Vector3 worldVelocity = trackingReference.TransformDirection(rightActionVector);
             velocity += worldVelocity * swimForce;
+            AddTurnFromStroke(rightActionVector);
 
             cooldownTimer = 0f;
 
@@ -172,6 +184,32 @@ public class LineSwimmer : MonoBehaviour
         else
         {
             rightLineRenderer.enabled = false;
+        }
+    }
+
+    void AddTurnFromStroke(Vector3 localActionVector)
+    {
+        float sideways = localActionVector.x;
+
+        if (Mathf.Abs(sideways) < minTurnStroke)
+            return;
+
+        float turnAmount = sideways * turnForce;
+        turnAmount = Mathf.Clamp(turnAmount, -maxTurnPerStroke, maxTurnPerStroke);
+
+        yawVelocity += turnAmount;
+    }
+
+    void ApplyTurning()
+    {
+        if (Mathf.Abs(yawVelocity) > 0.01f)
+        {
+            transform.Rotate(0f, yawVelocity * Time.deltaTime, 0f);
+            yawVelocity = Mathf.Lerp(yawVelocity, 0f, turnDrag * Time.deltaTime);
+        }
+        else
+        {
+            yawVelocity = 0f;
         }
     }
 
