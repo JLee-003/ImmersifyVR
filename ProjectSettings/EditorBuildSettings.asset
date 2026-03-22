@@ -32,8 +32,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MAIN/Scenes/Lobby.unity
     guid: 9fc3ebad12c3f6c459072f52538be7d3
-  - enabled: 0
-    path: Assets/_Jaeho/Scenes/ClimbingPrototype.unity
+  - enabled: 1
+    path: Assets/MAIN/Scenes/ClimbingPrototype.unity
     guid: 1e14fdafa383afa40a996ae415109b9c
   - enabled: 1
     path: Assets/_Jonny/Tennis/Scenes/SpaceballLv3.unity
