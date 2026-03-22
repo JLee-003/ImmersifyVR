@@ -19,7 +19,8 @@ public class SpaceballTutorialManager : MonoBehaviour
     [SerializeField] private float ballRestVelocityThreshold = 0.1f;
     [SerializeField] private string enemyBackWallTag = "EnemyPointZone";
     [SerializeField] private int tutorialTargetCount = 3;
-    [SerializeField] private float minDistanceFromPlayer = 2f; // Minimum distance to spawn ball from player
+
+    private float minDistanceFromPlayer ; // Minimum distance to spawn ball from player
 
 
     private int currentTargetIndex = 0;
@@ -57,6 +58,7 @@ public class SpaceballTutorialManager : MonoBehaviour
 
     void Start()
     {
+        minDistanceFromPlayer = CalibrationMeasurements.Instance.armLength * 1.2f;
         currentMoveText = MoveCloserText;
         if (tutorialText != null)
         {
@@ -98,7 +100,15 @@ public class SpaceballTutorialManager : MonoBehaviour
 
         if (tennisBall != null)
         {
-            defaultBallPosition = tennisBall.transform.position;
+            Vector3 calculatedBallPosition = tennisBall.transform.position;
+            
+            if (spawnPoint != null && CalibrationMeasurements.Instance != null)
+            {
+                calculatedBallPosition.z = spawnPoint.position.z + CalibrationMeasurements.Instance.comfortReach;
+            }
+            
+            defaultBallPosition = calculatedBallPosition;
+            tennisBall.transform.position = defaultBallPosition;
             currentBallPosition = defaultBallPosition;
             ballRb = tennisBall.GetComponent<Rigidbody>();
 

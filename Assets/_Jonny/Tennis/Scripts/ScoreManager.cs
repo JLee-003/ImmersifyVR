@@ -25,9 +25,10 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] GameObject enemyObj;
     GameObject ballObj;
 
-    [SerializeField] Vector3 ballServePos;
     [SerializeField] Vector3 playerNeutralPos;
     [SerializeField] Vector3 enemyNeutralPos;    
+
+    [SerializeField] ZeroGravProjectile ballProjectile;
 
 
 
@@ -136,7 +137,7 @@ public class ScoreManager : MonoBehaviour
     {
         enemyObj.transform.position = enemyNeutralPos;
         ballObj.GetComponent<ZeroGravProjectile>().SetVelocity(Vector3.zero);
-        ballObj.transform.position = ballServePos;
+        ballObj.transform.position = ballProjectile.ballSpawnPosition;
     }
 
     void LoadNextLevel()

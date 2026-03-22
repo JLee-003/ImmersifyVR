@@ -183,7 +183,7 @@ public class CalibrationManager : MonoBehaviour
             if (maxDistance > 0f)
             {
                 CalibrationMeasurements.Instance.armLength = maxDistance;
-                CalibrationMeasurements.Instance.comfortReach = maxDistance * 0.7f;
+                CalibrationMeasurements.Instance.comfortReach = maxDistance * 0.6f;
                 
                 StartArmsUpCalibration();
             }

@@ -21,7 +21,9 @@ public class CalibrationMeasurements : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // TODO - SET DEFAULT VALUES
-        
+        // TODO - SET ACTUAL DEFAULT VALUES
+        armLength = 0.8f;
+        comfortReach = armLength * 0.6f;
+        upReachLength = 0.4f;
     }
 }

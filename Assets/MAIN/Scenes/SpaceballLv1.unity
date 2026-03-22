@@ -1387,9 +1387,9 @@ MonoBehaviour:
   - SpaceballLv2
   currentLevelIndex: 0
   enemyObj: {fileID: 1626606612}
-  ballServePos: {x: 0, y: 2.5, z: -4}
   playerNeutralPos: {x: 0, y: 1.5, z: -4.5}
   enemyNeutralPos: {x: 0, y: 0.75, z: 4}
+  ballProjectile: {fileID: 1225377905}
 --- !u!1001 &1225377904
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1403,6 +1403,11 @@ PrefabInstance:
       propertyPath: enemy
       value: 
       objectReference: {fileID: 1626606613}
+    - target: {fileID: 112808995215111200, guid: ca771e468866e02439abe027a5b83b2e,
+        type: 3}
+      propertyPath: playerSpawnPoint
+      value: 
+      objectReference: {fileID: 522267097}
     - target: {fileID: 4723789974576245706, guid: ca771e468866e02439abe027a5b83b2e,
         type: 3}
       propertyPath: m_Name
@@ -1463,6 +1468,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca771e468866e02439abe027a5b83b2e, type: 3}
+--- !u!114 &1225377905 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 112808995215111200, guid: ca771e468866e02439abe027a5b83b2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1225377904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a591518dcf2220498caafc89a3d3a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1251698699
 GameObject:
   m_ObjectHideFlags: 0
