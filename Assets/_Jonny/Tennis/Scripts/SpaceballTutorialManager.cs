@@ -51,7 +51,7 @@ public class SpaceballTutorialManager : MonoBehaviour
     private const string MoveLeftText = "Good job! Hold your hands to your left and press the grip button to move to the ball.";
     private const string FirstSwingText = "Now swing your arm to hit the ball. Try to hit the ball in the green zone!";
     private const string HitTargetText = "Now hit the ball in the green zone!";
-    private const string ScorePointText = "Now try to score a point on the enemy's side!";
+    private const string ScorePointText = "Now try to score a point on the opponents's side!";
     private const string PointScoredText = "Great job! You scored a point!";
     
     private string currentMoveText = "";
