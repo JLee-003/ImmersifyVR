@@ -36,7 +36,7 @@ public class LineSwimmer : MonoBehaviour
 
     CharacterController characterController;
     float cooldownTimer;
-    Vector3 velocity;
+    public Vector3 velocity;
     float totalDistanceSwum = 0f;
 
     Vector3 startPosLeft;

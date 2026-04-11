@@ -22,6 +22,7 @@ public class SwimmingTutorial : MonoBehaviour
 
     ActionBasedContinuousMoveProvider moveProvider;
 
+    private bool sphereCollided = false;
     private bool gripButtonPressed = false;
     private bool hasReachedGreenPoint = false;
     private bool loadedScene = false;
