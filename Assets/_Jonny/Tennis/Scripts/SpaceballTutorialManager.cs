@@ -11,6 +11,10 @@ public class SpaceballTutorialManager : MonoBehaviour
     [SerializeField] private GameObject tennisBall;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject moveBallCanvas;
+    [Tooltip("Shown only while waiting to move and the ball is left of the player (thruster right).")]
+    [SerializeField] private GameObject thrusterRightCanvas;
+    [Tooltip("Shown only while waiting to move and the ball is right of the player (thruster left).")]
+    [SerializeField] private GameObject thrusterLeftCanvas;
     [SerializeField] private float closeDistanceSqr = 1f;
     [SerializeField] private Vector2 randomBallXBounds = new Vector2(-3.5f, 3.5f);
     [SerializeField] private Vector2 randomBallYBounds = new Vector2(0.5f, 3f);
@@ -46,9 +50,9 @@ public class SpaceballTutorialManager : MonoBehaviour
 
     private TutorialPhase phase = TutorialPhase.WaitingForClose;
 
-    private const string MoveCloserText = "Good job! Move to the ball: hold your hands opposite the direction of the ball and press the grip button.";
-    private const string MoveRightText = "Good job! Hold your hands to your right and press the grip button to move to the ball.";
-    private const string MoveLeftText = "Good job! Hold your hands to your left and press the grip button to move to the ball.";
+    private const string MoveCloserText = "Good job! Now move closer to the ball.";
+    private const string MoveRightText = "Good job! Hold your hands to your right and press the grip button to move left towards the ball.";
+    private const string MoveLeftText = "Good job! Hold your hands to your left and press the grip button to move right towards the ball.";
     private const string FirstSwingText = "Now swing your arm to hit the ball. Try to hit the ball in the green zone!";
     private const string HitTargetText = "Now hit the ball in the green zone!";
     private const string ScorePointText = "Now try to score a point on the opponents's side!";
@@ -97,6 +101,8 @@ public class SpaceballTutorialManager : MonoBehaviour
         {
             moveBallCanvas.SetActive(false);
         }
+
+        SetThrusterHintCanvasesActive(false, false);
 
         if (tennisBall != null)
         {
@@ -209,6 +215,32 @@ public class SpaceballTutorialManager : MonoBehaviour
                 }
                 tutorialText.text = currentTargetIndex == 0 ? FirstSwingText : HitTargetText;
                 break;
+        }
+    }
+
+    void LateUpdate()
+    {
+        ApplyThrusterHintVisibility();
+    }
+
+    private void ApplyThrusterHintVisibility()
+    {
+        bool waitingToMove = phase == TutorialPhase.WaitingForClose;
+        bool showRight = waitingToMove && currentMoveText == MoveRightText;
+        bool showLeft = waitingToMove && currentMoveText == MoveLeftText;
+        SetThrusterHintCanvasesActive(showRight, showLeft);
+    }
+
+    private void SetThrusterHintCanvasesActive(bool rightActive, bool leftActive)
+    {
+        if (thrusterRightCanvas != null)
+        {
+            thrusterRightCanvas.SetActive(rightActive);
+        }
+
+        if (thrusterLeftCanvas != null)
+        {
+            thrusterLeftCanvas.SetActive(leftActive);
         }
     }
 

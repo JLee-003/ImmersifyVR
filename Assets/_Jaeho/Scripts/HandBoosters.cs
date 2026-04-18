@@ -40,6 +40,23 @@ public class HandBoosters : MonoBehaviour
     public bool IsLeftBoosting { get; private set; }
     public bool IsRightBoosting { get; private set; }
 
+    // Runtime gate allowing external scripts (e.g. tutorials) to suspend thrusters
+    // even while the scene is in the allowlist.
+    public bool ThrustersEnabled { get; private set; } = true;
+
+    public void SetThrustersEnabled(bool enabled)
+    {
+        ThrustersEnabled = enabled;
+        if (!enabled)
+        {
+            if (leftThrusterSource && leftThrusterSource.isPlaying) leftThrusterSource.Stop();
+            if (rightThrusterSource && rightThrusterSource.isPlaying) rightThrusterSource.Stop();
+            velocity = Vector3.zero;
+            IsLeftBoosting = false;
+            IsRightBoosting = false;
+        }
+    }
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -103,8 +120,8 @@ public class HandBoosters : MonoBehaviour
 
     void Update()
     {
-        // Not an allowed scene? Do nothing
-        if (!_sceneAllowed) return;
+        // Not an allowed scene or gated off at runtime? Do nothing
+        if (!_sceneAllowed || !ThrustersEnabled) return;
 
         Debug.Log("HAND BOOSTERS IS ON");
 
