@@ -32,6 +32,8 @@ public class LineSwimmer : MonoBehaviour
     [SerializeField] float minTurnStroke = 0.05f;
     [SerializeField] float maxTurnPerStroke = 90f;
 
+    private bool tutorialMode = false;
+
     float yawVelocity;
 
     CharacterController characterController;
@@ -111,17 +113,20 @@ public class LineSwimmer : MonoBehaviour
 
         if (leftSwimStarted && leftControllerSwimReference.action.WasReleasedThisFrame())
         {
-            endPosLeft = leftControllerTransform.localPosition;
-            leftActionVector = startPosLeft - endPosLeft;
+            if (!tutorialMode)
+            {
+                endPosLeft = leftControllerTransform.localPosition;
+                leftActionVector = startPosLeft - endPosLeft;
 
-            Vector3 worldVelocity = trackingReference.TransformDirection(leftActionVector);
-            velocity += worldVelocity * swimForce;
-            AddTurnFromStroke(leftActionVector);
+                Vector3 worldVelocity = trackingReference.TransformDirection(leftActionVector);
+                velocity += worldVelocity * swimForce;
+                AddTurnFromStroke(leftActionVector);
 
-            cooldownTimer = 0f;
+                cooldownTimer = 0f;
 
-            HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 0.3f, 0.2f);
-            AudioSource.PlayClipAtPoint(swimAudio, transform.position, 1f);
+                HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, false, 0.3f, 0.2f);
+                AudioSource.PlayClipAtPoint(swimAudio, transform.position, 1f);
+            }
             
             leftSwimStarted = false;
         }
@@ -144,17 +149,20 @@ public class LineSwimmer : MonoBehaviour
 
         if (rightSwimStarted && rightControllerSwimReference.action.WasReleasedThisFrame())
         {
-            endPosRight = rightControllerTransform.localPosition;
-            rightActionVector = startPosRight - endPosRight;
+            if (!tutorialMode)
+            {
+                endPosRight = rightControllerTransform.localPosition;
+                rightActionVector = startPosRight - endPosRight;
 
-            Vector3 worldVelocity = trackingReference.TransformDirection(rightActionVector);
-            velocity += worldVelocity * swimForce;
-            AddTurnFromStroke(rightActionVector);
+                Vector3 worldVelocity = trackingReference.TransformDirection(rightActionVector);
+                velocity += worldVelocity * swimForce;
+                AddTurnFromStroke(rightActionVector);
 
-            cooldownTimer = 0f;
+                cooldownTimer = 0f;
 
-            HapticFeedbackManager.Instance?.InitiateHapticFeedback(false, true, 0.4f, 0.2f);
-            AudioSource.PlayClipAtPoint(swimAudio, transform.position, 1f);
+                HapticFeedbackManager.Instance?.InitiateHapticFeedback(false, true, 0.4f, 0.2f);
+                AudioSource.PlayClipAtPoint(swimAudio, transform.position, 1f);
+            }
 
             rightSwimStarted = false;
         }
@@ -237,5 +245,36 @@ public class LineSwimmer : MonoBehaviour
     {
         totalDistanceSwum = 0f;
     }
+    public void SetTutorialMode(bool enabled)
+    {
+        tutorialMode = enabled;
 
+        if (enabled)
+        {
+            leftSwimStarted = false;
+            rightSwimStarted = false;
+        }
+    }
+
+    public void TriggerTutorialBoost(float boostForce, float upwardBoost)
+    {
+        Vector3 boostDirection = trackingReference.forward;
+        boostDirection.y = 0f;
+        boostDirection.Normalize();
+
+        velocity += boostDirection * boostForce;
+        velocity += Vector3.up * upwardBoost;
+
+        cooldownTimer = 0f;
+
+        leftSwimStarted = false;
+        rightSwimStarted = false;
+
+        HapticFeedbackManager.Instance?.InitiateHapticFeedback(true, true, 0.4f, 0.15f);
+
+        if (swimAudio != null)
+        {
+            AudioSource.PlayClipAtPoint(swimAudio, transform.position, 1f);
+        }
+    }
 }

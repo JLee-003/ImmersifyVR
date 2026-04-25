@@ -201,10 +201,6 @@ public class SwimmingTutorial : MonoBehaviour
         {
             StartCoroutine(WaitAndLoadScene()); // Ensure WaitAndLoadScene is called here
             loadedScene = true;
-            //Manually run water-exit code
-            /*moveProvider.moveSpeed = 3f;
-            swimmer.enabled = false;
-            moveProvider.useGravity = true;*/
         }
     }
 
